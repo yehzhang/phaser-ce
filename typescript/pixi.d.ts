@@ -510,32 +510,34 @@ declare module PIXI {
     }
 
     // Overwritten by Phaser.Point
-    export class Point {
+    export type Point = Phaser.Point;
+    // export class Point {
 
-        constructor(x?: number, y?: number);
+    //     constructor(x?: number, y?: number);
 
-        x: number;
-        y: number;
+    //     x: number;
+    //     y: number;
 
-        clone(): Point;
-        set(x: number, y: number): void;
+    //     clone(): Point;
+    //     set(x: number, y: number): void;
 
-    }
+    // }
 
     // Overwritten by Phaser.Rectangle
-    export class Rectangle implements HitArea {
+    export type Rectangle = Phaser.Rectangle;
+    // export class Rectangle implements HitArea {
 
-        constructor(x?: number, y?: number, width?: number, height?: number);
+    //     constructor(x?: number, y?: number, width?: number, height?: number);
 
-        x: number;
-        y: number;
-        width: number;
-        height: number;
+    //     x: number;
+    //     y: number;
+    //     width: number;
+    //     height: number;
 
-        clone(): Rectangle;
-        contains(x: number, y: number): boolean;
+    //     clone(): Rectangle;
+    //     contains(x: number, y: number): boolean;
 
-    }
+    // }
 
     export class Rope extends Strip {
 

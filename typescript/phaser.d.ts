@@ -91,7 +91,6 @@ declare class Phaser {
 }
 
 declare module Phaser {
-
     enum blendModes {
 
         NORMAL,
@@ -139,10 +138,10 @@ declare module Phaser {
         loop: boolean;
         loopCount: number;
         name: string;
-        onComplete: Phaser.Signal;
-        onLoop: Phaser.Signal;
-        onStart: Phaser.Signal;
-        onUpdate: Phaser.Signal;
+        onComplete: Phaser.Signal<any>;
+        onLoop: Phaser.Signal<any>;
+        onStart: Phaser.Signal<any>;
+        onUpdate: Phaser.Signal<any>;
         paused: boolean;
         reversed: boolean;
         speed: number;
@@ -487,10 +486,10 @@ declare module Phaser {
         freezeFrames: boolean;
         onDownSound: Phaser.Sound | Phaser.AudioSprite;
         onDownSoundMarker: string;
-        onInputDown: Phaser.Signal;
-        onInputOut: Phaser.Signal;
-        onInputOver: Phaser.Signal;
-        onInputUp: Phaser.Signal;
+        onInputDown: Phaser.Signal<any>;
+        onInputOut: Phaser.Signal<any>;
+        onInputOver: Phaser.Signal<any>;
+        onInputUp: Phaser.Signal<any>;
         onOutSound: Phaser.Sound | Phaser.AudioSprite;
         onOutSoundMarker: string;
         onOverSound: Phaser.Sound | Phaser.AudioSprite;
@@ -552,8 +551,8 @@ declare module Phaser {
 
         autoResolveURL: boolean;
         game: Phaser.Game;
-        onReady: Phaser.Signal;
-        onSoundUnlock: Phaser.Signal;
+        onReady: Phaser.Signal<any>;
+        onSoundUnlock: Phaser.Signal<any>;
 
         addBinary(key: string, binaryData: any): void;
         addBitmapData(key: string, bitmapData: Phaser.BitmapData, frameData?: Phaser.FrameData): Phaser.BitmapData;
@@ -673,7 +672,7 @@ declare module Phaser {
         static ENABLE_FX: number;
 
         atLimit: { x: boolean; y: boolean; };
-        bounds: Phaser.Rectangle;
+        bounds: Phaser.Rectangle | void;
         deadzone: Phaser.Rectangle;
         displayObject: PIXI.DisplayObject;
         id: number;
@@ -686,9 +685,9 @@ declare module Phaser {
         roundPx: boolean;
         scale: Phaser.Point;
         shakeIntensity: number;
-        onFadeComplete: Phaser.Signal;
-        onFlashComplete: Phaser.Signal;
-        onShakeComplete: Phaser.Signal;
+        onFadeComplete: Phaser.Signal<any>;
+        onFlashComplete: Phaser.Signal<any>;
+        onShakeComplete: Phaser.Signal<any>;
         target: Phaser.Sprite;
         totalInView: number;
         view: Phaser.Rectangle;
@@ -908,7 +907,7 @@ declare module Phaser {
     class Device {
 
         static LITTLE_ENDIAN: boolean;
-        static onInitialized: Phaser.Signal;
+        static onInitialized: Phaser.Signal<any>;
 
         static checkFullScreenSupport(): void;
         static canPlayAudio(type: string): boolean;
@@ -1008,9 +1007,9 @@ declare module Phaser {
         game: Phaser.Game;
         isDown: boolean;
         isUp: boolean;
-        onDown: Phaser.Signal;
-        onFloat: Phaser.Signal;
-        onUp: Phaser.Signal;
+        onDown: Phaser.Signal<any>;
+        onFloat: Phaser.Signal<any>;
+        onUp: Phaser.Signal<any>;
         pad: Phaser.Gamepad;
         repeats: number;
         timeDown: number;
@@ -1135,24 +1134,24 @@ declare module Phaser {
         constructor(sprite: Phaser.Sprite);
 
         parent: Phaser.Sprite;
-        onAddedToGroup: Phaser.Signal;
-        onRemovedFromGroup: Phaser.Signal;
-        onRemovedFromWorld: Phaser.Signal;
-        onKilled: Phaser.Signal;
-        onRevived: Phaser.Signal;
-        onOutOfBounds: Phaser.Signal;
-        onEnterBounds: Phaser.Signal;
-        onInputOver: Phaser.Signal;
-        onInputOut: Phaser.Signal;
-        onInputDown: Phaser.Signal;
-        onInputUp: Phaser.Signal;
-        onDestroy: Phaser.Signal;
-        onDragStart: Phaser.Signal;
-        onDragStop: Phaser.Signal;
-        onDragUpdate: Phaser.Signal;
-        onAnimationStart: Phaser.Signal;
-        onAnimationComplete: Phaser.Signal;
-        onAnimationLoop: Phaser.Signal;
+        onAddedToGroup: Phaser.Signal<any>;
+        onRemovedFromGroup: Phaser.Signal<any>;
+        onRemovedFromWorld: Phaser.Signal<any>;
+        onKilled: Phaser.Signal<any>;
+        onRevived: Phaser.Signal<any>;
+        onOutOfBounds: Phaser.Signal<any>;
+        onEnterBounds: Phaser.Signal<any>;
+        onInputOver: Phaser.Signal<any>;
+        onInputOut: Phaser.Signal<any>;
+        onInputDown: Phaser.Signal<any>;
+        onInputUp: Phaser.Signal<any>;
+        onDestroy: Phaser.Signal<any>;
+        onDragStart: Phaser.Signal<any>;
+        onDragStop: Phaser.Signal<any>;
+        onDragUpdate: Phaser.Signal<any>;
+        onAnimationStart: Phaser.Signal<any>;
+        onAnimationComplete: Phaser.Signal<any>;
+        onAnimationLoop: Phaser.Signal<any>;
 
         destroy(): void;
 
@@ -1496,7 +1495,7 @@ declare module Phaser {
         debug: Phaser.Utils.Debug;
         device: Phaser.Device;
         forceSingleUpdate: boolean;
-        fpsProblemNotifier: Phaser.Signal;
+        fpsProblemNotifier: Phaser.Signal<any>;
         height: number;
         id: number;
         input: Phaser.Input;
@@ -1507,10 +1506,10 @@ declare module Phaser {
         make: Phaser.GameObjectCreator;
         math: Phaser.Math;
         net: Phaser.Net;
-        onBlur: Phaser.Signal;
-        onFocus: Phaser.Signal;
-        onPause: Phaser.Signal;
-        onResume: Phaser.Signal;
+        onBlur: Phaser.Signal<any>;
+        onFocus: Phaser.Signal<any>;
+        onPause: Phaser.Signal<any>;
+        onResume: Phaser.Signal<any>;
         parent: HTMLElement;
         particles: Phaser.Particles;
         paused: boolean;
@@ -1864,11 +1863,11 @@ declare module Phaser {
         left: number;
         length: number;
         name: string;
-        onChildInputDown: Phaser.Signal;
-        onChildInputUp: Phaser.Signal;
-        onChildInputOver: Phaser.Signal;
-        onChildInputOut: Phaser.Signal;
-        onDestroy: Phaser.Signal;
+        onChildInputDown: Phaser.Signal<any>;
+        onChildInputUp: Phaser.Signal<any>;
+        onChildInputOver: Phaser.Signal<any>;
+        onChildInputOut: Phaser.Signal<any>;
+        onDestroy: Phaser.Signal<any>;
         pendingDestroy: boolean;
         physicsBodyType: number;
         physicsType: number;
@@ -2088,10 +2087,10 @@ declare module Phaser {
         moveCallbacks: (pointer: Phaser.Pointer, x: number, y: number) => void[];
         mspointer: Phaser.MSPointer;
         multiInputOverride: number;
-        onDown: Phaser.Signal;
-        onHold: Phaser.Signal;
-        onTap: Phaser.Signal;
-        onUp: Phaser.Signal;
+        onDown: Phaser.Signal<any>;
+        onHold: Phaser.Signal<any>;
+        onTap: Phaser.Signal<any>;
+        onUp: Phaser.Signal<any>;
         pointer1: Phaser.Pointer;
         pointer2: Phaser.Pointer;
         pointer3: Phaser.Pointer;
@@ -2237,10 +2236,10 @@ declare module Phaser {
         _justUp: boolean;
         justUp: boolean;
         keyCode: number;
-        onDown: Phaser.Signal;
+        onDown: Phaser.Signal<any>;
         onHoldCallback: Function;
         onHoldContext: any;
-        onUp: Phaser.Signal;
+        onUp: Phaser.Signal<any>;
         repeats: number;
         shiftKey: boolean;
         timeDown: number;
@@ -2584,12 +2583,12 @@ declare module Phaser {
         headers: any;
         isLoading: boolean;
         maxParallelDownloads: number;
-        onFileStart: Phaser.Signal;
-        onFileComplete: Phaser.Signal;
-        onFileError: Phaser.Signal;
-        onLoadComplete: Phaser.Signal;
-        onLoadStart: Phaser.Signal;
-        onPackComplete: Phaser.Signal;
+        onFileStart: Phaser.Signal<any>;
+        onFileComplete: Phaser.Signal<any>;
+        onFileError: Phaser.Signal<any>;
+        onLoadComplete: Phaser.Signal<any>;
+        onLoadStart: Phaser.Signal<any>;
+        onPackComplete: Phaser.Signal<any>;
         path: string;
         preloadSprite: any;
         progress: number;
@@ -2809,7 +2808,7 @@ declare module Phaser {
         _onMouseOver: (event: MouseEvent) => void;
         _onMouseWheel: (event: MouseEvent) => void;
         _wheelEvent: WheelEventProxy;
-        pointerLock: Phaser.Signal;
+        pointerLock: Phaser.Signal<any>;
         stopOnGameOut: boolean;
         wheelDelta: number;
 
@@ -3043,12 +3042,12 @@ declare module Phaser {
         retry: number;
         retryInterval: number;
 
-        onAccess: Phaser.Signal;
-        onError: Phaser.Signal;
-        onPlay: Phaser.Signal;
-        onComplete: Phaser.Signal;
-        onUpdate: Phaser.Signal;
-        onTimeout: Phaser.Signal;
+        onAccess: Phaser.Signal<any>;
+        onError: Phaser.Signal<any>;
+        onPlay: Phaser.Signal<any>;
+        onComplete: Phaser.Signal<any>;
+        onUpdate: Phaser.Signal<any>;
+        onTimeout: Phaser.Signal<any>;
 
         touchLocked: boolean;
         complete: () => void;
@@ -3188,10 +3187,10 @@ declare module Phaser {
                 movementCallbackContext: any;
                 newVelocity: Phaser.Point;
                 offset: Phaser.Point;
-                onCollide: Phaser.Signal;
-                onMoveComplete: Phaser.Signal;
-                onOverlap: Phaser.Signal;
-                onWorldBounds: Phaser.Signal;
+                onCollide: Phaser.Signal<any>;
+                onMoveComplete: Phaser.Signal<any>;
+                onOverlap: Phaser.Signal<any>;
+                onWorldBounds: Phaser.Signal<any>;
                 overlapX: number;
                 overlapY: number;
                 phase: number;
@@ -3466,16 +3465,16 @@ declare module Phaser {
             gravity: Phaser.Physics.P2.InversePointProxy;
             materials: Phaser.Physics.P2.Material[];
             nothingCollisionGroup: Phaser.Physics.P2.CollisionGroup;
-            onBodyAdded: Phaser.Signal;
-            onBodyRemoved: Phaser.Signal;
-            onBeginContact: Phaser.Signal;
-            onConstraintAdded: Phaser.Signal;
-            onConstraintRemoved: Phaser.Signal;
-            onContactMaterialAdded: Phaser.Signal;
-            onContactMaterialRemoved: Phaser.Signal;
-            onEndContact: Phaser.Signal;
-            onSpringAdded: Phaser.Signal;
-            onSpringRemoved: Phaser.Signal;
+            onBodyAdded: Phaser.Signal<any>;
+            onBodyRemoved: Phaser.Signal<any>;
+            onBeginContact: Phaser.Signal<any>;
+            onConstraintAdded: Phaser.Signal<any>;
+            onConstraintRemoved: Phaser.Signal<any>;
+            onContactMaterialAdded: Phaser.Signal<any>;
+            onContactMaterialRemoved: Phaser.Signal<any>;
+            onEndContact: Phaser.Signal<any>;
+            onSpringAdded: Phaser.Signal<any>;
+            onSpringRemoved: Phaser.Signal<any>;
             paused: boolean;
             postBroaddphaseCallback: Function;
             restitution: number;
@@ -3583,8 +3582,8 @@ declare module Phaser {
                 mass: number;
                 motionState: number;
                 offset: Phaser.Point;
-                onBeginContact: Phaser.Signal;
-                onEndContact: Phaser.Signal;
+                onBeginContact: Phaser.Signal<any>;
+                onEndContact: Phaser.Signal<any>;
                 rotation: number;
                 removeNextStep: boolean;
                 sprite: Phaser.Sprite;
@@ -4052,7 +4051,19 @@ declare module Phaser {
 
     }
 
-    class Point extends PIXI.Point {
+    class PixiPoint {
+
+        constructor(x?: number, y?: number);
+
+        x: number;
+        y: number;
+
+        clone(): Point;
+        set(x: number, y: number): void;
+
+    }
+
+    class Point extends PixiPoint {
 
         constructor(x?: number, y?: number);
 
@@ -4532,30 +4543,38 @@ declare module Phaser {
 
     }
 
-    class Signal {
+    class Signal<T> {
 
-        active: boolean;
-        boundDispatch: Function;
-        memorize: boolean;
+      active: boolean;
+      memorize: boolean;
 
-        add(listener: Function, listenerContext?: any, priority?: number, ...args: any[]): Phaser.SignalBinding;
-        addOnce(listener: Function, listenerContext?: any, priority?: number, ...args: any[]): Phaser.SignalBinding;
-        dispatch(...params: any[]): void;
-        dispose(): void;
-        forget(): void;
-        getNumListeners(): number;
-        halt(): void;
-        has(listener: Function, context?: any): boolean;
-        remove(listener: Function, context?: any): Function;
-        removeAll(context?: any): void;
-        toString(): string;
-        validateListener(listener: Function, fnName: string): void;
+      add(listener: (value: T) => void, listenerContext?: any, priority?: number): Phaser.SignalBinding;
+
+      addOnce(listener: (value: T) => void, listenerContext?: any, priority?: number): Phaser.SignalBinding;
+
+      dispatch(value: T): void;
+
+      dispose(): void;
+
+      forget(): void;
+
+      getNumListeners(): number;
+
+      halt(): void;
+
+      has(listener: (value: T) => void, context?: any): boolean;
+
+      remove(listener: (value: T) => void, context?: any): Function;
+
+      removeAll(context?: any): void;
+
+      toString(): string;
 
     }
 
     class SignalBinding {
 
-        constructor(signal: Phaser.Signal, listener: Function, isOnce: boolean, listenerContext?: any, priority?: number, ...args: any[]);
+        constructor(signal: Phaser.Signal<any>, listener: Function, isOnce: boolean, listenerContext?: any, priority?: number, ...args: any[]);
 
         active: boolean;
         callCount: number;
@@ -4567,7 +4586,7 @@ declare module Phaser {
         isBound(): boolean;
         isOnce(): boolean;
         getListener(): Function;
-        getSignal(): Phaser.Signal;
+        getSignal(): Phaser.Signal<any>;
         toString(): string;
 
     }
@@ -4633,16 +4652,16 @@ declare module Phaser {
         masterGainNode: any;
         mute: boolean;
         name: string;
-        onDecoded: Phaser.Signal;
+        onDecoded: Phaser.Signal<any>;
         onEndedHandler: () => void;
-        onFadeComplete: Phaser.Signal;
-        onLoop: Phaser.Signal;
-        onMarkerComplete: Phaser.Signal;
-        onMute: Phaser.Signal;
-        onPause: Phaser.Signal;
-        onPlay: Phaser.Signal;
-        onResume: Phaser.Signal;
-        onStop: Phaser.Signal;
+        onFadeComplete: Phaser.Signal<any>;
+        onLoop: Phaser.Signal<any>;
+        onMarkerComplete: Phaser.Signal<any>;
+        onMute: Phaser.Signal<any>;
+        onPause: Phaser.Signal<any>;
+        onPlay: Phaser.Signal<any>;
+        onResume: Phaser.Signal<any>;
+        onStop: Phaser.Signal<any>;
         override: boolean;
         paused: boolean;
         pausedPosition: number;
@@ -4684,10 +4703,10 @@ declare module Phaser {
         mute: boolean;
         muteOnPause: boolean;
         noAudio: boolean;
-        onSoundDecode: Phaser.Signal;
-        onVolumeChange: Phaser.Signal;
-        onMute: Phaser.Signal;
-        onUnMute: Phaser.Signal;
+        onSoundDecode: Phaser.Signal<any>;
+        onVolumeChange: Phaser.Signal<any>;
+        onMute: Phaser.Signal<any>;
+        onUnMute: Phaser.Signal<any>;
         touchLocked: boolean;
         usingAudioTag: boolean;
         usingWebAudio: boolean;
@@ -4868,7 +4887,7 @@ declare module Phaser {
         };
         currentScaleMode: number;
         dom: Phaser.DOM;
-        enterIncorrectOrientation: Signal;
+        enterIncorrectOrientation: Signal<any>;
         event: any;
         forceLandscape: boolean;
         forcePortrait: boolean;
@@ -4884,18 +4903,18 @@ declare module Phaser {
         isGamePortrait: boolean;
         isPortrait: boolean;
         isLandscape: boolean;
-        leaveIncorrectOrientation: Signal;
+        leaveIncorrectOrientation: Signal<any>;
         margin: { left: number; top: number; right: number; bottom: number; x: number; y: number; };
         maxHeight: number;
         maxWidth: number;
         minHeight: number;
         minWidth: number;
         offset: Point;
-        onFullScreenInit: Phaser.Signal;
-        onFullScreenChange: Phaser.Signal;
-        onFullScreenError: Phaser.Signal;
-        onOrientationChange: Phaser.Signal;
-        onSizeChange: Signal;
+        onFullScreenInit: Phaser.Signal<any>;
+        onFullScreenChange: Phaser.Signal<any>;
+        onFullScreenError: Phaser.Signal<any>;
+        onOrientationChange: Phaser.Signal<any>;
+        onSizeChange: Signal<any>;
         pageAlignHorizontally: boolean;
         pageAlignVertically: boolean;
         parentNode: HTMLElement;
@@ -5018,7 +5037,7 @@ declare module Phaser {
         onUpdateCallback: Function;
         states: any;
 
-        onStateChange: Phaser.Signal;
+        onStateChange: Phaser.Signal<any>;
         add(key: string, state: any, autoStart?: boolean): void;
         checkState(key: string): boolean;
         clearCurrentState(): void;
@@ -5543,7 +5562,7 @@ declare module Phaser {
         ms: number;
         next: number;
         nextTick: number;
-        onComplete: Phaser.Signal;
+        onComplete: Phaser.Signal<any>;
         running: boolean;
         paused: boolean;
         seconds: number;
@@ -5625,11 +5644,11 @@ declare module Phaser {
         isRunning: boolean;
         isPaused: boolean;
         manager: Phaser.TweenManager;
-        onChildComplete: Phaser.Signal;
-        onComplete: Phaser.Signal;
-        onLoop: Phaser.Signal;
-        onRepeat: Phaser.Signal;
-        onStart: Phaser.Signal;
+        onChildComplete: Phaser.Signal<any>;
+        onComplete: Phaser.Signal<any>;
+        onLoop: Phaser.Signal<any>;
+        onRepeat: Phaser.Signal<any>;
+        onStart: Phaser.Signal<any>;
         pendingDelete: boolean;
         properties: any;
         repeatCounter: number;
@@ -5841,9 +5860,9 @@ declare module Phaser {
         fireRate: number;
         fireRateVariance: number;
         multiFire: boolean;
-        onFire: Phaser.Signal;
-        onFireLimit: Phaser.Signal;
-        onKill: Phaser.Signal;
+        onFire: Phaser.Signal<any>;
+        onFireLimit: Phaser.Signal<any>;
+        onKill: Phaser.Signal<any>;
         shots: number;
         trackedPointer: Phaser.Pointer;
         trackedSprite: any;
