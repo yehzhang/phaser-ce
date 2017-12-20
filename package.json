@@ -19,7 +19,8 @@
     "grunt": "grunt",
     "test": "NODE_ENV=test grunt jshint",
     "test:build": "node --check build/*.js build/custom/*.js",
-    "test:ts": "./node_modules/typescript/bin/tsc --noImplicitAny ./typescript/{p2,phaser,pixi}.d.ts"
+    "test:ts": "./node_modules/typescript/bin/tsc --noImplicitAny ./typescript/{p2,phaser,pixi}.d.ts",
+    "prepublish": "npm run test:ts"
   },
   "keywords": [
     "2d",
@@ -51,7 +52,7 @@
     "grunt-ts": "^6.0.0-beta.16",
     "jsdoc": "^3.5.4",
     "load-grunt-config": "^0.19.2",
-    "typescript": "1.4.1",
+    "typescript": "2.0.0",
     "yuidocjs": "^0.10.2"
   },
   "typings": "./typescript/phaser.comments.d.ts",

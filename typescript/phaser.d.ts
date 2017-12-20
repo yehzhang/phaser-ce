@@ -567,7 +567,7 @@ declare module Phaser {
         addRenderTexture(key: string, texture: RenderTexture): void;
         addShader(key: string, url: string, data: any): void;
         addSound(key: string, url: string, data: any, webAudio: boolean, audioTag: boolean): void;
-        addSpriteSheet(key: string, url: string, data: any, frameWidth: number, frameHeight: number, frameMax?: number, margin?: number, spacing?: number, skipFrames?: number): void;
+        addSpriteSheet(key: string, url: string | null, data: any, frameWidth: number, frameHeight: number, frameMax?: number, margin?: number, spacing?: number, skipFrames?: number): void;
         addText(key: string, url: string, data: any): void;
         addTextureAtlas(key: string, url: string, data: any, atlasData: any, format: number): void;
         addTilemap(key: string, url: string, mapData: any, format: number): void;
@@ -672,7 +672,7 @@ declare module Phaser {
         static ENABLE_FX: number;
 
         atLimit: { x: boolean; y: boolean; };
-        bounds: Phaser.Rectangle | void;
+        bounds: Phaser.Rectangle | null;
         deadzone: Phaser.Rectangle;
         displayObject: PIXI.DisplayObject;
         id: number;
@@ -4339,7 +4339,7 @@ declare module Phaser {
         ceil(): void;
         ceilAll(): void;
         centerOn(x: number, y: number): Phaser.Rectangle;
-        clone(output: Phaser.Rectangle): Phaser.Rectangle;
+        clone(output?: Phaser.Rectangle): Phaser.Rectangle;
         contains(x: number, y: number): boolean;
         containsRect(b: Phaser.Rectangle): boolean;
         copyFrom(source: any): Phaser.Rectangle;
