@@ -3,17 +3,17 @@
   "version": "2.9.7",
   "release": "2017-12-20",
   "description": "Phaser CE (Community Edition) is a fast, free and fun HTML5 Game Framework for Desktop and Mobile web browsers.",
-  "author": "Richard Davey <rdavey@gmail.com> (http://www.photonstorm.com)",
+  "author": "Simon Zhang <simonzhangintp@gmail.com>",
   "logo": "https://raw.github.com/photonstorm/phaser-ce/master/phaser-logo-small.png",
-  "homepage": "https://photonstorm.github.io/phaser-ce/",
-  "bugs": "https://github.com/photonstorm/phaser-ce/issues",
+  "homepage": "https://github.com/yehzhang/phaser-ce/",
+  "bugs": "https://github.com/yehzhang/phaser-ce/issues",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "main": "./build/phaser.js",
-  "types": "./typescript/phaser.comments.d.ts",
+  "types": "./typescript/phaser.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://photonstorm@github.com/photonstorm/phaser-ce.git"
+    "url": "https://github.com/yehzhang/phaser-ce.git"
   },
   "scripts": {
     "grunt": "grunt",
@@ -55,12 +55,12 @@
     "typescript": "2.0.0",
     "yuidocjs": "^0.10.2"
   },
-  "typings": "./typescript/phaser.comments.d.ts",
+  "typings": "./typescript/phaser.d.ts",
   "typescript": {
     "definitions": [
       "typescript/p2.d.ts",
-      "typescript/phaser.comments.d.ts",
-      "typescript/pixi.comments.d.ts"
+      "typescript/phaser.d.ts",
+      "typescript/pixi.d.ts"
     ]
   }
 }

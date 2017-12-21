@@ -1,3 +1,5 @@
+/// <reference path="pixi.d.ts" />
+/// <reference path="p2.d.ts" />
 // Type definitions for Phaser CE
 // Project: https://github.com/photonstorm/phaser-ce
 
