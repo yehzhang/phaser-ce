@@ -874,7 +874,7 @@ declare module PIXI {
 
     intersection(b: Phaser.Rectangle, out: Phaser.Rectangle): Phaser.Rectangle;
 
-    intersects(b: Phaser.Rectangle, tolerance: number): boolean;
+    intersects(b: Phaser.Rectangle): boolean;
 
     intersectsRaw(
         left: number,
