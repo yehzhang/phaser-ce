@@ -2530,7 +2530,7 @@ declare module Phaser {
         frame?: any,
         group?: Phaser.Group | Phaser.Stage): Phaser.Sprite;
 
-    spriteBatch(parent: any, name?: string, addToStage?: boolean): Phaser.Group | Phaser.Stage;
+    spriteBatch(parent: any, name?: string, addToStage?: boolean): Phaser.SpriteBatch;
 
     text(
         x?: number,
@@ -7318,7 +7318,7 @@ declare module Phaser {
 
     setGameSize(width: number, height: number): void;
 
-    setResizeCallback(callback: ResizeCallback, context: any): void;
+    setResizeCallback(callback: ResizeCallback, context?: any): void;
 
     setUserScale(
         hScale: number,

@@ -398,6 +398,7 @@ declare module PIXI {
 
     contains(child: DisplayObject): boolean;
 
+    updateCache(): void;
   }
 
   export class FilterTexture {
