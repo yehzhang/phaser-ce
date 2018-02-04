@@ -2412,7 +2412,7 @@ declare module Phaser {
 
     sprite(x: number, y: number, key?: any, frame?: any): Phaser.Sprite;
 
-    spriteBatch(parent: any, name?: String, addToStage?: boolean): Phaser.SpriteBatch;
+    spriteBatch(parent?: any, name?: String, addToStage?: boolean): Phaser.SpriteBatch;
 
     text(x: number, y: number, text?: string, style?: PhaserTextStyle): Phaser.Text;
 
@@ -2530,7 +2530,7 @@ declare module Phaser {
         frame?: any,
         group?: Phaser.Group | Phaser.Stage): Phaser.Sprite;
 
-    spriteBatch(parent: any, name?: string, addToStage?: boolean): Phaser.SpriteBatch;
+    spriteBatch(parent?: any, name?: string, addToStage?: boolean): Phaser.SpriteBatch;
 
     text(
         x?: number,
