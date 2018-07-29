@@ -2,829 +2,819 @@
 // Project: https://github.com/schteppe/p2.js/
 
 declare module 'phaser-ce-type-updated/build/custom/p2' {
-  export = p2;
+    export = p2;
 }
 
 declare module p2 {
 
-  export class AABB {
+    export class AABB {
 
-    constructor(options?: {
-      upperBound?: number[];
-      lowerBound?: number[];
-    });
+        constructor(options?: {
+            upperBound?: number[];
+            lowerBound?: number[];
+        });
 
-    setFromPoints(points: number[][], position: number[], angle: number, skinSize: number): void;
+        setFromPoints(points: number[][], position: number[], angle: number, skinSize: number): void;
 
-    copy(aabb: AABB): void;
+        copy(aabb: AABB): void;
 
-    extend(aabb: AABB): void;
+        extend(aabb: AABB): void;
 
-    overlaps(aabb: AABB): boolean;
+        overlaps(aabb: AABB): boolean;
 
-  }
+    }
 
-  export class Broadphase {
+    export class Broadphase {
 
-    static AABB: number;
-    static BOUNDING_CIRCLE: number;
+        static AABB: number;
+        static BOUNDING_CIRCLE: number;
 
-    static NAIVE: number;
-    static SAP: number;
+        static NAIVE: number;
+        static SAP: number;
+        type: number;
+        result: Body[];
+        world: World;
+        boundingVolumeType: number;
 
-    static boundingRadiusCheck(bodyA: Body, bodyB: Body): boolean;
+        constructor(type: number);
 
-    static aabbCheck(bodyA: Body, bodyB: Body): boolean;
+        static boundingRadiusCheck(bodyA: Body, bodyB: Body): boolean;
 
-    static canCollide(bodyA: Body, bodyB: Body): boolean;
+        static aabbCheck(bodyA: Body, bodyB: Body): boolean;
 
-    constructor(type: number);
+        static canCollide(bodyA: Body, bodyB: Body): boolean;
 
-    type: number;
-    result: Body[];
-    world: World;
-    boundingVolumeType: number;
+        setWorld(world: World): void;
 
-    setWorld(world: World): void;
+        getCollisionPairs(world: World): Body[];
 
-    getCollisionPairs(world: World): Body[];
+        boundingVolumeCheck(bodyA: Body, bodyB: Body): boolean;
 
-    boundingVolumeCheck(bodyA: Body, bodyB: Body): boolean;
+    }
 
-  }
+    export class GridBroadphase extends Broadphase {
 
-  export class GridBroadphase extends Broadphase {
+        xmin: number;
+        xmax: number;
+        ymin: number;
+        ymax: number;
+        nx: number;
+        ny: number;
+        binsizeX: number;
+        binsizeY: number;
 
-    constructor(options?: {
-      xmin?: number;
-      xmax?: number;
-      ymin?: number;
-      ymax?: number;
-      nx?: number;
-      ny?: number;
-    });
+        constructor(options?: {
+            xmin?: number;
+            xmax?: number;
+            ymin?: number;
+            ymax?: number;
+            nx?: number;
+            ny?: number;
+        });
 
-    xmin: number;
-    xmax: number;
-    ymin: number;
-    ymax: number;
-    nx: number;
-    ny: number;
-    binsizeX: number;
-    binsizeY: number;
+    }
 
-  }
+    export class NativeBroadphase extends Broadphase {
 
-  export class NativeBroadphase extends Broadphase {
+    }
 
-  }
+    export class Narrowphase {
 
-  export class Narrowphase {
+        contactEquations: ContactEquation[];
+        frictionEquations: FrictionEquation[];
+        enableFriction: boolean;
+        slipForce: number;
+        frictionCoefficient: number;
+        surfaceVelocity: number;
+        reuseObjects: boolean;
+        resuableContactEquations: any[];
+        reusableFrictionEquations: any[];
+        restitution: number;
+        stiffness: number;
+        relaxation: number;
+        frictionStiffness: number;
+        frictionRelaxation: number;
+        enableFrictionReduction: boolean;
+        contactSkinSize: number;
 
-    contactEquations: ContactEquation[];
-    frictionEquations: FrictionEquation[];
-    enableFriction: boolean;
-    slipForce: number;
-    frictionCoefficient: number;
-    surfaceVelocity: number;
-    reuseObjects: boolean;
-    resuableContactEquations: any[];
-    reusableFrictionEquations: any[];
-    restitution: number;
-    stiffness: number;
-    relaxation: number;
-    frictionStiffness: number;
-    frictionRelaxation: number;
-    enableFrictionReduction: boolean;
-    contactSkinSize: number;
+        collidedLastStep(bodyA: Body, bodyB: Body): boolean;
 
-    collidedLastStep(bodyA: Body, bodyB: Body): boolean;
+        reset(): void;
 
-    reset(): void;
+        createContactEquation(bodyA: Body, bodyB: Body, shapeA: Shape, shapeB: Shape): ContactEquation;
 
-    createContactEquation(bodyA: Body, bodyB: Body, shapeA: Shape, shapeB: Shape): ContactEquation;
+        createFrictionFromContact(c: ContactEquation): FrictionEquation;
 
-    createFrictionFromContact(c: ContactEquation): FrictionEquation;
+    }
 
-  }
+    export class SAPBroadphase extends Broadphase {
 
-  export class SAPBroadphase extends Broadphase {
+        axisList: Body[];
+        axisIndex: number;
 
-    axisList: Body[];
-    axisIndex: number;
+    }
 
-  }
+    export class Constraint {
 
-  export class Constraint {
+        static DISTANCE: number;
+        static GEAR: number;
+        static LOCK: number;
+        static PRISMATIC: number;
+        static REVOLUTE: number;
+        type: number;
+        equeations: Equation[];
+        bodyA: Body;
+        bodyB: Body;
+        collideConnected: boolean;
+
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+        });
+
+        update(): void;
+
+        setStiffness(stiffness: number): void;
 
-    static DISTANCE: number;
-    static GEAR: number;
-    static LOCK: number;
-    static PRISMATIC: number;
-    static REVOLUTE: number;
+        setRelaxation(relaxation: number): void;
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-    });
+    }
 
-    type: number;
-    equeations: Equation[];
-    bodyA: Body;
-    bodyB: Body;
-    collideConnected: boolean;
+    export class DistanceConstraint extends Constraint {
 
-    update(): void;
+        localAnchorA: number[];
+        localAnchorB: number[];
+        distance: number;
+        maxForce: number;
+        upperLimitEnabled: boolean;
+        upperLimit: number;
+        lowerLimitEnabled: boolean;
+        lowerLimit: number;
+        position: number;
+
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+            distance?: number;
+            localAnchorA?: number[];
+            localAnchorB?: number[];
+            maxForce?: number;
+        });
+
+        setMaxForce(f: number): void;
+
+        getMaxForce(): number;
+
+    }
+
+    export class GearConstraint extends Constraint {
+
+        ratio: number;
+        angle: number;
 
-    setStiffness(stiffness: number): void;
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+            angle?: number;
+            ratio?: number;
+            maxTorque?: number;
+        });
 
-    setRelaxation(relaxation: number): void;
+        setMaxTorque(torque: number): void;
 
-  }
+        getMaxTorque(): number;
 
-  export class DistanceConstraint extends Constraint {
+    }
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-      distance?: number;
-      localAnchorA?: number[];
-      localAnchorB?: number[];
-      maxForce?: number;
-    });
+    export class LockConstraint extends Constraint {
 
-    localAnchorA: number[];
-    localAnchorB: number[];
-    distance: number;
-    maxForce: number;
-    upperLimitEnabled: boolean;
-    upperLimit: number;
-    lowerLimitEnabled: boolean;
-    lowerLimit: number;
-    position: number;
-
-    setMaxForce(f: number): void;
-
-    getMaxForce(): number;
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+            localOffsetB?: number[];
+            localAngleB?: number;
+            maxForce?: number;
+        });
 
-  }
+        setMaxForce(force: number): void;
 
-  export class GearConstraint extends Constraint {
+        getMaxForce(): number;
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-      angle?: number;
-      ratio?: number;
-      maxTorque?: number;
-    });
+    }
 
-    ratio: number;
-    angle: number;
+    export class PrismaticConstraint extends Constraint {
 
-    setMaxTorque(torque: number): void;
+        localAnchorA: number[];
+        localAnchorB: number[];
+        localAxisA: number[];
+        position: number;
+        velocity: number;
+        lowerLimitEnabled: boolean;
+        upperLimitEnabled: boolean;
+        lowerLimit: number;
+        upperLimit: number;
+        upperLimitEquation: ContactEquation;
+        lowerLimitEquation: ContactEquation;
+        motorEquation: Equation;
+        motorEnabled: boolean;
+        motorSpeed: number;
 
-    getMaxTorque(): number;
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+            maxForce?: number;
+            localAnchorA?: number[];
+            localAnchorB?: number[];
+            localAxisA?: number[];
+            disableRotationalLock?: boolean;
+            upperLimit?: number;
+            lowerLimit?: number;
+        });
 
-  }
+        enableMotor(): void;
 
-  export class LockConstraint extends Constraint {
+        disableMotor(): void;
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-      localOffsetB?: number[];
-      localAngleB?: number;
-      maxForce?: number;
-    });
+        setLimits(lower: number, upper: number): void;
 
-    setMaxForce(force: number): void;
+    }
 
-    getMaxForce(): number;
+    export class RevoluteConstraint extends Constraint {
 
-  }
+        pivotA: number[];
+        pivotB: number[];
+        motorEquation: RotationalVelocityEquation;
+        motorEnabled: boolean;
+        angle: number;
+        lowerLimitEnabled: boolean;
+        upperLimitEnabled: boolean;
+        lowerLimit: number;
+        upperLimit: number;
+        upperLimitEquation: ContactEquation;
+        lowerLimitEquation: ContactEquation;
 
-  export class PrismaticConstraint extends Constraint {
+        constructor(bodyA: Body, bodyB: Body, type: number, options?: {
+            collideConnected?: boolean;
+            wakeUpBodies?: boolean;
+            worldPivot?: number[];
+            localPivotA?: number[];
+            localPivotB?: number[];
+            maxForce?: number;
+        });
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-      maxForce?: number;
-      localAnchorA?: number[];
-      localAnchorB?: number[];
-      localAxisA?: number[];
-      disableRotationalLock?: boolean;
-      upperLimit?: number;
-      lowerLimit?: number;
-    });
+        enableMotor(): void;
 
-    localAnchorA: number[];
-    localAnchorB: number[];
-    localAxisA: number[];
-    position: number;
-    velocity: number;
-    lowerLimitEnabled: boolean;
-    upperLimitEnabled: boolean;
-    lowerLimit: number;
-    upperLimit: number;
-    upperLimitEquation: ContactEquation;
-    lowerLimitEquation: ContactEquation;
-    motorEquation: Equation;
-    motorEnabled: boolean;
-    motorSpeed: number;
+        disableMotor(): void;
 
-    enableMotor(): void;
+        motorIsEnabled(): boolean;
 
-    disableMotor(): void;
+        setLimits(lower: number, upper: number): void;
 
-    setLimits(lower: number, upper: number): void;
+        setMotorSpeed(speed: number): void;
 
-  }
+        getMotorSpeed(): number;
 
-  export class RevoluteConstraint extends Constraint {
+    }
 
-    constructor(bodyA: Body, bodyB: Body, type: number, options?: {
-      collideConnected?: boolean;
-      wakeUpBodies?: boolean;
-      worldPivot?: number[];
-      localPivotA?: number[];
-      localPivotB?: number[];
-      maxForce?: number;
-    });
+    export class AngleLockEquation extends Equation {
 
-    pivotA: number[];
-    pivotB: number[];
-    motorEquation: RotationalVelocityEquation;
-    motorEnabled: boolean;
-    angle: number;
-    lowerLimitEnabled: boolean;
-    upperLimitEnabled: boolean;
-    lowerLimit: number;
-    upperLimit: number;
-    upperLimitEquation: ContactEquation;
-    lowerLimitEquation: ContactEquation;
+        constructor(bodyA: Body, bodyB: Body, options?: {
+            angle?: number;
+            ratio?: number;
+        });
 
-    enableMotor(): void;
+        computeGq(): number;
 
-    disableMotor(): void;
+        setRatio(ratio: number): number;
 
-    motorIsEnabled(): boolean;
+        setMaxTorque(torque: number): number;
 
-    setLimits(lower: number, upper: number): void;
+    }
 
-    setMotorSpeed(speed: number): void;
+    export class ContactEquation extends Equation {
 
-    getMotorSpeed(): number;
+        contactPointA: number[];
+        penetrationVec: number[];
+        contactPointB: number[];
+        normalA: number[];
+        restitution: number;
+        firstImpact: boolean;
+        shapeA: Shape;
+        shapeB: Shape;
 
-  }
+        constructor(bodyA: Body, bodyB: Body);
 
-  export class AngleLockEquation extends Equation {
+        computeB(a: number, b: number, h: number): number;
 
-    constructor(bodyA: Body, bodyB: Body, options?: {
-      angle?: number;
-      ratio?: number;
-    });
+    }
 
-    computeGq(): number;
+    export class Equation {
 
-    setRatio(ratio: number): number;
+        static DEFAULT_STIFFNESS: number;
+        static DEFAULT_RELAXATION: number;
+        minForce: number;
+        maxForce: number;
+        bodyA: Body;
+        bodyB: Body;
+        stiffness: number;
+        relaxation: number;
+        G: number[];
+        offset: number;
+        a: number;
+        b: number;
+        epsilon: number;
+        timeStep: number;
+        needsUpdate: boolean;
+        multiplier: number;
+        relativeVelocity: number;
+        enabled: boolean;
 
-    setMaxTorque(torque: number): number;
+        constructor(bodyA: Body, bodyB: Body, minForce?: number, maxForce?: number);
 
-  }
+        gmult(G: number[], vi: number[], wi: number[], vj: number[], wj: number[]): number;
 
-  export class ContactEquation extends Equation {
+        computeB(a: number, b: number, h: number): number;
 
-    constructor(bodyA: Body, bodyB: Body);
+        computeGq(): number;
 
-    contactPointA: number[];
-    penetrationVec: number[];
-    contactPointB: number[];
-    normalA: number[];
-    restitution: number;
-    firstImpact: boolean;
-    shapeA: Shape;
-    shapeB: Shape;
+        computeGW(): number;
 
-    computeB(a: number, b: number, h: number): number;
+        computeGWlambda(): number;
 
-  }
+        computeGiMf(): number;
 
-  export class Equation {
+        computeGiMGt(): number;
 
-    static DEFAULT_STIFFNESS: number;
-    static DEFAULT_RELAXATION: number;
+        addToWlambda(deltalambda: number): number;
 
-    constructor(bodyA: Body, bodyB: Body, minForce?: number, maxForce?: number);
+        computeInvC(eps: number): number;
 
-    minForce: number;
-    maxForce: number;
-    bodyA: Body;
-    bodyB: Body;
-    stiffness: number;
-    relaxation: number;
-    G: number[];
-    offset: number;
-    a: number;
-    b: number;
-    epsilon: number;
-    timeStep: number;
-    needsUpdate: boolean;
-    multiplier: number;
-    relativeVelocity: number;
-    enabled: boolean;
+    }
 
-    gmult(G: number[], vi: number[], wi: number[], vj: number[], wj: number[]): number;
+    export class FrictionEquation extends Equation {
 
-    computeB(a: number, b: number, h: number): number;
+        contactPointA: number[];
+        contactPointB: number[];
+        t: number[];
+        shapeA: Shape;
+        shapeB: Shape;
+        frictionCoefficient: number;
 
-    computeGq(): number;
+        constructor(bodyA: Body, bodyB: Body, slipForce: number);
 
-    computeGW(): number;
+        setSlipForce(slipForce: number): number;
 
-    computeGWlambda(): number;
+        getSlipForce(): number;
 
-    computeGiMf(): number;
+        computeB(a: number, b: number, h: number): number;
 
-    computeGiMGt(): number;
+    }
 
-    addToWlambda(deltalambda: number): number;
+    export class RotationalLockEquation extends Equation {
 
-    computeInvC(eps: number): number;
+        angle: number;
 
-  }
+        constructor(bodyA: Body, bodyB: Body, options?: {
+            angle?: number;
+        });
 
-  export class FrictionEquation extends Equation {
+        computeGq(): number;
 
-    constructor(bodyA: Body, bodyB: Body, slipForce: number);
+    }
 
-    contactPointA: number[];
-    contactPointB: number[];
-    t: number[];
-    shapeA: Shape;
-    shapeB: Shape;
-    frictionCoefficient: number;
+    export class RotationalVelocityEquation extends Equation {
 
-    setSlipForce(slipForce: number): number;
+        constructor(bodyA: Body, bodyB: Body);
 
-    getSlipForce(): number;
+        computeB(a: number, b: number, h: number): number;
 
-    computeB(a: number, b: number, h: number): number;
+    }
 
-  }
+    export class EventEmitter {
 
-  export class RotationalLockEquation extends Equation {
+        on(type: string, listener: Function, context: any): EventEmitter;
 
-    constructor(bodyA: Body, bodyB: Body, options?: {
-      angle?: number;
-    });
+        has(type: string, listener: Function): boolean;
 
-    angle: number;
+        off(type: string, listener: Function): EventEmitter;
 
-    computeGq(): number;
+        emit(event: any): EventEmitter;
 
-  }
+    }
 
-  export class RotationalVelocityEquation extends Equation {
+    export class ContactMaterialOptions {
 
-    constructor(bodyA: Body, bodyB: Body);
+        friction: number;
+        restitution: number;
+        stiffness: number;
+        relaxation: number;
+        frictionStiffness: number;
+        frictionRelaxation: number;
+        surfaceVelocity: number;
 
-    computeB(a: number, b: number, h: number): number;
+    }
 
-  }
+    export class ContactMaterial {
 
-  export class EventEmitter {
+        static idCounter: number;
+        id: number;
+        materialA: Material;
+        materialB: Material;
+        friction: number;
+        restitution: number;
+        stiffness: number;
+        relaxation: number;
+        frictionStiffness: number;
+        frictionRelaxation: number;
+        surfaceVelocity: number;
+        contactSkinSize: number;
 
-    on(type: string, listener: Function, context: any): EventEmitter;
+        constructor(materialA: Material, materialB: Material, options?: ContactMaterialOptions);
 
-    has(type: string, listener: Function): boolean;
+    }
 
-    off(type: string, listener: Function): EventEmitter;
+    export class Material {
 
-    emit(event: any): EventEmitter;
+        static idCounter: number;
+        id: number;
 
-  }
+        constructor(id: number);
 
-  export class ContactMaterialOptions {
+    }
 
-    friction: number;
-    restitution: number;
-    stiffness: number;
-    relaxation: number;
-    frictionStiffness: number;
-    frictionRelaxation: number;
-    surfaceVelocity: number;
+    export class vec2 {
 
-  }
+        static crossLength(a: number[], b: number[]): number;
 
-  export class ContactMaterial {
+        static crossVZ(out: number[], vec: number[], zcomp: number): number;
 
-    static idCounter: number;
+        static crossZV(out: number[], zcomp: number, vec: number[]): number;
 
-    constructor(materialA: Material, materialB: Material, options?: ContactMaterialOptions);
+        static rotate(out: number[], a: number[], angle: number): void;
 
-    id: number;
-    materialA: Material;
-    materialB: Material;
-    friction: number;
-    restitution: number;
-    stiffness: number;
-    relaxation: number;
-    frictionStiffness: number;
-    frictionRelaxation: number;
-    surfaceVelocity: number;
-    contactSkinSize: number;
+        static rotate90cw(out: number[], a: number[]): number;
 
-  }
+        static centroid(out: number[], a: number[], b: number[], c: number[]): number[];
 
-  export class Material {
+        static create(): number[];
 
-    static idCounter: number;
+        static clone(a: number[]): number[];
 
-    constructor(id: number);
+        static fromValues(x: number, y: number): number[];
 
-    id: number;
+        static copy(out: number[], a: number[]): number[];
 
-  }
+        static set(out: number[], x: number, y: number): number[];
 
-  export class vec2 {
+        static toLocalFrame(
+            out: number[],
+            worldPoint: number[],
+            framePosition: number[],
+            frameAngle: number): void;
 
-    static crossLength(a: number[], b: number[]): number;
+        static toGlobalFrame(
+            out: number[],
+            localPoint: number[],
+            framePosition: number[],
+            frameAngle: number): void;
 
-    static crossVZ(out: number[], vec: number[], zcomp: number): number;
+        static add(out: number[], a: number[], b: number[]): number[];
 
-    static crossZV(out: number[], zcomp: number, vec: number[]): number;
+        static subtract(out: number[], a: number[], b: number[]): number[];
 
-    static rotate(out: number[], a: number[], angle: number): void;
+        static sub(out: number[], a: number[], b: number[]): number[];
 
-    static rotate90cw(out: number[], a: number[]): number;
+        static multiply(out: number[], a: number[], b: number[]): number[];
 
-    static centroid(out: number[], a: number[], b: number[], c: number[]): number[];
+        static mul(out: number[], a: number[], b: number[]): number[];
 
-    static create(): number[];
+        static divide(out: number[], a: number[], b: number[]): number[];
 
-    static clone(a: number[]): number[];
+        static div(out: number[], a: number[], b: number[]): number[];
 
-    static fromValues(x: number, y: number): number[];
+        static scale(out: number[], a: number[], b: number): number[];
 
-    static copy(out: number[], a: number[]): number[];
+        static distance(a: number[], b: number[]): number;
 
-    static set(out: number[], x: number, y: number): number[];
+        static dist(a: number[], b: number[]): number;
 
-    static toLocalFrame(
-        out: number[],
-        worldPoint: number[],
-        framePosition: number[],
-        frameAngle: number): void;
+        static squaredDistance(a: number[], b: number[]): number;
 
-    static toGlobalFrame(
-        out: number[],
-        localPoint: number[],
-        framePosition: number[],
-        frameAngle: number): void;
+        static sqrDist(a: number[], b: number[]): number;
 
-    static add(out: number[], a: number[], b: number[]): number[];
+        static length(a: number[]): number;
 
-    static subtract(out: number[], a: number[], b: number[]): number[];
+        static len(a: number[]): number;
 
-    static sub(out: number[], a: number[], b: number[]): number[];
+        static squaredLength(a: number[]): number;
 
-    static multiply(out: number[], a: number[], b: number[]): number[];
+        static sqrLen(a: number[]): number;
 
-    static mul(out: number[], a: number[], b: number[]): number[];
+        static negate(out: number[], a: number[]): number[];
 
-    static divide(out: number[], a: number[], b: number[]): number[];
+        static normalize(out: number[], a: number[]): number[];
 
-    static div(out: number[], a: number[], b: number[]): number[];
+        static dot(a: number[], b: number[]): number;
 
-    static scale(out: number[], a: number[], b: number): number[];
+        static str(a: number[]): string;
 
-    static distance(a: number[], b: number[]): number;
+    }
 
-    static dist(a: number[], b: number[]): number;
+    export interface BodyOptions {
 
-    static squaredDistance(a: number[], b: number[]): number;
+        mass?: number;
+        position?: number[];
+        velocity?: number[];
+        angle?: number;
+        angularVelocity?: number;
+        force?: number[];
+        angularForce?: number;
+        fixedRotation?: boolean;
 
-    static sqrDist(a: number[], b: number[]): number;
+    }
 
-    static length(a: number[]): number;
+    export class Body extends EventEmitter {
 
-    static len(a: number[]): number;
+        static DYNAMIC: number;
+        static STATIC: number;
+        static KINEMATIC: number;
+        static AWAKE: number;
+        static SLEEPY: number;
+        static SLEEPING: number;
+        sleepyEvent: {
+            type: string;
+        };
+        sleepEvent: {
+            type: string;
+        };
+        wakeUpEvent: {
+            type: string;
+        };
+        id: number;
+        world: World;
+        shapes: Shape[];
+        shapeOffsets: number[][];
+        shapeAngles: number[];
+        mass: number;
+        invMass: number;
+        inertia: number;
+        invInertia: number;
+        invMassSolve: number;
+        invInertiaSolve: number;
+        fixedRotation: number;
+        position: number[];
+        interpolatedPosition: number[];
+        interpolatedAngle: number;
+        previousPosition: number[];
+        previousAngle: number;
+        velocity: number[];
+        vlambda: number[];
+        wlambda: number[];
+        angle: number;
+        angularVelocity: number;
+        force: number[];
+        angularForce: number;
+        damping: number;
+        angularDamping: number;
+        type: number;
+        boundingRadius: number;
+        aabb: AABB;
+        aabbNeedsUpdate: boolean;
+        allowSleep: boolean;
+        wantsToSleep: boolean;
+        sleepState: number;
+        sleepSpeedLimit: number;
+        sleepTimeLimit: number;
+        gravityScale: number;
 
-    static squaredLength(a: number[]): number;
+        constructor(options?: BodyOptions);
 
-    static sqrLen(a: number[]): number;
+        updateSolveMassProperties(): void;
 
-    static negate(out: number[], a: number[]): number[];
+        setDensity(density: number): void;
 
-    static normalize(out: number[], a: number[]): number[];
+        getArea(): number;
 
-    static dot(a: number[], b: number[]): number;
+        getAABB(): AABB;
 
-    static str(a: number[]): string;
+        updateAABB(): void;
 
-  }
+        updateBoundingRadius(): void;
 
-  export interface BodyOptions {
+        addShape(shape: Shape, offset?: number[], angle?: number): void;
 
-    mass?: number;
-    position?: number[];
-    velocity?: number[];
-    angle?: number;
-    angularVelocity?: number;
-    force?: number[];
-    angularForce?: number;
-    fixedRotation?: boolean;
+        removeShape(shape: Shape): boolean;
 
-  }
+        updateMassProperties(): void;
 
-  export class Body extends EventEmitter {
+        applyForce(force: number[], worldPoint: number[]): void;
 
-    sleepyEvent: {
-      type: string;
-    };
+        toLocalFrame(out: number[], worldPoint: number[]): void;
 
-    sleepEvent: {
-      type: string;
-    };
+        toWorldFrame(out: number[], localPoint: number[]): void;
 
-    wakeUpEvent: {
-      type: string;
-    };
+        fromPolygon(path: number[][], options?: {
+            optimalDecomp?: boolean;
+            skipSimpleCheck?: boolean;
+            removeCollinearPoints?: any; //boolean | number
+        }): boolean;
 
-    static DYNAMIC: number;
-    static STATIC: number;
-    static KINEMATIC: number;
-    static AWAKE: number;
-    static SLEEPY: number;
-    static SLEEPING: number;
+        adjustCenterOfMass(): void;
 
-    constructor(options?: BodyOptions);
+        setZeroForce(): void;
 
-    id: number;
-    world: World;
-    shapes: Shape[];
-    shapeOffsets: number[][];
-    shapeAngles: number[];
-    mass: number;
-    invMass: number;
-    inertia: number;
-    invInertia: number;
-    invMassSolve: number;
-    invInertiaSolve: number;
-    fixedRotation: number;
-    position: number[];
-    interpolatedPosition: number[];
-    interpolatedAngle: number;
-    previousPosition: number[];
-    previousAngle: number;
-    velocity: number[];
-    vlambda: number[];
-    wlambda: number[];
-    angle: number;
-    angularVelocity: number;
-    force: number[];
-    angularForce: number;
-    damping: number;
-    angularDamping: number;
-    type: number;
-    boundingRadius: number;
-    aabb: AABB;
-    aabbNeedsUpdate: boolean;
-    allowSleep: boolean;
-    wantsToSleep: boolean;
-    sleepState: number;
-    sleepSpeedLimit: number;
-    sleepTimeLimit: number;
-    gravityScale: number;
+        resetConstraintVelocity(): void;
 
-    updateSolveMassProperties(): void;
+        applyDamping(dy: number): void;
 
-    setDensity(density: number): void;
+        wakeUp(): void;
 
-    getArea(): number;
+        sleep(): void;
 
-    getAABB(): AABB;
+        sleepTick(time: number, dontSleep: boolean, dt: number): void;
 
-    updateAABB(): void;
+        getVelocityFromPosition(story: number[], dt: number): number[];
 
-    updateBoundingRadius(): void;
+        getAngularVelocityFromPosition(timeStep: number): number;
 
-    addShape(shape: Shape, offset?: number[], angle?: number): void;
+        overlaps(body: Body): boolean;
 
-    removeShape(shape: Shape): boolean;
+    }
 
-    updateMassProperties(): void;
+    export class Spring {
 
-    applyForce(force: number[], worldPoint: number[]): void;
+        stiffness: number;
+        damping: number;
+        bodyA: Body;
+        bodyB: Body;
 
-    toLocalFrame(out: number[], worldPoint: number[]): void;
+        constructor(bodyA: Body, bodyB: Body, options?: {
 
-    toWorldFrame(out: number[], localPoint: number[]): void;
+            stiffness?: number;
+            damping?: number;
+            localAnchorA?: number[];
+            localAnchorB?: number[];
+            worldAnchorA?: number[];
+            worldAnchorB?: number[];
 
-    fromPolygon(path: number[][], options?: {
-      optimalDecomp?: boolean;
-      skipSimpleCheck?: boolean;
-      removeCollinearPoints?: any; //boolean | number
-    }): boolean;
+        });
 
-    adjustCenterOfMass(): void;
+        applyForce(): void;
 
-    setZeroForce(): void;
+    }
 
-    resetConstraintVelocity(): void;
+    export class LinearSpring extends Spring {
 
-    applyDamping(dy: number): void;
+        localAnchorA: number[];
+        localAnchorB: number[];
+        restLength: number;
 
-    wakeUp(): void;
+        setWorldAnchorA(worldAnchorA: number[]): void;
 
-    sleep(): void;
+        setWorldAnchorB(worldAnchorB: number[]): void;
 
-    sleepTick(time: number, dontSleep: boolean, dt: number): void;
+        getWorldAnchorA(result: number[]): number[];
 
-    getVelocityFromPosition(story: number[], dt: number): number[];
+        getWorldAnchorB(result: number[]): number[];
 
-    getAngularVelocityFromPosition(timeStep: number): number;
+        applyForce(): void;
 
-    overlaps(body: Body): boolean;
+    }
 
-  }
+    export class RotationalSpring extends Spring {
 
-  export class Spring {
+        restAngle: number;
 
-    constructor(bodyA: Body, bodyB: Body, options?: {
+        constructor(bodyA: Body, bodyB: Body, options?: {
+            restAngle?: number;
+            stiffness?: number;
+            damping?: number;
+        });
 
-      stiffness?: number;
-      damping?: number;
-      localAnchorA?: number[];
-      localAnchorB?: number[];
-      worldAnchorA?: number[];
-      worldAnchorB?: number[];
+    }
 
-    });
+    export class Capsule extends Shape {
 
-    stiffness: number;
-    damping: number;
-    bodyA: Body;
-    bodyB: Body;
+        length: number;
+        radius: number;
 
-    applyForce(): void;
+        constructor(length?: number, radius?: number);
 
-  }
+    }
 
-  export class LinearSpring extends Spring {
+    export class Circle extends Shape {
 
-    localAnchorA: number[];
-    localAnchorB: number[];
-    restLength: number;
+        radius: number;
 
-    setWorldAnchorA(worldAnchorA: number[]): void;
+        constructor(radius: number);
 
-    setWorldAnchorB(worldAnchorB: number[]): void;
+    }
 
-    getWorldAnchorA(result: number[]): number[];
+    export class Convex extends Shape {
 
-    getWorldAnchorB(result: number[]): number[];
-
-    applyForce(): void;
-
-  }
-
-  export class RotationalSpring extends Spring {
-
-    constructor(bodyA: Body, bodyB: Body, options?: {
-      restAngle?: number;
-      stiffness?: number;
-      damping?: number;
-    });
-
-    restAngle: number;
-
-  }
-
-  export class Capsule extends Shape {
-
-    constructor(length?: number, radius?: number);
-
-    length: number;
-    radius: number;
-
-  }
-
-  export class Circle extends Shape {
-
-    constructor(radius: number);
-
-    radius: number;
-
-  }
-
-  export class Convex extends Shape {
-
-    static triangleArea(a: number[], b: number[], c: number[]): number;
+        vertices: number[][];
+        axes: number[];
+        centerOfMass: number[];
+        triangles: number[];
+        boundingRadius: number;
 
         constructor(options?: any);
 
-    vertices: number[][];
-    axes: number[];
-    centerOfMass: number[];
-    triangles: number[];
-    boundingRadius: number;
+        static triangleArea(a: number[], b: number[], c: number[]): number;
 
-    projectOntoLocalAxis(localAxis: number[], result: number[]): void;
+        projectOntoLocalAxis(localAxis: number[], result: number[]): void;
 
-    projectOntoWorldAxis(
-        localAxis: number[],
-        shapeOffset: number[],
-        shapeAngle: number,
-        result: number[]): void;
+        projectOntoWorldAxis(
+            localAxis: number[],
+            shapeOffset: number[],
+            shapeAngle: number,
+            result: number[]): void;
 
-    updateCenterOfMass(): void;
+        updateCenterOfMass(): void;
 
-  }
+    }
 
-  export class Heightfield extends Shape {
+    export class Heightfield extends Shape {
 
-    constructor(data: number[], options?: {
-      minValue?: number;
-      maxValue?: number;
-      elementWidth: number;
-    });
+        data: number[];
+        maxValue: number;
+        minValue: number;
+        elementWidth: number;
 
-    data: number[];
-    maxValue: number;
-    minValue: number;
-    elementWidth: number;
+        constructor(data: number[], options?: {
+            minValue?: number;
+            maxValue?: number;
+            elementWidth: number;
+        });
 
-  }
+    }
 
-  export interface SharedShapeOptions {
+    export interface SharedShapeOptions {
 
-    position?: number[];
-    angle?: number;
-    collisionGroup?: number;
-    collisionResponse?: boolean;
-    collisionMask?: number;
-    sensor?: boolean;
+        position?: number[];
+        angle?: number;
+        collisionGroup?: number;
+        collisionResponse?: boolean;
+        collisionMask?: number;
+        sensor?: boolean;
 
-  }
+    }
 
-  export interface ShapeOptions extends SharedShapeOptions {
+    export interface ShapeOptions extends SharedShapeOptions {
 
-    type?: number;
+        type?: number;
 
-  }
+    }
 
-  export class Shape {
+    export class Shape {
 
-    static idCounter: number;
-    static CIRCLE: number;
-    static PARTICLE: number;
-    static PLANE: number;
-    static CONVEX: number;
-    static LINE: number;
-    static RECTANGLE: number;
-    static CAPSULE: number;
-    static HEIGHTFIELD: number;
+        static idCounter: number;
+        static CIRCLE: number;
+        static PARTICLE: number;
+        static PLANE: number;
+        static CONVEX: number;
+        static LINE: number;
+        static RECTANGLE: number;
+        static CAPSULE: number;
+        static HEIGHTFIELD: number;
+        type: number;
+        id: number;
+        boundingRadius: number;
+        collisionGroup: number;
+        collisionMask: number;
+        material: Material;
+        area: number;
+        sensor: boolean;
 
-    constructor(options?: ShapeOptions);
+        constructor(options?: ShapeOptions);
 
-    type: number;
-    id: number;
-    boundingRadius: number;
-    collisionGroup: number;
-    collisionMask: number;
-    material: Material;
-    area: number;
-    sensor: boolean;
+        computeMomentOfInertia(mass: number): number;
 
-    computeMomentOfInertia(mass: number): number;
+        updateBoundingRadius(): number;
 
-    updateBoundingRadius(): number;
+        updateArea(): void;
 
-    updateArea(): void;
+        computeAABB(out: AABB, position: number[], angle: number): void;
 
-    computeAABB(out: AABB, position: number[], angle: number): void;
+    }
 
-  }
+    export class Line extends Shape {
 
-  export class Line extends Shape {
+        length: number;
 
-    constructor(length?: number);
+        constructor(length?: number);
 
-    length: number;
+    }
 
-  }
+    export class Particle extends Shape {
 
-  export class Particle extends Shape {
+    }
 
-  }
+    export class Plane extends Shape {
 
-  export class Plane extends Shape {
+    }
 
-  }
-
-  export interface BoxOptions {
+    export interface BoxOptions {
 
         width?: number;
         height?: number;
@@ -832,319 +822,308 @@ declare module p2 {
     }
 
     export class Box extends Shape {
-        constructor(options?: BoxOptions);
-
         width: number;
         height: number;
+
+        constructor(options?: BoxOptions);
     }
 
     export class Rectangle extends Shape {
 
-    static sameDimensions(a: Rectangle, b: Rectangle): boolean;
+        width: number;
+        height: number;
 
-    constructor(width?: number, height?: number);
+        constructor(width?: number, height?: number);
 
-    width: number;
-    height: number;
+        static sameDimensions(a: Rectangle, b: Rectangle): boolean;
 
-  }
+    }
 
-  export class Solver extends EventEmitter {
+    export class Solver extends EventEmitter {
 
-    static GS: number;
-    static ISLAND: number;
+        static GS: number;
+        static ISLAND: number;
+        type: number;
+        equations: Equation[];
+        equationSortFunction: Equation; //Equation | boolean
 
-    constructor(options?: {}, type?: number);
+        constructor(options?: {}, type?: number);
 
-    type: number;
-    equations: Equation[];
-    equationSortFunction: Equation; //Equation | boolean
+        solve(dy: number, world: World): void;
 
-    solve(dy: number, world: World): void;
+        solveIsland(dy: number, island: Island): void;
 
-    solveIsland(dy: number, island: Island): void;
+        sortEquations(): void;
 
-    sortEquations(): void;
+        addEquation(eq: Equation): void;
 
-    addEquation(eq: Equation): void;
+        addEquations(eqs: Equation[]): void;
 
-    addEquations(eqs: Equation[]): void;
+        removeEquation(eq: Equation): void;
 
-    removeEquation(eq: Equation): void;
+        removeAllEquations(): void;
 
-    removeAllEquations(): void;
+    }
 
-  }
+    export class GSSolver extends Solver {
 
-  export class GSSolver extends Solver {
+        iterations: number;
+        tolerance: number;
+        useZeroRHS: boolean;
+        frictionIterations: number;
+        usedIterations: number;
 
-    constructor(options?: {
-      iterations?: number;
-      tolerance?: number;
-    });
+        constructor(options?: {
+            iterations?: number;
+            tolerance?: number;
+        });
 
-    iterations: number;
-    tolerance: number;
-    useZeroRHS: boolean;
-    frictionIterations: number;
-    usedIterations: number;
+        solve(h: number, world: World): void;
 
-    solve(h: number, world: World): void;
+    }
 
-  }
+    export class OverlapKeeper {
 
-  export class OverlapKeeper {
+        shapeA: Shape;
+        shapeB: Shape;
+        bodyA: Body;
+        bodyB: Body;
 
-    constructor(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Shape);
+        constructor(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Shape);
 
-    shapeA: Shape;
-    shapeB: Shape;
-    bodyA: Body;
-    bodyB: Body;
+        tick(): void;
 
-    tick(): void;
+        setOverlapping(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Body): void;
 
-    setOverlapping(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Body): void;
+        bodiesAreOverlapping(bodyA: Body, bodyB: Body): boolean;
 
-    bodiesAreOverlapping(bodyA: Body, bodyB: Body): boolean;
+        set(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Shape): void;
 
-    set(bodyA: Body, shapeA: Shape, bodyB: Body, shapeB: Shape): void;
+    }
 
-  }
+    export class TupleDictionary {
 
-  export class TupleDictionary {
+        data: number[];
+        keys: number[];
 
-    data: number[];
-    keys: number[];
+        getKey(id1: number, id2: number): string;
 
-    getKey(id1: number, id2: number): string;
+        getByKey(key: number): number;
 
-    getByKey(key: number): number;
+        get(i: number, j: number): number;
 
-    get(i: number, j: number): number;
+        set(i: number, j: number, value: number): number;
 
-    set(i: number, j: number, value: number): number;
+        reset(): void;
 
-    reset(): void;
+        copy(dict: TupleDictionary): void;
 
-    copy(dict: TupleDictionary): void;
+    }
 
-  }
+    export class Utils {
 
-  export class Utils {
+        static appendArray<T>(a: Array<T>, b: Array<T>): Array<T>;
 
-    static appendArray<T>(a: Array<T>, b: Array<T>): Array<T>;
+        static chanceRoll(chance: number): boolean;
 
-    static chanceRoll(chance: number): boolean;
+        static defaults(options: any, defaults: any): any;
 
-    static defaults(options: any, defaults: any): any;
+        static extend(a: any, b: any): void;
 
-    static extend(a: any, b: any): void;
+        static randomChoice(choice1: any, choice2: any): any;
 
-    static randomChoice(choice1: any, choice2: any): any;
+        static rotateArray(matrix: any[], direction: any): any[];
 
-    static rotateArray(matrix: any[], direction: any): any[];
-
-    static splice<T>(array: Array<T>, index: number, howMany: number): void;
-
-    static shuffle<T>(array: T[]): T[];
-
-    static transposeArray<T>(array: T[]): T[];
-
-  }
-
-  export class Island {
-
-    equations: Equation[];
-    bodies: Body[];
-
-    reset(): void;
-
-    getBodies(result: any): Body[];
-
-    wantsToSleep(): boolean;
-
-    sleep(): boolean;
-
-  }
-
-  export class IslandManager extends Solver {
-
-    static getUnvisitedNode(nodes: Node[]): IslandNode; // IslandNode | boolean
-
-    equations: Equation[];
-    islands: Island[];
-    nodes: IslandNode[];
-
-    visit(node: IslandNode, bds: Body[], eqs: Equation[]): void;
-
-    bfs(root: IslandNode, bds: Body[], eqs: Equation[]): void;
-
-    split(world: World): Island[];
-
-  }
-
-  export class IslandNode {
-
-    constructor(body: Body);
-
-    body: Body;
-    neighbors: IslandNode[];
-    equations: Equation[];
-    visited: boolean;
-
-    reset(): void;
-
-  }
-
-  export class World extends EventEmitter {
-
-    postStepEvent: {
-      type: string;
-    };
-
-    addBodyEvent: {
-      type: string;
-    };
-
-    removeBodyEvent: {
-      type: string;
-    };
-
-    addSpringEvent: {
-      type: string;
-    };
-
-    impactEvent: {
-      type: string;
-      bodyA: Body;
-      bodyB: Body;
-      shapeA: Shape;
-      shapeB: Shape;
-      contactEquation: ContactEquation;
-    };
-
-    postBroadphaseEvent: {
-      type: string;
-      pairs: Body[];
-    };
-
-    beginContactEvent: {
-      type: string;
-      shapeA: Shape;
-      shapeB: Shape;
-      bodyA: Body;
-      bodyB: Body;
-      contactEquations: ContactEquation[];
-    };
-
-    endContactEvent: {
-      type: string;
-      shapeA: Shape;
-      shapeB: Shape;
-      bodyA: Body;
-      bodyB: Body;
-    };
-
-    preSolveEvent: {
-      type: string;
-      contactEquations: ContactEquation[];
-      frictionEquations: FrictionEquation[];
-    };
-
-    static NO_SLEEPING: number;
-    static BODY_SLEEPING: number;
-    static ISLAND_SLEEPING: number;
-
-    static integrateBody(body: Body, dy: number): void;
-
-    constructor(options?: {
-      solver?: Solver;
-      gravity?: number[];
-      broadphase?: Broadphase;
-      islandSplit?: boolean;
-      doProfiling?: boolean;
-    });
-
-    springs: Spring[];
-    bodies: Body[];
-    solver: Solver;
-    narrowphase: Narrowphase;
-    islandManager: IslandManager;
-    gravity: number[];
-    frictionGravity: number;
-    useWorldGravityAsFrictionGravity: boolean;
-    useFrictionGravityOnZeroGravity: boolean;
-    doProfiling: boolean;
-    lastStepTime: number;
-    broadphase: Broadphase;
-    constraints: Constraint[];
-    defaultMaterial: Material;
-    defaultContactMaterial: ContactMaterial;
-    lastTimeStep: number;
-    applySpringForces: boolean;
-    applyDamping: boolean;
-    applyGravity: boolean;
-    solveConstraints: boolean;
-    contactMaterials: ContactMaterial[];
-    time: number;
-    stepping: boolean;
-    islandSplit: boolean;
-    emitImpactEvent: boolean;
-    sleepMode: number;
-
-    addConstraint(c: Constraint): void;
-
-    addContactMaterial(contactMaterial: ContactMaterial): void;
-
-    removeContactMaterial(cm: ContactMaterial): void;
-
-    getContactMaterial(materialA: Material, materialB: Material): ContactMaterial; // ContactMaterial
-                                                                                   // | boolean
-    removeConstraint(c: Constraint): void;
-
-    step(dy: number, timeSinceLastCalled?: number, maxSubSteps?: number): void;
-
-    runNarrowphase(
-        np: Narrowphase,
-        bi: Body,
-        si: Shape,
-        xi: any[],
-        ai: number,
-        bj: Body,
-        sj: Shape,
-        xj: any[],
-        aj: number,
-        cm: number,
-        glen: number): void;
-
-    addSpring(s: Spring): void;
-
-    removeSpring(s: Spring): void;
-
-    addBody(body: Body): void;
-
-    removeBody(body: Body): void;
-
-    getBodyByID(id: number): Body; //Body | boolean
-    disableBodyCollision(bodyA: Body, bodyB: Body): void;
-
-    enableBodyCollision(bodyA: Body, bodyB: Body): void;
-
-    clear(): void;
-
-    clone(): World;
-
-    hitTest(worldPoint: number[], bodies: Body[], precision: number): Body[];
-
-    setGlobalEquationParameters(parameters: {
-      relaxation?: number;
-      stiffness?: number;
-    }): void;
-
-    setGlobalStiffness(stiffness: number): void;
-
-    setGlobalRelaxation(relaxation: number): void;
-  }
+        static splice<T>(array: Array<T>, index: number, howMany: number): void;
+
+        static shuffle<T>(array: T[]): T[];
+
+        static transposeArray<T>(array: T[]): T[];
+
+    }
+
+    export class Island {
+
+        equations: Equation[];
+        bodies: Body[];
+
+        reset(): void;
+
+        getBodies(result: any): Body[];
+
+        wantsToSleep(): boolean;
+
+        sleep(): boolean;
+
+    }
+
+    export class IslandManager extends Solver {
+
+        equations: Equation[];
+        islands: Island[];
+        nodes: IslandNode[];
+
+        static getUnvisitedNode(nodes: Node[]): IslandNode; // IslandNode | boolean
+
+        visit(node: IslandNode, bds: Body[], eqs: Equation[]): void;
+
+        bfs(root: IslandNode, bds: Body[], eqs: Equation[]): void;
+
+        split(world: World): Island[];
+
+    }
+
+    export class IslandNode {
+
+        body: Body;
+        neighbors: IslandNode[];
+        equations: Equation[];
+        visited: boolean;
+
+        constructor(body: Body);
+
+        reset(): void;
+
+    }
+
+    export class World extends EventEmitter {
+
+        static NO_SLEEPING: number;
+        static BODY_SLEEPING: number;
+        static ISLAND_SLEEPING: number;
+        postStepEvent: {
+            type: string;
+        };
+        addBodyEvent: {
+            type: string;
+        };
+        removeBodyEvent: {
+            type: string;
+        };
+        addSpringEvent: {
+            type: string;
+        };
+        impactEvent: {
+            type: string;
+            bodyA: Body;
+            bodyB: Body;
+            shapeA: Shape;
+            shapeB: Shape;
+            contactEquation: ContactEquation;
+        };
+        postBroadphaseEvent: {
+            type: string;
+            pairs: Body[];
+        };
+        beginContactEvent: {
+            type: string;
+            shapeA: Shape;
+            shapeB: Shape;
+            bodyA: Body;
+            bodyB: Body;
+            contactEquations: ContactEquation[];
+        };
+        endContactEvent: {
+            type: string;
+            shapeA: Shape;
+            shapeB: Shape;
+            bodyA: Body;
+            bodyB: Body;
+        };
+        preSolveEvent: {
+            type: string;
+            contactEquations: ContactEquation[];
+            frictionEquations: FrictionEquation[];
+        };
+        springs: Spring[];
+        bodies: Body[];
+        solver: Solver;
+        narrowphase: Narrowphase;
+        islandManager: IslandManager;
+        gravity: number[];
+        frictionGravity: number;
+        useWorldGravityAsFrictionGravity: boolean;
+        useFrictionGravityOnZeroGravity: boolean;
+        doProfiling: boolean;
+        lastStepTime: number;
+        broadphase: Broadphase;
+        constraints: Constraint[];
+        defaultMaterial: Material;
+        defaultContactMaterial: ContactMaterial;
+        lastTimeStep: number;
+        applySpringForces: boolean;
+        applyDamping: boolean;
+        applyGravity: boolean;
+        solveConstraints: boolean;
+        contactMaterials: ContactMaterial[];
+        time: number;
+        stepping: boolean;
+        islandSplit: boolean;
+        emitImpactEvent: boolean;
+        sleepMode: number;
+
+        constructor(options?: {
+            solver?: Solver;
+            gravity?: number[];
+            broadphase?: Broadphase;
+            islandSplit?: boolean;
+            doProfiling?: boolean;
+        });
+
+        static integrateBody(body: Body, dy: number): void;
+
+        addConstraint(c: Constraint): void;
+
+        addContactMaterial(contactMaterial: ContactMaterial): void;
+
+        removeContactMaterial(cm: ContactMaterial): void;
+
+        getContactMaterial(materialA: Material, materialB: Material): ContactMaterial; // ContactMaterial
+                                                                                       // | boolean
+        removeConstraint(c: Constraint): void;
+
+        step(dy: number, timeSinceLastCalled?: number, maxSubSteps?: number): void;
+
+        runNarrowphase(
+            np: Narrowphase,
+            bi: Body,
+            si: Shape,
+            xi: any[],
+            ai: number,
+            bj: Body,
+            sj: Shape,
+            xj: any[],
+            aj: number,
+            cm: number,
+            glen: number): void;
+
+        addSpring(s: Spring): void;
+
+        removeSpring(s: Spring): void;
+
+        addBody(body: Body): void;
+
+        removeBody(body: Body): void;
+
+        getBodyByID(id: number): Body; //Body | boolean
+        disableBodyCollision(bodyA: Body, bodyB: Body): void;
+
+        enableBodyCollision(bodyA: Body, bodyB: Body): void;
+
+        clear(): void;
+
+        clone(): World;
+
+        hitTest(worldPoint: number[], bodies: Body[], precision: number): Body[];
+
+        setGlobalEquationParameters(parameters: {
+            relaxation?: number;
+            stiffness?: number;
+        }): void;
+
+        setGlobalStiffness(stiffness: number): void;
+
+        setGlobalRelaxation(relaxation: number): void;
+    }
 
 }

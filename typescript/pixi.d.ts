@@ -1,780 +1,780 @@
 // Type definitions for PIXI with Phaser Deviations.
 
 declare module 'phaser-ce-type-updated/build/custom/pixi' {
-  export = PIXI;
+    export = PIXI;
 }
 
 declare module PIXI {
 
-  export var game: Phaser.Game;
-  export var WEBGL_RENDERER: number;
-  export var CANVAS_RENDERER: number;
-  export var VERSION: string;
+    export var game: Phaser.Game;
+    export var WEBGL_RENDERER: number;
+    export var CANVAS_RENDERER: number;
+    export var VERSION: string;
 
-  export enum blendModes {
+    export enum blendModes {
 
-    NORMAL,
-    ADD,
-    MULTIPLY,
-    SCREEN,
-    OVERLAY,
-    DARKEN,
-    LIGHTEN,
-    COLOR_DODGE,
-    COLOR_BURN,
-    HARD_LIGHT,
-    SOFT_LIGHT,
-    DIFFERENCE,
-    EXCLUSION,
-    HUE,
-    SATURATION,
-    COLOR,
-    LUMINOSITY
+        NORMAL,
+        ADD,
+        MULTIPLY,
+        SCREEN,
+        OVERLAY,
+        DARKEN,
+        LIGHTEN,
+        COLOR_DODGE,
+        COLOR_BURN,
+        HARD_LIGHT,
+        SOFT_LIGHT,
+        DIFFERENCE,
+        EXCLUSION,
+        HUE,
+        SATURATION,
+        COLOR,
+        LUMINOSITY
 
-  }
+    }
 
-  export enum scaleModes {
+    export enum scaleModes {
 
-    DEFAULT,
-    LINEAR,
-    NEAREST
+        DEFAULT,
+        LINEAR,
+        NEAREST
 
-  }
+    }
 
-  export var glContexts: WebGLRenderingContext[];
-  export var instances: any[];
+    export var glContexts: WebGLRenderingContext[];
+    export var instances: any[];
 
-  export var TextureSilentFail: boolean;
+    export var TextureSilentFail: boolean;
 
-  export function canUseNewCanvasBlendModes(): boolean;
+    export function canUseNewCanvasBlendModes(): boolean;
 
-  export function CompileFragmentShader(gl: WebGLRenderingContext, shaderSrc: string[]): any;
+    export function CompileFragmentShader(gl: WebGLRenderingContext, shaderSrc: string[]): any;
 
-  export interface IEventCallback {
-    (e?: IEvent): void;
-  }
+    export interface IEventCallback {
+        (e?: IEvent): void;
+    }
 
-  export interface IEvent {
-    type: string;
-    content: any;
-  }
+    export interface IEvent {
+        type: string;
+        content: any;
+    }
 
-  export interface HitArea {
-    contains(x: number, y: number): boolean;
-  }
+    export interface HitArea {
+        contains(x: number, y: number): boolean;
+    }
 
-  export interface IInteractionDataCallback {
-    (interactionData: InteractionData): void;
-  }
+    export interface IInteractionDataCallback {
+        (interactionData: InteractionData): void;
+    }
 
-  export interface PixiRenderer {
+    export interface PixiRenderer {
 
-    autoResize: boolean;
-    clearBeforeRender: boolean;
-    height: number;
-    resolution: number;
-    transparent: boolean;
-    type: number;
-    view: HTMLCanvasElement;
-    width: number;
+        autoResize: boolean;
+        clearBeforeRender: boolean;
+        height: number;
+        resolution: number;
+        transparent: boolean;
+        type: number;
+        view: HTMLCanvasElement;
+        width: number;
 
-    destroy(): void;
+        destroy(): void;
 
-    render(stage: DisplayObjectContainer): void;
+        render(stage: DisplayObjectContainer): void;
 
-    resize(width: number, height: number): void;
+        resize(width: number, height: number): void;
 
-  }
+    }
 
-  export interface PixiRendererOptions {
+    export interface PixiRendererOptions {
 
-    autoResize?: boolean;
-    antialias?: boolean;
-    clearBeforeRender?: boolean;
-    preserveDrawingBuffer?: boolean;
-    resolution?: number;
-    transparent?: boolean;
-    view?: HTMLCanvasElement;
+        autoResize?: boolean;
+        antialias?: boolean;
+        clearBeforeRender?: boolean;
+        preserveDrawingBuffer?: boolean;
+        resolution?: number;
+        transparent?: boolean;
+        view?: HTMLCanvasElement;
 
-  }
+    }
 
-  export interface BitmapTextStyle {
+    export interface BitmapTextStyle {
 
-    font?: string;
-    align?: string;
-    tint?: string;
+        font?: string;
+        align?: string;
+        tint?: string;
 
-  }
+    }
 
-  export interface TextStyle {
+    export interface TextStyle {
 
-    align?: string;
-    dropShadow?: boolean;
-    dropShadowColor?: string;
-    dropShadowAngle?: number;
-    dropShadowDistance?: number;
-    fill?: string;
-    font?: string;
-    lineJoin?: string;
-    stroke?: string;
-    strokeThickness?: number;
-    wordWrap?: boolean;
-    wordWrapWidth?: number;
+        align?: string;
+        dropShadow?: boolean;
+        dropShadowColor?: string;
+        dropShadowAngle?: number;
+        dropShadowDistance?: number;
+        fill?: string;
+        font?: string;
+        lineJoin?: string;
+        stroke?: string;
+        strokeThickness?: number;
+        wordWrap?: boolean;
+        wordWrapWidth?: number;
 
-  }
+    }
 
-  export interface Loader {
+    export interface Loader {
 
-    load(): void;
+        load(): void;
 
-  }
+    }
 
-  export interface MaskData {
+    export interface MaskData {
 
-    alpha: number;
-    worldTransform: number[];
+        alpha: number;
+        worldTransform: number[];
 
-  }
+    }
 
-  export interface RenderSession {
+    export interface RenderSession {
 
-    context: CanvasRenderingContext2D;
-    maskManager: CanvasMaskManager;
-    scaleMode: scaleModes;
-    smoothProperty: string;
-    roundPixels: boolean;
+        context: CanvasRenderingContext2D;
+        maskManager: CanvasMaskManager;
+        scaleMode: scaleModes;
+        smoothProperty: string;
+        roundPixels: boolean;
 
-  }
+    }
 
-  export interface ShaderAttribute {
-    // TODO: Find signature of shader attributes
-  }
+    export interface ShaderAttribute {
+        // TODO: Find signature of shader attributes
+    }
 
-  export interface FilterBlock {
+    export interface FilterBlock {
 
-    visible: boolean;
-    renderable: boolean;
+        visible: boolean;
+        renderable: boolean;
 
-  }
+    }
 
-  // Phaser.Filter is used instead
-  export class AbstractFilter {
+    // Phaser.Filter is used instead
+    export class AbstractFilter {
 
-    constructor(fragmentSrc: string | string[], uniforms: any);
+        dirty: boolean;
+        padding: number;
+        uniforms: any;
+        fragmentSrc: string | string[];
 
-    dirty: boolean;
-    padding: number;
-    uniforms: any;
-    fragmentSrc: string | string[];
+        constructor(fragmentSrc: string | string[], uniforms: any);
 
-    apply(frameBuffer: WebGLFramebuffer): void;
+        apply(frameBuffer: WebGLFramebuffer): void;
 
-    syncUniforms(): void;
+        syncUniforms(): void;
 
-  }
+    }
 
-  export class BaseTexture implements Mixin {
+    export class BaseTexture implements Mixin {
 
-    static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: scaleModes): BaseTexture;
+        height: number;
+        hasLoaded: boolean;
+        mipmap: boolean;
+        premultipliedAlpha: boolean;
+        resolution: number;
+        scaleMode: scaleModes;
+        skipRender: boolean;
+        source: HTMLImageElement;
+        textureIndex: number;
+        width: number;
 
-    constructor(source: HTMLImageElement, scaleMode: scaleModes);
-    constructor(source: HTMLCanvasElement, scaleMode: scaleModes);
+        constructor(source: HTMLImageElement, scaleMode: scaleModes);
 
-    height: number;
-    hasLoaded: boolean;
-    mipmap: boolean;
-    premultipliedAlpha: boolean;
-    resolution: number;
-    scaleMode: scaleModes;
-    skipRender: boolean;
-    source: HTMLImageElement;
-    textureIndex: number;
-    width: number;
+        constructor(source: HTMLCanvasElement, scaleMode: scaleModes);
 
-    listeners(eventName: string): Function[];
+        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: scaleModes): BaseTexture;
 
-    emit(eventName: string, data?: any): boolean;
+        listeners(eventName: string): Function[];
 
-    dispatchEvent(eventName: string, data?: any): boolean;
+        emit(eventName: string, data?: any): boolean;
 
-    on(eventName: string, fn: Function): Function;
+        dispatchEvent(eventName: string, data?: any): boolean;
 
-    addEventListener(eventName: string, fn: Function): Function;
+        on(eventName: string, fn: Function): Function;
 
-    once(eventName: string, fn: Function): Function;
+        addEventListener(eventName: string, fn: Function): Function;
 
-    off(eventName: string, fn: Function): Function;
+        once(eventName: string, fn: Function): Function;
 
-    removeAllEventListeners(eventName: string): void;
+        off(eventName: string, fn: Function): Function;
 
-    forceLoaded(width: number, height: number): void;
+        removeAllEventListeners(eventName: string): void;
 
-    destroy(): void;
+        forceLoaded(width: number, height: number): void;
 
-    dirty(): void;
+        destroy(): void;
 
-    unloadFromGPU(): void;
+        dirty(): void;
 
-  }
+        unloadFromGPU(): void;
 
-  export class CanvasBuffer {
+    }
 
-    constructor(width: number, height: number);
+    export class CanvasBuffer {
 
-    canvas: HTMLCanvasElement;
-    context: CanvasRenderingContext2D;
-    height: number;
-    width: number;
+        canvas: HTMLCanvasElement;
+        context: CanvasRenderingContext2D;
+        height: number;
+        width: number;
 
-    destroy(): void;
+        constructor(width: number, height: number);
 
-    clear(): void;
+        destroy(): void;
 
-    resize(width: number, height: number): void;
+        clear(): void;
 
-  }
+        resize(width: number, height: number): void;
 
-  export class CanvasMaskManager {
+    }
 
-    pushMask(maskData: MaskData, renderSession: RenderSession): void;
+    export class CanvasMaskManager {
 
-    popMask(renderSession: RenderSession): void;
+        pushMask(maskData: MaskData, renderSession: RenderSession): void;
 
-  }
+        popMask(renderSession: RenderSession): void;
 
-  export class CanvasRenderer implements PixiRenderer {
+    }
 
-    constructor(game: Phaser.Game);
+    export class CanvasRenderer implements PixiRenderer {
 
-    game: Phaser.Game;
-    type: number;
-    resolution: number;
-    clearBeforeRender: boolean;
-    transparent: boolean;
-    autoResize: boolean;
-    width: number;
-    height: number;
-    view: HTMLCanvasElement;
-    context: CanvasRenderingContext2D;
-    refresh: boolean;
-    count: number;
-    maskManager: CanvasMaskManager;
-    renderSession: RenderSession;
+        game: Phaser.Game;
+        type: number;
+        resolution: number;
+        clearBeforeRender: boolean;
+        transparent: boolean;
+        autoResize: boolean;
+        width: number;
+        height: number;
+        view: HTMLCanvasElement;
+        context: CanvasRenderingContext2D;
+        refresh: boolean;
+        count: number;
+        maskManager: CanvasMaskManager;
+        renderSession: RenderSession;
 
-    render(stage: DisplayObjectContainer): void;
+        constructor(game: Phaser.Game);
 
-    resize(width: number, height: number): void;
+        render(stage: DisplayObjectContainer): void;
 
-    setTexturePriority(textureNameCollection: string[]): string[];
+        resize(width: number, height: number): void;
 
-    destroy(removeView?: boolean): void;
+        setTexturePriority(textureNameCollection: string[]): string[];
 
-  }
+        destroy(removeView?: boolean): void;
 
-  export class CanvasTinter {
+    }
 
-    static getTintedTexture(sprite: Sprite, color: number): HTMLCanvasElement;
+    export class CanvasTinter {
 
-    static tintWithMultiply(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        static canUseMultiply: boolean;
+        static tintMethod: any;
 
-    static tintWithOverlay(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        static getTintedTexture(sprite: Sprite, color: number): HTMLCanvasElement;
 
-    static tintWithPerPixel(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
+        static tintWithMultiply(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
 
-    static canUseMultiply: boolean;
-    static tintMethod: any;
+        static tintWithOverlay(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
 
-  }
+        static tintWithPerPixel(texture: Texture, color: number, canvas: HTMLCanvasElement): void;
 
-  export class DisplayObject {
+    }
 
-    alpha: number;
-    buttonMode: boolean;
-    cacheAsBitmap: boolean;
-    defaultCursor: string;
-    filterArea: Rectangle;
-    filters: AbstractFilter[];
-    hitArea: HitArea;
-    interactive: boolean;
-    mask: Phaser.Graphics;
-    parent: DisplayObjectContainer;
-    pivot: Point;
-    position: Point;
-    renderable: boolean;
-    rotation: number;
-    scale: Point;
-    stage: DisplayObjectContainer;
-    visible: boolean;
-    worldAlpha: number;
-    worldPosition: Point;
-    worldScale: Point;
-    worldTransform: Matrix;
-    worldRotation: number;
-    worldVisible: boolean;
-    x: number;
-    y: number;
+    export class DisplayObject {
 
-    click(e: InteractionData): void;
+        alpha: number;
+        buttonMode: boolean;
+        cacheAsBitmap: boolean;
+        defaultCursor: string;
+        filterArea: Rectangle;
+        filters: AbstractFilter[];
+        hitArea: HitArea;
+        interactive: boolean;
+        mask: Phaser.Graphics;
+        parent: DisplayObjectContainer;
+        pivot: Point;
+        position: Point;
+        renderable: boolean;
+        rotation: number;
+        scale: Point;
+        stage: DisplayObjectContainer;
+        visible: boolean;
+        worldAlpha: number;
+        worldPosition: Point;
+        worldScale: Point;
+        worldTransform: Matrix;
+        worldRotation: number;
+        worldVisible: boolean;
+        x: number;
+        y: number;
 
-    displayObjectUpdateTransform(parent?: DisplayObjectContainer): void;
+        click(e: InteractionData): void;
 
-    generateTexture(
-        resolution?: number,
-        scaleMode?: number,
-        renderer?: PixiRenderer | number): Phaser.RenderTexture;
+        displayObjectUpdateTransform(parent?: DisplayObjectContainer): void;
 
-    mousedown(e: InteractionData): void;
+        generateTexture(
+            resolution?: number,
+            scaleMode?: number,
+            renderer?: PixiRenderer | number): Phaser.RenderTexture;
 
-    mouseout(e: InteractionData): void;
+        mousedown(e: InteractionData): void;
 
-    mouseover(e: InteractionData): void;
+        mouseout(e: InteractionData): void;
 
-    mouseup(e: InteractionData): void;
+        mouseover(e: InteractionData): void;
 
-    mousemove(e: InteractionData): void;
+        mouseup(e: InteractionData): void;
 
-    mouseupoutside(e: InteractionData): void;
+        mousemove(e: InteractionData): void;
 
-    rightclick(e: InteractionData): void;
+        mouseupoutside(e: InteractionData): void;
 
-    rightdown(e: InteractionData): void;
+        rightclick(e: InteractionData): void;
 
-    rightup(e: InteractionData): void;
+        rightdown(e: InteractionData): void;
 
-    rightupoutside(e: InteractionData): void;
+        rightup(e: InteractionData): void;
 
-    setStageReference(stage: DisplayObjectContainer): void;
+        rightupoutside(e: InteractionData): void;
 
-    tap(e: InteractionData): void;
+        setStageReference(stage: DisplayObjectContainer): void;
 
-    toGlobal(position: Point): Point;
+        tap(e: InteractionData): void;
 
-    toLocal(position: Point, from: DisplayObject): Point;
+        toGlobal(position: Point): Point;
 
-    touchend(e: InteractionData): void;
+        toLocal(position: Point, from: DisplayObject): Point;
 
-    touchendoutside(e: InteractionData): void;
+        touchend(e: InteractionData): void;
 
-    touchstart(e: InteractionData): void;
+        touchendoutside(e: InteractionData): void;
 
-    touchmove(e: InteractionData): void;
+        touchstart(e: InteractionData): void;
 
-    updateTransform(parent?: DisplayObjectContainer): void;
+        touchmove(e: InteractionData): void;
+
+        updateTransform(parent?: DisplayObjectContainer): void;
+
         updateCache(): void;
 
-  }
+    }
 
-  export class DisplayObjectContainer extends DisplayObject {
+    export class DisplayObjectContainer extends DisplayObject {
 
-    constructor();
+        children: DisplayObject[];
+        height: number;
+        width: number;
+        ignoreChildInput: boolean;
 
-    children: DisplayObject[];
-    height: number;
-    width: number;
-    ignoreChildInput: boolean;
+        constructor();
 
-    addChild(child: DisplayObject): DisplayObject;
+        addChild(child: DisplayObject): DisplayObject;
 
-    addChildAt(child: DisplayObject, index: number): DisplayObject;
+        addChildAt(child: DisplayObject, index: number): DisplayObject;
 
-    getBounds(targetCoordinateSpace?: DisplayObject | Matrix): Rectangle;
+        getBounds(targetCoordinateSpace?: DisplayObject | Matrix): Rectangle;
 
-    getChildAt(index: number): DisplayObject;
+        getChildAt(index: number): DisplayObject;
 
-    getChildIndex(child: DisplayObject): number;
+        getChildIndex(child: DisplayObject): number;
 
-    getLocalBounds(): Rectangle;
+        getLocalBounds(): Rectangle;
 
-    removeChild(child: DisplayObject): DisplayObject;
+        removeChild(child: DisplayObject): DisplayObject;
 
-    removeChildAt(index: number): DisplayObject;
+        removeChildAt(index: number): DisplayObject;
 
-    removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
+        removeChildren(beginIndex?: number, endIndex?: number): DisplayObject[];
 
-    removeStageReference(): void;
+        removeStageReference(): void;
 
-    setChildIndex(child: DisplayObject, index: number): void;
+        setChildIndex(child: DisplayObject, index: number): void;
 
-    swapChildren(child: DisplayObject, child2: DisplayObject): void;
+        swapChildren(child: DisplayObject, child2: DisplayObject): void;
 
-    contains(child: DisplayObject): boolean;
+        contains(child: DisplayObject): boolean;
 
-    updateCache(): void;
-  }
+        updateCache(): void;
+    }
 
-  export class FilterTexture {
+    export class FilterTexture {
 
-    constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: scaleModes);
+        fragmentSrc: string[];
+        frameBuffer: WebGLFramebuffer;
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        scaleMode: number;
+        texture: WebGLTexture;
 
-    fragmentSrc: string[];
-    frameBuffer: WebGLFramebuffer;
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    scaleMode: number;
-    texture: WebGLTexture;
+        constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: scaleModes);
 
-    clear(): void;
+        clear(): void;
 
-    resize(width: number, height: number): void;
+        resize(width: number, height: number): void;
 
-    destroy(): void;
+        destroy(): void;
 
-  }
+    }
 
-  export class ImageLoader implements Mixin {
+    export class ImageLoader implements Mixin {
 
-    constructor(url: string, crossorigin?: boolean);
+        texture: Texture;
 
-    texture: Texture;
+        constructor(url: string, crossorigin?: boolean);
 
-    listeners(eventName: string): Function[];
+        listeners(eventName: string): Function[];
 
-    emit(eventName: string, data?: any): boolean;
+        emit(eventName: string, data?: any): boolean;
 
-    dispatchEvent(eventName: string, data?: any): boolean;
+        dispatchEvent(eventName: string, data?: any): boolean;
 
-    on(eventName: string, fn: Function): Function;
+        on(eventName: string, fn: Function): Function;
 
-    addEventListener(eventName: string, fn: Function): Function;
+        addEventListener(eventName: string, fn: Function): Function;
 
-    once(eventName: string, fn: Function): Function;
+        once(eventName: string, fn: Function): Function;
 
-    off(eventName: string, fn: Function): Function;
+        off(eventName: string, fn: Function): Function;
 
-    removeAllEventListeners(eventName: string): void;
+        removeAllEventListeners(eventName: string): void;
 
-    load(): void;
+        load(): void;
 
-    loadFramedSpriteSheet(frameWidth: number, frameHeight: number, textureName: string): void;
+        loadFramedSpriteSheet(frameWidth: number, frameHeight: number, textureName: string): void;
 
-  }
+    }
 
-  export class InteractionData {
+    export class InteractionData {
 
-    global: Point;
-    target: Sprite;
-    originalEvent: Event;
+        global: Point;
+        target: Sprite;
+        originalEvent: Event;
 
-    getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
+        getLocalPosition(displayObject: DisplayObject, point?: Point, globalPos?: Point): Point;
 
-  }
+    }
 
-  // Phaser.Matrix is used instead
-  export class Matrix {
+    // Phaser.Matrix is used instead
+    export class Matrix {
 
-    a: number;
-    b: number;
-    c: number;
-    d: number;
-    tx: number;
-    ty: number;
+        a: number;
+        b: number;
+        c: number;
+        d: number;
+        tx: number;
+        ty: number;
 
-    append(matrix: Matrix): Matrix;
+        append(matrix: Matrix): Matrix;
 
-    apply(pos: Point, newPos: Point): Point;
+        apply(pos: Point, newPos: Point): Point;
 
-    applyInverse(pos: Point, newPos: Point): Point;
+        applyInverse(pos: Point, newPos: Point): Point;
 
-    determineMatrixArrayType(): number[];
+        determineMatrixArrayType(): number[];
 
-    identity(): Matrix;
+        identity(): Matrix;
 
-    rotate(angle: number): Matrix;
+        rotate(angle: number): Matrix;
 
-    fromArray(array: number[]): void;
+        fromArray(array: number[]): void;
 
-    translate(x: number, y: number): Matrix;
+        translate(x: number, y: number): Matrix;
 
-    toArray(transpose: boolean): number[];
+        toArray(transpose: boolean): number[];
 
-    scale(x: number, y: number): Matrix;
+        scale(x: number, y: number): Matrix;
 
-  }
+    }
 
-  export interface Mixin {
+    export interface Mixin {
 
-    listeners(eventName: string): Function[];
+        listeners(eventName: string): Function[];
 
-    emit(eventName: string, data?: any): boolean;
+        emit(eventName: string, data?: any): boolean;
 
-    dispatchEvent(eventName: string, data?: any): boolean;
+        dispatchEvent(eventName: string, data?: any): boolean;
 
-    on(eventName: string, fn: Function): Function;
+        on(eventName: string, fn: Function): Function;
 
-    addEventListener(eventName: string, fn: Function): Function;
+        addEventListener(eventName: string, fn: Function): Function;
 
-    once(eventName: string, fn: Function): Function;
+        once(eventName: string, fn: Function): Function;
 
-    off(eventName: string, fn: Function): Function;
+        off(eventName: string, fn: Function): Function;
 
-    removeAllEventListeners(eventName: string): void;
+        removeAllEventListeners(eventName: string): void;
 
-  }
+    }
 
-  export interface IPixiShader {
+    export interface IPixiShader {
 
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class PixiShader implements IPixiShader {
+    export class PixiShader implements IPixiShader {
 
-    constructor(gl: WebGLRenderingContext);
+        attributes: ShaderAttribute[];
+        defaultVertexSrc: string[];
+        dirty: boolean;
+        firstRun: boolean;
+        textureCount: number;
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    attributes: ShaderAttribute[];
-    defaultVertexSrc: string[];
-    dirty: boolean;
-    firstRun: boolean;
-    textureCount: number;
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        constructor(gl: WebGLRenderingContext);
 
-    initSampler2D(): void;
+        initSampler2D(): void;
 
-    initUniforms(): void;
+        initUniforms(): void;
 
-    syncUniforms(): void;
+        syncUniforms(): void;
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class PixiFastShader implements IPixiShader {
+    export class PixiFastShader implements IPixiShader {
 
-    constructor(gl: WebGLRenderingContext);
+        textureCount: number;
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    textureCount: number;
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        constructor(gl: WebGLRenderingContext);
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class PrimitiveShader implements IPixiShader {
+    export class PrimitiveShader implements IPixiShader {
 
-    constructor(gl: WebGLRenderingContext);
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        constructor(gl: WebGLRenderingContext);
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class ComplexPrimitiveShader implements IPixiShader {
+    export class ComplexPrimitiveShader implements IPixiShader {
 
-    constructor(gl: WebGLRenderingContext);
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        constructor(gl: WebGLRenderingContext);
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class StripShader implements IPixiShader {
+    export class StripShader implements IPixiShader {
 
-    constructor(gl: WebGLRenderingContext);
+        fragmentSrc: string[];
+        gl: WebGLRenderingContext;
+        program: WebGLProgram;
+        vertexSrc: string[];
 
-    fragmentSrc: string[];
-    gl: WebGLRenderingContext;
-    program: WebGLProgram;
-    vertexSrc: string[];
+        constructor(gl: WebGLRenderingContext);
 
-    destroy(): void;
+        destroy(): void;
 
-    init(): void;
+        init(): void;
 
-  }
+    }
 
-  export class Point {
+    export class Point {
 
-    constructor(x?: number, y?: number);
+        x: number;
+        y: number;
+        type: number;
 
-    x: number;
-    y: number;
-    type: number;
+        constructor(x?: number, y?: number);
 
-    static add(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static add(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static subtract(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static subtract(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static multiply(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static multiply(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static divide(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static divide(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static equals(a: Phaser.Point, b: Phaser.Point): boolean;
+        static equals(a: Phaser.Point, b: Phaser.Point): boolean;
 
-    static equalsXY(a: Phaser.Point, x: number, y: number): boolean;
+        static equalsXY(a: Phaser.Point, x: number, y: number): boolean;
 
-    static fuzzyEquals(a: Phaser.Point, b: Phaser.Point, epsilon?: number): boolean;
+        static fuzzyEquals(a: Phaser.Point, b: Phaser.Point, epsilon?: number): boolean;
 
-    static fuzzyEqualsXY(a: Phaser.Point, x: number, y: number, epsilon?: number): boolean;
+        static fuzzyEqualsXY(a: Phaser.Point, x: number, y: number, epsilon?: number): boolean;
 
-    static angle(a: Phaser.Point, b: Phaser.Point): number;
+        static angle(a: Phaser.Point, b: Phaser.Point): number;
 
-    static angleSq(a: Phaser.Point, b: Phaser.Point): number;
+        static angleSq(a: Phaser.Point, b: Phaser.Point): number;
 
-    static negative(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static negative(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static multiplyAdd(
-        a: Phaser.Point,
-        b: Phaser.Point,
-        scale: number,
-        out?: Phaser.Point): Phaser.Point;
+        static multiplyAdd(
+            a: Phaser.Point,
+            b: Phaser.Point,
+            scale: number,
+            out?: Phaser.Point): Phaser.Point;
 
-    static interpolate(
-        a: Phaser.Point,
-        b: Phaser.Point,
-        alpha: number,
-        out?: Phaser.Point): Phaser.Point;
+        static interpolate(
+            a: Phaser.Point,
+            b: Phaser.Point,
+            alpha: number,
+            out?: Phaser.Point): Phaser.Point;
 
-    static parse(obj: any, xProp?: string, yProp?: string): Phaser.Point;
+        static parse(obj: any, xProp?: string, yProp?: string): Phaser.Point;
 
-    static perp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static perp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static rperp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static rperp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static distance(a: any, b: any, round?: boolean): number;
+        static distance(a: any, b: any, round?: boolean): number;
 
-    static project(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static project(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static projectUnit(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static projectUnit(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static normalRightHand(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static normalRightHand(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static normalize(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static normalize(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
 
-    static rotate(
-        a: Phaser.Point,
-        x: number,
-        y: number,
-        angle: number,
-        asDegrees?: boolean,
-        distance?: number): Phaser.Point;
+        static rotate(
+            a: Phaser.Point,
+            x: number,
+            y: number,
+            angle: number,
+            asDegrees?: boolean,
+            distance?: number): Phaser.Point;
 
-    static centroid(points: Phaser.Point[], out?: Phaser.Point): Phaser.Point;
+        static centroid(points: Phaser.Point[], out?: Phaser.Point): Phaser.Point;
 
-    static isPoint(obj: any): boolean;
+        static isPoint(obj: any): boolean;
 
-    static set(obj: any, x: number, y: number): any;
+        static set(obj: any, x: number, y: number): any;
 
-    static sortClockwise(points: any[], center?: Phaser.Point): any[];
+        static sortClockwise(points: any[], center?: Phaser.Point): any[];
 
-    add(x: number, y: number): Phaser.Point;
+        add(x: number, y: number): Phaser.Point;
 
-    angle(a: Phaser.Point, asDegrees?: boolean): number;
+        angle(a: Phaser.Point, asDegrees?: boolean): number;
 
-    angleSq(a: Phaser.Point): number;
+        angleSq(a: Phaser.Point): number;
 
-    angleXY(x: number, y: number, asDegrees?: boolean): number;
+        angleXY(x: number, y: number, asDegrees?: boolean): number;
 
-    atan(asDegrees?: boolean): number;
+        atan(asDegrees?: boolean): number;
 
-    ceil(): Phaser.Point;
+        ceil(): Phaser.Point;
 
-    clamp(min: number, max: number): Phaser.Point;
+        clamp(min: number, max: number): Phaser.Point;
 
-    clampX(min: number, max: number): Phaser.Point;
+        clampX(min: number, max: number): Phaser.Point;
 
-    clampY(min: number, max: number): Phaser.Point;
+        clampY(min: number, max: number): Phaser.Point;
 
-    clip(rect: any): Phaser.Point;
+        clip(rect: any): Phaser.Point;
 
-    clone(output?: Phaser.Point): Phaser.Point;
+        clone(output?: Phaser.Point): Phaser.Point;
 
-    copyFrom(source: Phaser.Point): Phaser.Point;
+        copyFrom(source: Phaser.Point): Phaser.Point;
 
-    copyTo<T>(dest: T): T;
+        copyTo<T>(dest: T): T;
 
-    cross(a: Phaser.Point): number;
+        cross(a: Phaser.Point): number;
 
-    distance(dest: Phaser.Point, round?: boolean): number;
+        distance(dest: Phaser.Point, round?: boolean): number;
 
-    divide(x: number, y: number): Phaser.Point;
+        divide(x: number, y: number): Phaser.Point;
 
-    dot(a: Phaser.Point): number;
+        dot(a: Phaser.Point): number;
 
-    equals(a: Phaser.Point): boolean;
+        equals(a: Phaser.Point): boolean;
 
-    equalsXY(x: number, y: number): boolean;
+        equalsXY(x: number, y: number): boolean;
 
-    expand(min: number): Phaser.Point;
+        expand(min: number): Phaser.Point;
 
-    floor(): Phaser.Point;
+        floor(): Phaser.Point;
 
-    fuzzyEquals(a: Phaser.Point, epsilon?: number): boolean;
+        fuzzyEquals(a: Phaser.Point, epsilon?: number): boolean;
 
-    fuzzyEqualsXY(x: number, y: number, epsilon?: number): boolean;
+        fuzzyEqualsXY(x: number, y: number, epsilon?: number): boolean;
 
-    getMagnitude(): number;
+        getMagnitude(): number;
 
-    getMagnitudeSq(): number;
+        getMagnitudeSq(): number;
 
-    invert(): Phaser.Point;
+        invert(): Phaser.Point;
 
-    isZero(): boolean;
+        isZero(): boolean;
 
-    limit(max: number): Phaser.Point;
+        limit(max: number): Phaser.Point;
 
-    multiply(x: number, y: number): Phaser.Point;
+        multiply(x: number, y: number): Phaser.Point;
 
-    normalize(): Phaser.Point;
+        normalize(): Phaser.Point;
 
-    normalRightHand(): Phaser.Point;
+        normalRightHand(): Phaser.Point;
 
-    perp(): Phaser.Point;
+        perp(): Phaser.Point;
 
-    rotate(
-        x: number,
-        y: number,
-        angle: number,
-        asDegrees?: boolean,
-        distance?: number): Phaser.Point;
+        rotate(
+            x: number,
+            y: number,
+            angle: number,
+            asDegrees?: boolean,
+            distance?: number): Phaser.Point;
 
-    rperp(): Phaser.Point;
+        rperp(): Phaser.Point;
 
-    set(x: number, y?: number): Phaser.Point;
+        set(x: number, y?: number): Phaser.Point;
 
-    setMagnitude(magnitude: number): Phaser.Point;
+        setMagnitude(magnitude: number): Phaser.Point;
 
-    setTo(x: number, y?: number): Phaser.Point;
+        setTo(x: number, y?: number): Phaser.Point;
 
-    setToPolar(azimuth: number, radius?: number, asDegrees?: boolean): Phaser.Point;
+        setToPolar(azimuth: number, radius?: number, asDegrees?: boolean): Phaser.Point;
 
-    subtract(x: number, y: number): Phaser.Point;
+        subtract(x: number, y: number): Phaser.Point;
 
-    toString(): string;
+        toString(): string;
 
-  }
+    }
 
-  export class Rectangle {
-
-    constructor(x: number, y: number, width: number, height: number);
+    export class Rectangle {
 
         bottom: number;
         bottomRight: Phaser.Point;
@@ -799,538 +799,536 @@ declare module PIXI {
         x: number;
         y: number;
 
-    static createFromBounds(a: any, output?: Phaser.Rectangle): Phaser.Rectangle;
+        constructor(x: number, y: number, width: number, height: number);
 
-    static equals(a: Phaser.Rectangle, b: Phaser.Rectangle): boolean;
+        static createFromBounds(a: any, output?: Phaser.Rectangle): Phaser.Rectangle;
 
-    static inflate(a: Phaser.Rectangle, dx: number, dy: number): Phaser.Rectangle;
+        static equals(a: Phaser.Rectangle, b: Phaser.Rectangle): boolean;
 
-    static inflatePoint(a: Phaser.Rectangle, point: Phaser.Point): Phaser.Rectangle;
+        static inflate(a: Phaser.Rectangle, dx: number, dy: number): Phaser.Rectangle;
 
-    static intersection(
-        a: Phaser.Rectangle,
-        b: Phaser.Rectangle,
-        out?: Phaser.Rectangle): Phaser.Rectangle;
+        static inflatePoint(a: Phaser.Rectangle, point: Phaser.Point): Phaser.Rectangle;
 
-    static intersects(a: Phaser.Rectangle, b: Phaser.Rectangle): boolean;
+        static intersection(
+            a: Phaser.Rectangle,
+            b: Phaser.Rectangle,
+            out?: Phaser.Rectangle): Phaser.Rectangle;
 
-    static intersectsRaw(
-        left: number,
-        right: number,
-        top: number,
-        bottom: number,
-        tolerance: number): boolean;
+        static intersects(a: Phaser.Rectangle, b: Phaser.Rectangle): boolean;
 
-    static size(a: Phaser.Rectangle, output?: Phaser.Point): Phaser.Point;
+        static intersectsRaw(
+            left: number,
+            right: number,
+            top: number,
+            bottom: number,
+            tolerance: number): boolean;
 
-    static union(
-        a: Phaser.Rectangle,
-        b: Phaser.Rectangle,
-        out?: Phaser.Rectangle): Phaser.Rectangle;
+        static size(a: Phaser.Rectangle, output?: Phaser.Point): Phaser.Point;
 
-    ceil(): void;
+        static union(
+            a: Phaser.Rectangle,
+            b: Phaser.Rectangle,
+            out?: Phaser.Rectangle): Phaser.Rectangle;
 
-    ceilAll(): void;
+        ceil(): void;
 
-    centerOn(x: number, y: number): Phaser.Rectangle;
+        ceilAll(): void;
 
-    clone(output?: Phaser.Rectangle): Phaser.Rectangle;
+        centerOn(x: number, y: number): Phaser.Rectangle;
 
-    contains(x: number, y: number): boolean;
+        clone(output?: Phaser.Rectangle): Phaser.Rectangle;
 
-    containsRect(b: Phaser.Rectangle): boolean;
+        contains(x: number, y: number): boolean;
 
-    copyFrom(source: any): Phaser.Rectangle;
+        containsRect(b: Phaser.Rectangle): boolean;
 
-    copyFromBounds(source: any): Phaser.Rectangle;
+        copyFrom(source: any): Phaser.Rectangle;
 
-    copyTo(dest: any): any;
+        copyFromBounds(source: any): Phaser.Rectangle;
 
-    equals(b: Phaser.Rectangle): boolean;
+        copyTo(dest: any): any;
 
-    floor(): void;
+        equals(b: Phaser.Rectangle): boolean;
 
-    floorAll(): void;
+        floor(): void;
 
-    getPoint(position: number, out: Phaser.Point): Phaser.Point;
+        floorAll(): void;
 
-    inflate(dx: number, dy: number): Phaser.Rectangle;
+        getPoint(position: number, out: Phaser.Point): Phaser.Point;
 
-    intersection(b: Phaser.Rectangle, out: Phaser.Rectangle): Phaser.Rectangle;
+        inflate(dx: number, dy: number): Phaser.Rectangle;
 
-    intersects(b: Phaser.Rectangle): boolean;
+        intersection(b: Phaser.Rectangle, out: Phaser.Rectangle): Phaser.Rectangle;
 
-    intersectsRaw(
-        left: number,
-        right: number,
-        top: number,
-        bottom: number,
-        tolerance: number): boolean;
+        intersects(b: Phaser.Rectangle): boolean;
 
-    offset(dx: number, dy: number): Phaser.Rectangle;
+        intersectsRaw(
+            left: number,
+            right: number,
+            top: number,
+            bottom: number,
+            tolerance: number): boolean;
 
-    offsetPoint(point: Phaser.Point): Phaser.Rectangle;
+        offset(dx: number, dy: number): Phaser.Rectangle;
 
-    random(out?: Phaser.Point): Phaser.Point;
+        offsetPoint(point: Phaser.Point): Phaser.Rectangle;
 
-    resize(width: number, height: number): Phaser.Rectangle;
+        random(out?: Phaser.Point): Phaser.Point;
 
-    setTo(x: number, y: number, width: number, height: number): Phaser.Rectangle;
+        resize(width: number, height: number): Phaser.Rectangle;
 
-    scale(x: number, y?: number): Phaser.Rectangle;
+        setTo(x: number, y: number, width: number, height: number): Phaser.Rectangle;
 
-    sides(
-        top?: Phaser.Line,
-        right?: Phaser.Line,
-        bottom?: Phaser.Line,
-        left?: Phaser.Line): Phaser.Line[];
+        scale(x: number, y?: number): Phaser.Rectangle;
 
-    size(output?: Phaser.Point): Phaser.Point;
+        sides(
+            top?: Phaser.Line,
+            right?: Phaser.Line,
+            bottom?: Phaser.Line,
+            left?: Phaser.Line): Phaser.Line[];
 
-    toString(): string;
+        size(output?: Phaser.Point): Phaser.Point;
 
-    union(b: Phaser.Rectangle, out?: Phaser.Rectangle): Phaser.Rectangle;
+        toString(): string;
 
-  }
+        union(b: Phaser.Rectangle, out?: Phaser.Rectangle): Phaser.Rectangle;
 
-  export class Rope extends Strip {
+    }
 
-    points: Point[];
-    vertices: number[];
+    export class Rope extends Strip {
 
-    constructor(texture: Texture, points: Point[]);
+        points: Point[];
+        vertices: number[];
 
-    refresh(): void;
+        constructor(texture: Texture, points: Point[]);
 
-    setTexture(texture: Texture): void;
+        refresh(): void;
 
-  }
+        setTexture(texture: Texture): void;
 
-  export class Sprite extends DisplayObjectContainer {
+    }
 
-    constructor(texture: Texture);
+    export class Sprite extends DisplayObjectContainer {
 
-    anchor: Point;
-    blendMode: blendModes;
-    exists: boolean;
-    shader: IPixiShader;
-    texture: Texture;
-    tint: number;
+        static defaultAnchor: { x: number; y: number };
+        anchor: Point;
+        blendMode: blendModes;
+        exists: boolean;
+        shader: IPixiShader;
+        texture: Texture;
+        tint: number;
 
-    static defaultAnchor: { x: number; y: number };
+        constructor(texture: Texture);
 
-    setTexture(texture: Texture, destroyBase?: boolean): void;
+        setTexture(texture: Texture, destroyBase?: boolean): void;
 
-  }
+    }
 
-  export class SpriteBatch extends DisplayObjectContainer {
+    export class SpriteBatch extends DisplayObjectContainer {
 
-    constructor(texture?: Texture);
+        ready: boolean;
+        textureThing: Texture;
 
-    ready: boolean;
-    textureThing: Texture;
+        constructor(texture?: Texture);
 
-    initWebGL(gl: WebGLRenderingContext): void;
+        initWebGL(gl: WebGLRenderingContext): void;
 
-  }
+    }
 
-  export class Strip extends DisplayObjectContainer {
+    export class Strip extends DisplayObjectContainer {
 
-    static DrawModes: {
+        static DrawModes: {
 
-      TRIANGLE_STRIP: number;
-      TRIANGLES: number;
+            TRIANGLE_STRIP: number;
+            TRIANGLES: number;
 
-    };
+        };
+        blendMode: number;
+        colors: number[];
+        dirty: boolean;
+        indices: number[];
+        canvasPadding: number;
+        texture: Texture;
+        uvs: number[];
+        vertices: number[];
 
-    constructor(texture: Texture);
+        constructor(texture: Texture);
 
-    blendMode: number;
-    colors: number[];
-    dirty: boolean;
-    indices: number[];
-    canvasPadding: number;
-    texture: Texture;
-    uvs: number[];
-    vertices: number[];
+        getBounds(matrix?: Matrix): Rectangle;
 
-    getBounds(matrix?: Matrix): Rectangle;
+    }
 
-  }
+    export class Texture implements Mixin {
 
-  export class Texture implements Mixin {
+        static emptyTexture: Texture;
+        baseTexture: BaseTexture;
+        crop: Rectangle;
+        frame: Rectangle;
+        height: number;
+        noFrame: boolean;
+        requiresUpdate: boolean;
+        trim: Point;
+        width: number;
+        scope: any;
+        valid: boolean;
+        rotated: boolean;
 
-    static emptyTexture: Texture;
+        constructor(baseTexture: BaseTexture, frame?: Rectangle, crop?: Rectangle, trim?: Rectangle);
 
-    static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: scaleModes): Texture;
+        static fromCanvas(canvas: HTMLCanvasElement, scaleMode?: scaleModes): Texture;
 
-    constructor(baseTexture: BaseTexture, frame?: Rectangle, crop?: Rectangle, trim?: Rectangle);
+        listeners(eventName: string): Function[];
 
-    baseTexture: BaseTexture;
-    crop: Rectangle;
-    frame: Rectangle;
-    height: number;
-    noFrame: boolean;
-    requiresUpdate: boolean;
-    trim: Point;
-    width: number;
-    scope: any;
-    valid: boolean;
-    rotated: boolean;
+        emit(eventName: string, data?: any): boolean;
 
-    listeners(eventName: string): Function[];
+        dispatchEvent(eventName: string, data?: any): boolean;
 
-    emit(eventName: string, data?: any): boolean;
+        on(eventName: string, fn: Function): Function;
 
-    dispatchEvent(eventName: string, data?: any): boolean;
+        addEventListener(eventName: string, fn: Function): Function;
 
-    on(eventName: string, fn: Function): Function;
+        once(eventName: string, fn: Function): Function;
 
-    addEventListener(eventName: string, fn: Function): Function;
+        off(eventName: string, fn: Function): Function;
 
-    once(eventName: string, fn: Function): Function;
+        removeAllEventListeners(eventName: string): void;
 
-    off(eventName: string, fn: Function): Function;
+        destroy(destroyBase: boolean): void;
 
-    removeAllEventListeners(eventName: string): void;
+        setFrame(frame: Rectangle): void;
 
-    destroy(destroyBase: boolean): void;
+    }
 
-    setFrame(frame: Rectangle): void;
+    export class TilingSprite extends Sprite {
 
-  }
+        canvasBuffer: PIXI.CanvasBuffer;
+        blendMode: number;
+        refreshTexture: boolean;
+        texture: Texture;
+        textureDebug: boolean;
+        tint: number;
+        tilePosition: Point;
+        tilePattern: PIXI.Texture;
+        tileScale: Point;
+        tileScaleOffset: Point;
 
-  export class TilingSprite extends Sprite {
+        constructor(texture: Texture, width: number, height: number);
 
-    constructor(texture: Texture, width: number, height: number);
+        destroy(): void;
 
-    canvasBuffer: PIXI.CanvasBuffer;
-    blendMode: number;
-    refreshTexture: boolean;
-    texture: Texture;
-    textureDebug: boolean;
-    tint: number;
-    tilePosition: Point;
-    tilePattern: PIXI.Texture;
-    tileScale: Point;
-    tileScaleOffset: Point;
+        generateTilingTexture(forcePowerOfTwo?: boolean): void;
 
-    destroy(): void;
+        setTexture(texture: Texture): void;
 
-    generateTilingTexture(forcePowerOfTwo?: boolean): void;
+    }
 
-    setTexture(texture: Texture): void;
+    export class VideoTexture extends BaseTexture {
 
-  }
+        controls: boolean;
+        autoUpdate: boolean;
+        type: string;
+        onPlayStart: () => void;
+        onPlayStop: () => void;
+        onCanPlay: (event: any) => void;
 
-  export class VideoTexture extends BaseTexture {
+        static baseTextureFromVideo(video: HTMLVideoElement, scaleMode: number): BaseTexture;
 
-    static baseTextureFromVideo(video: HTMLVideoElement, scaleMode: number): BaseTexture;
+        static textureFromVideo(video: HTMLVideoElement, scaleMode: number): Texture;
 
-    static textureFromVideo(video: HTMLVideoElement, scaleMode: number): Texture;
+        static fromUrl(
+            videoSrc: string,
+            scaleMode?: number,
+            autoPlay?: boolean,
+            type?: string,
+            loop?: boolean): Texture;
 
-    static fromUrl(
-        videoSrc: string,
-        scaleMode?: number,
-        autoPlay?: boolean,
-        type?: string,
-        loop?: boolean): Texture;
+        changeSource(src: string, type: string, loop: boolean): void;
 
-    controls: boolean;
-    autoUpdate: boolean;
-    type: string;
+        play(): void;
 
-    changeSource(src: string, type: string, loop: boolean): void;
+        stop(): void;
 
-    play(): void;
+        destroy(): void;
 
-    stop(): void;
+        updateBound(): void;
 
-    destroy(): void;
+    }
 
-    updateBound(): void;
+    export class WebGLBlendModeManager {
 
-    onPlayStart: () => void;
-    onPlayStop: () => void;
-    onCanPlay: (event: any) => void;
+        currentBlendMode: number;
 
-  }
+        destroy(): void;
 
-  export class WebGLBlendModeManager {
+        setBlendMode(blendMode: number): boolean;
 
-    currentBlendMode: number;
+        setContext(gl: WebGLRenderingContext): void;
 
-    destroy(): void;
+    }
 
-    setBlendMode(blendMode: number): boolean;
+    export class WebGLFastSpriteBatch {
 
-    setContext(gl: WebGLRenderingContext): void;
+        currentBatchSize: number;
+        currentBaseTexture: BaseTexture;
+        currentBlendMode: number;
+        renderSession: RenderSession;
+        drawing: boolean;
+        indexBuffer: any;
+        indices: number[];
+        lastIndexCount: number;
+        matrix: Matrix;
+        maxSize: number;
+        shader: IPixiShader;
+        size: number;
+        vertexBuffer: any;
+        vertices: number[];
+        vertSize: number;
 
-  }
+        constructor(gl: CanvasRenderingContext2D);
 
-  export class WebGLFastSpriteBatch {
+        end(): void;
 
-    constructor(gl: CanvasRenderingContext2D);
+        begin(spriteBatch: SpriteBatch, renderSession: RenderSession): void;
 
-    currentBatchSize: number;
-    currentBaseTexture: BaseTexture;
-    currentBlendMode: number;
-    renderSession: RenderSession;
-    drawing: boolean;
-    indexBuffer: any;
-    indices: number[];
-    lastIndexCount: number;
-    matrix: Matrix;
-    maxSize: number;
-    shader: IPixiShader;
-    size: number;
-    vertexBuffer: any;
-    vertices: number[];
-    vertSize: number;
+        destroy(removeView?: boolean): void;
 
-    end(): void;
+        flush(): void;
 
-    begin(spriteBatch: SpriteBatch, renderSession: RenderSession): void;
+        render(spriteBatch: SpriteBatch): void;
 
-    destroy(removeView?: boolean): void;
+        renderSprite(sprite: Sprite): void;
 
-    flush(): void;
+        setContext(gl: WebGLRenderingContext): void;
 
-    render(spriteBatch: SpriteBatch): void;
+        start(): void;
 
-    renderSprite(sprite: Sprite): void;
+        stop(): void;
 
-    setContext(gl: WebGLRenderingContext): void;
+    }
 
-    start(): void;
+    export class WebGLFilterManager {
 
-    stop(): void;
+        filterStack: AbstractFilter[];
+        transparent: boolean;
+        offsetX: number;
+        offsetY: number;
 
-  }
+        applyFilterPass(
+            filter: AbstractFilter,
+            filterArea: Texture,
+            width: number,
+            height: number): void;
 
-  export class WebGLFilterManager {
+        begin(renderSession: RenderSession, buffer: ArrayBuffer): void;
 
-    filterStack: AbstractFilter[];
-    transparent: boolean;
-    offsetX: number;
-    offsetY: number;
+        destroy(): void;
 
-    applyFilterPass(
-        filter: AbstractFilter,
-        filterArea: Texture,
-        width: number,
-        height: number): void;
+        initShaderBuffers(): void;
 
-    begin(renderSession: RenderSession, buffer: ArrayBuffer): void;
+        popFilter(): void;
 
-    destroy(): void;
+        pushFilter(filterBlock: FilterBlock): void;
 
-    initShaderBuffers(): void;
+        setContext(gl: WebGLRenderingContext): void;
 
-    popFilter(): void;
+    }
 
-    pushFilter(filterBlock: FilterBlock): void;
+    export class WebGLGraphics {
 
-    setContext(gl: WebGLRenderingContext): void;
+        static graphicsDataPool: any[];
 
-  }
+        static renderGraphics(graphics: Phaser.Graphics, renderRession: RenderSession): void;
 
-  export class WebGLGraphics {
+        static updateGraphics(graphics: Phaser.Graphics, gl: WebGLRenderingContext): void;
 
-    static graphicsDataPool: any[];
+        static switchMode(webGL: WebGLRenderingContext, type: number): any;
 
-    static renderGraphics(graphics: Phaser.Graphics, renderRession: RenderSession): void;
+        static buildRectangle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
 
-    static updateGraphics(graphics: Phaser.Graphics, gl: WebGLRenderingContext): void;
+        static buildRoundedRectangle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
 
-    static switchMode(webGL: WebGLRenderingContext, type: number): any;
+        static quadraticBezierCurve(
+            fromX: number,
+            fromY: number,
+            cpX: number,
+            cpY: number,
+            toX: number,
+            toY: number): number[];
 
-    static buildRectangle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
+        static buildCircle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
 
-    static buildRoundedRectangle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
+        static buildLine(graphicsData: Phaser.GraphicsData, webGLData: any): void;
 
-    static quadraticBezierCurve(
-        fromX: number,
-        fromY: number,
-        cpX: number,
-        cpY: number,
-        toX: number,
-        toY: number): number[];
+        static buildComplexPoly(graphicsData: Phaser.GraphicsData, webGLData: any): void;
 
-    static buildCircle(graphicsData: Phaser.GraphicsData, webGLData: any): void;
+        static buildPoly(graphicsData: Phaser.GraphicsData, webGLData: any): boolean;
 
-    static buildLine(graphicsData: Phaser.GraphicsData, webGLData: any): void;
+        reset(): void;
 
-    static buildComplexPoly(graphicsData: Phaser.GraphicsData, webGLData: any): void;
+        upload(): void;
 
-    static buildPoly(graphicsData: Phaser.GraphicsData, webGLData: any): boolean;
+    }
 
-    reset(): void;
+    export class WebGLGraphicsData {
 
-    upload(): void;
+        gl: WebGLRenderingContext;
+        glPoints: any[];
+        color: number[];
+        points: any[];
+        indices: any[];
+        buffer: WebGLBuffer;
+        indexBuffer: WebGLBuffer;
+        mode: number;
+        alpha: number;
+        dirty: boolean;
 
-  }
+        constructor(gl: WebGLRenderingContext);
 
-  export class WebGLGraphicsData {
+        reset(): void;
 
-    constructor(gl: WebGLRenderingContext);
+        upload(): void;
 
-    gl: WebGLRenderingContext;
-    glPoints: any[];
-    color: number[];
-    points: any[];
-    indices: any[];
-    buffer: WebGLBuffer;
-    indexBuffer: WebGLBuffer;
-    mode: number;
-    alpha: number;
-    dirty: boolean;
+    }
 
-    reset(): void;
+    export class WebGLMaskManager {
 
-    upload(): void;
+        destroy(): void;
 
-  }
+        popMask(renderSession: RenderSession): void;
 
-  export class WebGLMaskManager {
+        pushMask(maskData: any[], renderSession: RenderSession): void;
 
-    destroy(): void;
+        setContext(gl: WebGLRenderingContext): void;
 
-    popMask(renderSession: RenderSession): void;
+    }
 
-    pushMask(maskData: any[], renderSession: RenderSession): void;
+    export class WebGLRenderer implements PixiRenderer {
 
-    setContext(gl: WebGLRenderingContext): void;
+        game: Phaser.Game;
+        type: number;
+        resolution: number;
+        transparent: boolean;
+        autoResize: boolean;
+        preserveDrawingBuffer: boolean;
+        clearBeforeRender: boolean;
+        width: number;
+        height: number;
+        currentBatchedTextures: string[];
+        view: HTMLCanvasElement;
+        projection: Point;
+        offset: Point;
+        shaderManager: WebGLShaderManager;
+        spriteBatch: WebGLSpriteBatch;
+        maskManager: WebGLMaskManager;
+        filterManager: WebGLFilterManager;
+        stencilManager: WebGLStencilManager;
+        blendModeManager: WebGLBlendModeManager;
+        renderSession: RenderSession;
 
-  }
+        constructor(game: Phaser.Game);
 
-  export class WebGLRenderer implements PixiRenderer {
+        static createWebGLTexture(texture: Texture, gl: WebGLRenderingContext): void;
 
-    static createWebGLTexture(texture: Texture, gl: WebGLRenderingContext): void;
+        initContext(): void;
 
-    constructor(game: Phaser.Game);
+        render(stage: DisplayObjectContainer): void;
 
-    game: Phaser.Game;
-    type: number;
-    resolution: number;
-    transparent: boolean;
-    autoResize: boolean;
-    preserveDrawingBuffer: boolean;
-    clearBeforeRender: boolean;
-    width: number;
-    height: number;
-    currentBatchedTextures: string[];
-    view: HTMLCanvasElement;
-    projection: Point;
-    offset: Point;
-    shaderManager: WebGLShaderManager;
-    spriteBatch: WebGLSpriteBatch;
-    maskManager: WebGLMaskManager;
-    filterManager: WebGLFilterManager;
-    stencilManager: WebGLStencilManager;
-    blendModeManager: WebGLBlendModeManager;
-    renderSession: RenderSession;
+        renderDisplayObject(displayObject: DisplayObject, projection: Point, buffer: WebGLBuffer): void;
 
-    initContext(): void;
+        resize(width: number, height: number): void;
 
-    render(stage: DisplayObjectContainer): void;
+        updateTexture(texture: Texture): void;
 
-    renderDisplayObject(displayObject: DisplayObject, projection: Point, buffer: WebGLBuffer): void;
+        destroy(): void;
 
-    resize(width: number, height: number): void;
+        mapBlendModes(): void;
 
-    updateTexture(texture: Texture): void;
+        setTexturePriority(textureNameCollection: string[]): string[];
 
-    destroy(): void;
+    }
 
-    mapBlendModes(): void;
+    export class WebGLShaderManager {
 
-    setTexturePriority(textureNameCollection: string[]): string[];
+        maxAttibs: number;
+        attribState: any[];
+        stack: any[];
+        tempAttribState: any[];
 
-  }
+        destroy(): void;
 
-  export class WebGLShaderManager {
+        setAttribs(attribs: ShaderAttribute[]): void;
 
-    maxAttibs: number;
-    attribState: any[];
-    stack: any[];
-    tempAttribState: any[];
+        setContext(gl: WebGLRenderingContext): void;
 
-    destroy(): void;
+        setShader(shader: IPixiShader): boolean;
 
-    setAttribs(attribs: ShaderAttribute[]): void;
+    }
 
-    setContext(gl: WebGLRenderingContext): void;
+    export class WebGLStencilManager {
 
-    setShader(shader: IPixiShader): boolean;
+        stencilStack: any[];
+        reverse: boolean;
+        count: number;
 
-  }
+        bindGraphics(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
 
-  export class WebGLStencilManager {
+        destroy(): void;
 
-    stencilStack: any[];
-    reverse: boolean;
-    count: number;
+        popStencil(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
 
-    bindGraphics(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
+        pushStencil(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
 
-    destroy(): void;
+        setContext(gl: WebGLRenderingContext): void;
 
-    popStencil(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
+    }
 
-    pushStencil(graphics: Phaser.Graphics, webGLData: any[], renderSession: RenderSession): void;
+    export class WebGLSpriteBatch {
 
-    setContext(gl: WebGLRenderingContext): void;
+        blendModes: number[];
+        colors: number[];
+        currentBatchSize: number;
+        currentBaseTexture: Texture;
+        defaultShader: AbstractFilter;
+        dirty: boolean;
+        drawing: boolean;
+        indices: number[];
+        lastIndexCount: number;
+        positions: number[];
+        textures: Texture[];
+        shaders: IPixiShader[];
+        size: number;
+        sprites: any[];
+        vertices: number[];
+        vertSize: number;
 
-  }
+        begin(renderSession: RenderSession): void;
 
-  export class WebGLSpriteBatch {
+        destroy(): void;
 
-    blendModes: number[];
-    colors: number[];
-    currentBatchSize: number;
-    currentBaseTexture: Texture;
-    defaultShader: AbstractFilter;
-    dirty: boolean;
-    drawing: boolean;
-    indices: number[];
-    lastIndexCount: number;
-    positions: number[];
-    textures: Texture[];
-    shaders: IPixiShader[];
-    size: number;
-    sprites: any[];
-    vertices: number[];
-    vertSize: number;
+        end(): void;
 
-    begin(renderSession: RenderSession): void;
+        flush(shader?: IPixiShader): void;
 
-    destroy(): void;
+        render(sprite: Sprite): void;
 
-    end(): void;
+        renderBatch(texture: Texture, size: number, startIndex: number): void;
 
-    flush(shader?: IPixiShader): void;
+        renderTilingSprite(sprite: TilingSprite): void;
 
-    render(sprite: Sprite): void;
+        setBlendMode(blendMode: blendModes): void;
 
-    renderBatch(texture: Texture, size: number, startIndex: number): void;
+        setContext(gl: WebGLRenderingContext): void;
 
-    renderTilingSprite(sprite: TilingSprite): void;
+        start(): void;
 
-    setBlendMode(blendMode: blendModes): void;
+        stop(): void;
 
-    setContext(gl: WebGLRenderingContext): void;
-
-    start(): void;
-
-    stop(): void;
-
-  }
+    }
 
 }
 
 declare function requestAnimFrame(callback: Function): void;
 
 declare module PIXI.PolyK {
-  export function Triangulate(p: number[]): number[];
+    export function Triangulate(p: number[]): number[];
 }
