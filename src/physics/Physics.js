@@ -7,7 +7,7 @@
 /**
 * The Physics Manager is responsible for looking after all of the running physics systems.
 * Phaser supports 4 physics systems: Arcade Physics, P2, Ninja Physics and Box2D via a commercial plugin.
-* 
+*
 * Game Objects (such as Sprites) can only belong to 1 physics system, but you can have multiple systems active in a single game.
 *
 * For example you could have P2 managing a polygon-built terrain landscape that an vehicle drives over, while it could be firing bullets that use the
@@ -18,7 +18,8 @@
 * @param {Phaser.Game} game - A reference to the currently running game.
 * @param {object} [physicsConfig=null] - A physics configuration object to pass to the Physics world on creation.
 */
-Phaser.Physics = function (game, config) {
+Phaser.Physics = function (game, config)
+{
 
     config = config || {};
 
@@ -109,30 +110,31 @@ Phaser.Physics.prototype = {
     *
     * @method Phaser.Physics#parseConfig
     */
-    parseConfig: function () {
+    parseConfig: function ()
+    {
 
-        if ((!this.config.hasOwnProperty('arcade') || this.config['arcade'] === true) && Phaser.Physics.hasOwnProperty('Arcade'))
+        if ((!this.config.hasOwnProperty('arcade') || this.config.arcade === true) && Phaser.Physics.hasOwnProperty('Arcade'))
         {
             //  If Arcade isn't specified, we create it automatically if we can
             this.arcade = new Phaser.Physics.Arcade(this.game);
         }
 
-        if (this.config.hasOwnProperty('ninja') && this.config['ninja'] === true && Phaser.Physics.hasOwnProperty('Ninja'))
+        if (this.config.hasOwnProperty('ninja') && this.config.ninja === true && Phaser.Physics.hasOwnProperty('Ninja'))
         {
             this.ninja = new Phaser.Physics.Ninja(this.game);
         }
 
-        if (this.config.hasOwnProperty('p2') && this.config['p2'] === true && Phaser.Physics.hasOwnProperty('P2'))
+        if (this.config.hasOwnProperty('p2') && this.config.p2 === true && Phaser.Physics.hasOwnProperty('P2'))
         {
             this.p2 = new Phaser.Physics.P2(this.game, this.config);
         }
 
-        if (this.config.hasOwnProperty('box2d') && this.config['box2d'] === true && Phaser.Physics.hasOwnProperty('BOX2D'))
+        if (this.config.hasOwnProperty('box2d') && this.config.box2d === true && Phaser.Physics.hasOwnProperty('BOX2D'))
         {
-            this.box2d = new Phaser.Physics.BOX2D(this.game, this.config);
+            this.box2d = new Phaser.Physics.Box2D(this.game, this.config);
         }
 
-        if (this.config.hasOwnProperty('matter') && this.config['matter'] === true && Phaser.Physics.hasOwnProperty('Matter'))
+        if (this.config.hasOwnProperty('matter') && this.config.matter === true && Phaser.Physics.hasOwnProperty('Matter'))
         {
             this.matter = new Phaser.Physics.Matter(this.game, this.config);
         }
@@ -142,9 +144,9 @@ Phaser.Physics.prototype = {
     /**
     * This will create an instance of the requested physics simulation.
     * Phaser.Physics.Arcade is running by default, but all others need activating directly.
-    * 
+    *
     * You can start the following physics systems:
-    * 
+    *
     * Phaser.Physics.P2JS - A full-body advanced physics system by Stefan Hedman.
     * Phaser.Physics.NINJA - A port of Metanet Softwares N+ physics system.
     * Phaser.Physics.BOX2D - A commercial Phaser Plugin (see http://phaser.io)
@@ -152,14 +154,15 @@ Phaser.Physics.prototype = {
     * Both Ninja Physics and Box2D require their respective plugins to be loaded before you can start them.
     * They are not bundled into the core Phaser library.
     *
-    * If the physics world has already been created (i.e. in another state in your game) then 
-    * calling startSystem will reset the physics world, not re-create it. If you need to start them again from their constructors 
+    * If the physics world has already been created (i.e. in another state in your game) then
+    * calling startSystem will reset the physics world, not re-create it. If you need to start them again from their constructors
     * then set Phaser.Physics.p2 (or whichever system you want to recreate) to `null` before calling `startSystem`.
     *
     * @method Phaser.Physics#startSystem
     * @param {number} system - The physics system to start: Phaser.Physics.ARCADE, Phaser.Physics.P2JS, Phaser.Physics.NINJA or Phaser.Physics.BOX2D.
     */
-    startSystem: function (system) {
+    startSystem: function (system)
+    {
 
         if (system === Phaser.Physics.ARCADE)
         {
@@ -225,7 +228,8 @@ Phaser.Physics.prototype = {
     * @param {number} [system=Phaser.Physics.ARCADE] - The physics system that will be used to create the body. Defaults to Arcade Physics.
     * @param {boolean} [debug=false] - Enable the debug drawing for this body. Defaults to false.
     */
-    enable: function (object, system, debug) {
+    enable: function (object, system, debug)
+    {
 
         if (system === undefined) { system = Phaser.Physics.ARCADE; }
         if (debug === undefined) { debug = false; }
@@ -263,7 +267,8 @@ Phaser.Physics.prototype = {
     * @method Phaser.Physics#preUpdate
     * @protected
     */
-    preUpdate: function () {
+    preUpdate: function ()
+    {
 
         //  ArcadePhysics / Ninja don't have a core to preUpdate
 
@@ -290,7 +295,8 @@ Phaser.Physics.prototype = {
     * @method Phaser.Physics#update
     * @protected
     */
-    update: function () {
+    update: function ()
+    {
 
         //  ArcadePhysics / Ninja don't have a core to update
 
@@ -317,7 +323,8 @@ Phaser.Physics.prototype = {
     * @method Phaser.Physics#setBoundsToWorld
     * @protected
     */
-    setBoundsToWorld: function () {
+    setBoundsToWorld: function ()
+    {
 
         if (this.arcade)
         {
@@ -352,7 +359,8 @@ Phaser.Physics.prototype = {
     * @method Phaser.Physics#clear
     * @protected
     */
-    clear: function () {
+    clear: function ()
+    {
 
         if (this.p2)
         {
@@ -377,7 +385,8 @@ Phaser.Physics.prototype = {
     * @method Phaser.Physics#reset
     * @protected
     */
-    reset: function () {
+    reset: function ()
+    {
 
         if (this.p2)
         {
@@ -401,7 +410,8 @@ Phaser.Physics.prototype = {
     *
     * @method Phaser.Physics#destroy
     */
-    destroy: function () {
+    destroy: function ()
+    {
 
         if (this.p2)
         {

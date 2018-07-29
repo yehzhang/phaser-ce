@@ -14,7 +14,8 @@
 * @param {Phaser.Game} game - A reference to the currently running game.
 * @param {Phaser.State|Object} [pendingState=null] - A State object to seed the manager with.
 */
-Phaser.StateManager = function (game, pendingState) {
+Phaser.StateManager = function (game, pendingState)
+{
 
     /**
     * @property {Phaser.Game} game - A reference to the currently running game.
@@ -69,14 +70,14 @@ Phaser.StateManager = function (game, pendingState) {
 
     /**
     * onStateChange is a Phaser.Signal that is dispatched whenever the game changes state.
-    * 
+    *
     * It is dispatched only when the new state is started, which isn't usually at the same time as StateManager.start
     * is called because state swapping is done in sync with the game loop. It is dispatched *before* any of the new states
     * methods (such as preload and create) are called, and *after* the previous states shutdown method has been run.
     *
-    * The callback you specify is sent two parameters: the string based key of the new state, 
+    * The callback you specify is sent two parameters: the string based key of the new state,
     * and the second parameter is the string based key of the old / previous state.
-    * 
+    *
     * @property {Phaser.Signal} onStateChange
     */
     this.onStateChange = new Phaser.Signal();
@@ -168,7 +169,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#boot
     * @private
     */
-    boot: function () {
+    boot: function ()
+    {
 
         this.game.onPause.add(this.pause, this);
         this.game.onResume.add(this.resume, this);
@@ -197,7 +199,8 @@ Phaser.StateManager.prototype = {
     * @param {Phaser.State|object|function} state  - The state you want to switch to.
     * @param {boolean} [autoStart=false]  - If true the State will be started immediately after adding it.
     */
-    add: function (key, state, autoStart) {
+    add: function (key, state, autoStart)
+    {
 
         if (autoStart === undefined) { autoStart = false; }
 
@@ -240,7 +243,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#remove
     * @param {string} key - A unique key you use to reference this state, i.e. "MainMenu", "Level1".
     */
-    remove: function (key) {
+    remove: function (key)
+    {
 
         if (this.current === key)
         {
@@ -275,7 +279,8 @@ Phaser.StateManager.prototype = {
     * @param {boolean} [clearCache=false] - Clear the Game.Cache? This purges out all loaded assets. The default is false and you must have clearWorld=true if you want to clearCache as well.
     * @param {...*} parameter - Additional parameters that will be passed to the State.init function (if it has one).
     */
-    start: function (key, clearWorld, clearCache) {
+    start: function (key, clearWorld, clearCache)
+    {
 
         if (clearWorld === undefined) { clearWorld = true; }
         if (clearCache === undefined) { clearCache = false; }
@@ -303,7 +308,8 @@ Phaser.StateManager.prototype = {
     * @param {boolean} [clearCache=false] - Clear the Game.Cache? This purges out all loaded assets. The default is false and you must have clearWorld=true if you want to clearCache as well.
     * @param {...*} parameter - Additional parameters that will be passed to the State.init function if it has one.
     */
-    restart: function (clearWorld, clearCache) {
+    restart: function (clearWorld, clearCache)
+    {
 
         if (clearWorld === undefined) { clearWorld = true; }
         if (clearCache === undefined) { clearCache = false; }
@@ -325,7 +331,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#dummy
     * @private
     */
-    dummy: function () {
+    dummy: function ()
+    {
     },
 
     /**
@@ -333,7 +340,8 @@ Phaser.StateManager.prototype = {
     *
     * @method Phaser.StateManager#preUpdate
     */
-    preUpdate: function () {
+    preUpdate: function ()
+    {
 
         if (this._pendingState && this.game.isBooted)
         {
@@ -388,7 +396,8 @@ Phaser.StateManager.prototype = {
     *
     * @method Phaser.StateManager#clearCurrentState
     */
-    clearCurrentState: function () {
+    clearCurrentState: function ()
+    {
 
         if (this.current)
         {
@@ -434,7 +443,8 @@ Phaser.StateManager.prototype = {
     * @param {string} key - The key of the state you want to check.
     * @return {boolean} true if the State has the required functions, otherwise false.
     */
-    checkState: function (key) {
+    checkState: function (key)
+    {
 
         var state = this.states[key];
 
@@ -446,13 +456,13 @@ Phaser.StateManager.prototype = {
             }
             else
             {
-                console.warn("Invalid Phaser State object given. Must contain at least one of the required functions: preload, create, update or render");
+                console.warn('Invalid Phaser State object given. Must contain at least one of the required functions: preload, create, update or render');
                 return false;
             }
         }
         else
         {
-            console.warn("Phaser.StateManager - No state found with the key: " + key);
+            console.warn('Phaser.StateManager - No state found with the key: ' + key);
             return false;
         }
 
@@ -465,27 +475,30 @@ Phaser.StateManager.prototype = {
     * @param {string} key - State key.
     * @protected
     */
-    link: function (key) {
+    link: function (key)
+    {
 
-        this.states[key].game = this.game;
-        this.states[key].add = this.game.add;
-        this.states[key].make = this.game.make;
-        this.states[key].camera = this.game.camera;
-        this.states[key].cache = this.game.cache;
-        this.states[key].input = this.game.input;
-        this.states[key].load = this.game.load;
-        this.states[key].math = this.game.math;
-        this.states[key].sound = this.game.sound;
-        this.states[key].scale = this.game.scale;
-        this.states[key].state = this;
-        this.states[key].stage = this.game.stage;
-        this.states[key].time = this.game.time;
-        this.states[key].tweens = this.game.tweens;
-        this.states[key].world = this.game.world;
-        this.states[key].particles = this.game.particles;
-        this.states[key].rnd = this.game.rnd;
-        this.states[key].physics = this.game.physics;
-        this.states[key].key = key;
+        var state = this.states[key];
+
+        state.game = this.game;
+        state.add = this.game.add;
+        state.make = this.game.make;
+        state.camera = this.game.camera;
+        state.cache = this.game.cache;
+        state.input = this.game.input;
+        state.load = this.game.load;
+        state.math = this.game.math;
+        state.sound = this.game.sound;
+        state.scale = this.game.scale;
+        state.state = this;
+        state.stage = this.game.stage;
+        state.time = this.game.time;
+        state.tweens = this.game.tweens;
+        state.world = this.game.world;
+        state.particles = this.game.particles;
+        state.rnd = this.game.rnd;
+        state.physics = this.game.physics;
+        state.key = key;
 
     },
 
@@ -496,28 +509,31 @@ Phaser.StateManager.prototype = {
     * @param {string} key - State key.
     * @protected
     */
-    unlink: function (key) {
+    unlink: function (key)
+    {
 
-        if (this.states[key])
+        var state = this.states[key];
+
+        if (state)
         {
-            this.states[key].game = null;
-            this.states[key].add = null;
-            this.states[key].make = null;
-            this.states[key].camera = null;
-            this.states[key].cache = null;
-            this.states[key].input = null;
-            this.states[key].load = null;
-            this.states[key].math = null;
-            this.states[key].sound = null;
-            this.states[key].scale = null;
-            this.states[key].state = null;
-            this.states[key].stage = null;
-            this.states[key].time = null;
-            this.states[key].tweens = null;
-            this.states[key].world = null;
-            this.states[key].particles = null;
-            this.states[key].rnd = null;
-            this.states[key].physics = null;
+            state.game = null;
+            state.add = null;
+            state.make = null;
+            state.camera = null;
+            state.cache = null;
+            state.input = null;
+            state.load = null;
+            state.math = null;
+            state.sound = null;
+            state.scale = null;
+            state.state = null;
+            state.stage = null;
+            state.time = null;
+            state.tweens = null;
+            state.world = null;
+            state.particles = null;
+            state.rnd = null;
+            state.physics = null;
         }
 
     },
@@ -529,29 +545,33 @@ Phaser.StateManager.prototype = {
     * @param {string} key - State key.
     * @private
     */
-    setCurrentState: function (key) {
+    setCurrentState: function (key)
+    {
 
-        this.callbackContext = this.states[key];
+        var state = this.states[key];
+
+        this.callbackContext = state;
 
         this.link(key);
 
         //  Used when the state is set as being the current active state
-        this.onInitCallback = this.states[key]['init'] || this.dummy;
+        this.onInitCallback = state.init || this.dummy;
 
-        this.onPreloadCallback = this.states[key]['preload'] || null;
-        this.onLoadRenderCallback = this.states[key]['loadRender'] || null;
-        this.onLoadUpdateCallback = this.states[key]['loadUpdate'] || null;
-        this.onCreateCallback = this.states[key]['create'] || null;
-        this.onUpdateCallback = this.states[key]['update'] || null;
-        this.onPreRenderCallback = this.states[key]['preRender'] || null;
-        this.onRenderCallback = this.states[key]['render'] || null;
-        this.onResizeCallback = this.states[key]['resize'] || null;
-        this.onPausedCallback = this.states[key]['paused'] || null;
-        this.onResumedCallback = this.states[key]['resumed'] || null;
-        this.onPauseUpdateCallback = this.states[key]['pauseUpdate'] || null;
+        this.onPreloadCallback = state.preload || null;
+        this.onLoadRenderCallback = state.loadRender || null;
+        this.onLoadUpdateCallback = state.loadUpdate || null;
+        this.onCreateCallback = state.create || null;
+        this.onUpdateCallback = state.update || null;
+        this.onPostUpdateCallback = state.postUpdate || null;
+        this.onPreRenderCallback = state.preRender || null;
+        this.onRenderCallback = state.render || null;
+        this.onResizeCallback = state.resize || null;
+        this.onPausedCallback = state.paused || null;
+        this.onResumedCallback = state.resumed || null;
+        this.onPauseUpdateCallback = state.pauseUpdate || null;
 
         //  Used when the state is no longer the current active state
-        this.onShutDownCallback = this.states[key]['shutdown'] || this.dummy;
+        this.onShutDownCallback = state.shutdown || this.dummy;
 
         //  Reset the physics system, but not on the first state start
         if (this.current !== '')
@@ -582,21 +602,18 @@ Phaser.StateManager.prototype = {
      * @return {Phaser.State}
      * @public
      */
-    getCurrentState: function() {
+    getCurrentState: function ()
+    {
         return this.states[this.current];
     },
 
     /**
     * @method Phaser.StateManager#loadComplete
     * @protected
+    * @see Phaser.StateManager#preUpdate
     */
-    loadComplete: function () {
-
-        //  Make sure to do load-update one last time before state is set to _created
-        if (this._created === false && this.onLoadUpdateCallback)
-        {
-            this.onLoadUpdateCallback.call(this.callbackContext, this.game);
-        }
+    loadComplete: function ()
+    {
 
         if (this._created === false && this.onCreateCallback)
         {
@@ -611,10 +628,26 @@ Phaser.StateManager.prototype = {
     },
 
     /**
+    * @method Phaser.StateManager#loadUpdate
+    * @protected
+    * @see Phaser.Loader#finishedLoading
+    */
+    loadUpdate: function ()
+    {
+
+        if (this._created === false && this.onLoadUpdateCallback)
+        {
+            this.onLoadUpdateCallback.call(this.callbackContext, this.game);
+        }
+
+    },
+
+    /**
     * @method Phaser.StateManager#pause
     * @protected
     */
-    pause: function () {
+    pause: function ()
+    {
 
         if (this._created && this.onPausedCallback)
         {
@@ -627,7 +660,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#resume
     * @protected
     */
-    resume: function () {
+    resume: function ()
+    {
 
         if (this._created && this.onResumedCallback)
         {
@@ -640,7 +674,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#update
     * @protected
     */
-    update: function () {
+    update: function ()
+    {
 
         if (this._created)
         {
@@ -650,11 +685,19 @@ Phaser.StateManager.prototype = {
             }
         }
         else
+        if (this.onLoadUpdateCallback)
         {
-            if (this.onLoadUpdateCallback)
-            {
-                this.onLoadUpdateCallback.call(this.callbackContext, this.game);
-            }
+            this.onLoadUpdateCallback.call(this.callbackContext, this.game);
+        }
+
+    },
+
+    postUpdate: function ()
+    {
+
+        if (this._created && this.onPostUpdateCallback)
+        {
+            this.onPostUpdateCallback.call(this.callbackContext, this.game);
         }
 
     },
@@ -663,7 +706,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#pauseUpdate
     * @protected
     */
-    pauseUpdate: function () {
+    pauseUpdate: function ()
+    {
 
         if (this._created)
         {
@@ -673,11 +717,9 @@ Phaser.StateManager.prototype = {
             }
         }
         else
+        if (this.onLoadUpdateCallback)
         {
-            if (this.onLoadUpdateCallback)
-            {
-                this.onLoadUpdateCallback.call(this.callbackContext, this.game);
-            }
+            this.onLoadUpdateCallback.call(this.callbackContext, this.game);
         }
 
     },
@@ -687,7 +729,8 @@ Phaser.StateManager.prototype = {
     * @protected
     * @param {number} elapsedTime - The time elapsed since the last update.
     */
-    preRender: function (elapsedTime) {
+    preRender: function (elapsedTime)
+    {
 
         if (this._created && this.onPreRenderCallback)
         {
@@ -700,7 +743,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#resize
     * @protected
     */
-    resize: function (width, height) {
+    resize: function (width, height)
+    {
 
         if (this.onResizeCallback)
         {
@@ -713,7 +757,8 @@ Phaser.StateManager.prototype = {
     * @method Phaser.StateManager#render
     * @protected
     */
-    render: function () {
+    render: function ()
+    {
 
         if (this._created)
         {
@@ -733,11 +778,9 @@ Phaser.StateManager.prototype = {
             }
         }
         else
+        if (this.onLoadRenderCallback)
         {
-            if (this.onLoadRenderCallback)
-            {
-                this.onLoadRenderCallback.call(this.callbackContext, this.game);
-            }
+            this.onLoadRenderCallback.call(this.callbackContext, this.game);
         }
 
     },
@@ -747,7 +790,8 @@ Phaser.StateManager.prototype = {
     * You don't recover from this without rebuilding the Phaser instance again.
     * @method Phaser.StateManager#destroy
     */
-    destroy: function () {
+    destroy: function ()
+    {
 
         this._clearWorld = true;
         this._clearCache = true;
@@ -764,6 +808,7 @@ Phaser.StateManager.prototype = {
         this.onLoadUpdateCallback = null;
         this.onCreateCallback = null;
         this.onUpdateCallback = null;
+        this.onPostUpdateCallback = null;
         this.onRenderCallback = null;
         this.onPausedCallback = null;
         this.onResumedCallback = null;
@@ -785,9 +830,10 @@ Phaser.StateManager.prototype.constructor = Phaser.StateManager;
 * @property {boolean} created - True if the current state has had its `create` method run (if it has one, if not this is true by default).
 * @readOnly
 */
-Object.defineProperty(Phaser.StateManager.prototype, "created", {
+Object.defineProperty(Phaser.StateManager.prototype, 'created', {
 
-    get: function () {
+    get: function ()
+    {
 
         return this._created;
 

@@ -360,6 +360,7 @@ declare module PIXI {
     touchmove(e: InteractionData): void;
 
     updateTransform(parent?: DisplayObjectContainer): void;
+        updateCache(): void;
 
   }
 
@@ -775,46 +776,28 @@ declare module PIXI {
 
     constructor(x: number, y: number, width: number, height: number);
 
-    bottom: number;
-    bottomRight: Phaser.Point;
-    bottomLeft: Phaser.Point;
-    centerX: number;
-    centerY: number;
-    empty: boolean;
-    halfHeight: number;
-    halfWidth: number;
-    height: number;
-    left: number;
-    perimeter: number;
-    randomX: number;
-    randomY: number;
-    right: number;
-    top: number;
-    topLeft: Phaser.Point;
-    topRight: Phaser.Point;
-    type: number;
-    volume: number;
-    width: number;
-    x: number;
-    y: number;
-
-    static aabb(points: Phaser.Point[], out?: Phaser.Rectangle): Phaser.Rectangle;
-
-    static clone(a: Phaser.Rectangle, output?: Phaser.Rectangle): Phaser.Rectangle;
-
-    static contains(a: Phaser.Rectangle, x: number, y: number): boolean;
-
-    static containsPoint(a: Phaser.Rectangle, point: Phaser.Point): boolean;
-
-    static containsRaw(
-        rx: number,
-        ry: number,
-        rw: number,
-        rh: number,
-        x: number,
-        y: number): boolean;
-
-    static containsRect(a: Phaser.Rectangle, b: Phaser.Rectangle): boolean;
+        bottom: number;
+        bottomRight: Phaser.Point;
+        bottomLeft: Phaser.Point;
+        centerX: number;
+        centerY: number;
+        empty: boolean;
+        halfHeight: number;
+        halfWidth: number;
+        height: number;
+        left: number;
+        perimeter: number;
+        randomX: number;
+        randomY: number;
+        right: number;
+        top: number;
+        topLeft: Phaser.Point;
+        topRight: Phaser.Point;
+        type: number;
+        volume: number;
+        width: number;
+        x: number;
+        y: number;
 
     static createFromBounds(a: any, output?: Phaser.Rectangle): Phaser.Rectangle;
 

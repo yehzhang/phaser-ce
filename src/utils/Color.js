@@ -12,6 +12,96 @@
 Phaser.Color = {
 
     /**
+    * Red (0xff0000)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    RED: 0xff0000,
+
+    /**
+    * Orange (0xff9900)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    ORANGE: 0xff9900,
+
+    /**
+    * Yellow (0xffff00)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    YELLOW: 0xffff00,
+
+    /**
+    * Green (0x00ff00)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    GREEN: 0x00ff00,
+
+    /**
+    * Aqua (0x00ffff)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    AQUA: 0x00ffff,
+
+    /**
+    * Blue (0x0000ff)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    BLUE: 0x0000ff,
+
+    /**
+    * Violet/purple (0xff00ff)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    VIOLET: 0xff00ff,
+
+    /**
+    * White (0xffffff)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    WHITE: 0xffffff,
+
+    /**
+    * Black (0x000000)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    BLACK: 0,
+
+    /**
+    * Gray (0x666666)
+    *
+    * @type number
+    * @constant
+    * @default
+    */
+    GRAY: 0x666666,
+
+    /**
     * Packs the r, g, b, a components into a single integer, for use with Int32Array.
     * If device is little endian then ABGR order is used. Otherwise RGBA order is used.
     *
@@ -24,15 +114,16 @@ Phaser.Color = {
     * @param {number} a - The alpha color component, in the range 0 - 255.
     * @return {number} The packed color as uint32
     */
-    packPixel: function (r, g, b, a) {
+    packPixel: function (r, g, b, a)
+    {
 
         if (Phaser.Device.LITTLE_ENDIAN)
         {
-            return ( (a << 24) | (b << 16) | (g <<  8) | r ) >>> 0;
+            return ((a << 24) | (b << 16) | (g << 8) | r) >>> 0;
         }
         else
         {
-            return ( (r << 24) | (g << 16) | (b <<  8) | a ) >>> 0;
+            return ((r << 24) | (g << 16) | (b << 8) | a) >>> 0;
         }
 
     },
@@ -56,7 +147,8 @@ Phaser.Color = {
     * @param {boolean} [hsv=false] - Also convert the rgb values into hsv?
     * @return {object} An object with the red, green and blue values set in the r, g and b properties.
     */
-    unpackPixel: function (rgba, out, hsl, hsv) {
+    unpackPixel: function (rgba, out, hsl, hsv)
+    {
 
         if (out === undefined || out === null) { out = Phaser.Color.createColor(); }
         if (hsl === undefined || hsl === null) { hsl = false; }
@@ -105,7 +197,8 @@ Phaser.Color = {
     * @param {object} [out] - The object to use, optional.
     * @return {object} A color object.
     */
-    fromRGBA: function (rgba, out) {
+    fromRGBA: function (rgba, out)
+    {
 
         if (!out)
         {
@@ -135,9 +228,10 @@ Phaser.Color = {
     * @param {number} a - The alpha color component, in the range 0 - 255.
     * @return {number} A RGBA-packed 32 bit integer
     */
-    toRGBA: function (r, g, b, a) {
+    toRGBA: function (r, g, b, a)
+    {
 
-        return (r << 24) | (g << 16) | (b <<  8) | a;
+        return (r << 24) | (g << 16) | (b << 8) | a;
 
     },
 
@@ -152,7 +246,8 @@ Phaser.Color = {
     * @param {number} a - The alpha color component, in the range 0 - 255.
     * @return {number} A RGBA-packed 32 bit integer
     */
-    toABGR: function (r, g, b, a) {
+    toABGR: function (r, g, b, a)
+    {
 
         return ((a << 24) | (b << 16) | (g << 8) | r) >>> 0;
 
@@ -166,7 +261,8 @@ Phaser.Color = {
     * @param {number} color - The color to convert to an RGB array. In the format 0xRRGGBB.
     * @return {array} An array with element 0 containing the Red value, 1 containing Green, and 2 containing Blue.
     */
-    hexToRGBArray: function (color) {
+    hexToRGBArray: function (color)
+    {
 
         return [
             (color >> 16 & 0xFF) / 255,
@@ -184,7 +280,8 @@ Phaser.Color = {
     * @param {array} rgb - An array with element 0 containing the Red value, 1 containing Green, and 2 containing Blue.
     * @return {number} The color value, in the format 0xRRGGBB.
     */
-    RGBArrayToHex: function (rgb) {
+    RGBArrayToHex: function (rgb)
+    {
 
         return ((rgb[0] * 255 << 16) + (rgb[1] * 255 << 8) + rgb[2] * 255);
 
@@ -204,7 +301,8 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 3 properties will be created, h, s and l. If not provided a new object will be created.
     * @return {object} An object with the hue, saturation and lightness values set in the h, s and l properties.
     */
-    RGBtoHSL: function (r, g, b, out) {
+    RGBtoHSL: function (r, g, b, out)
+    {
 
         if (!out)
         {
@@ -263,7 +361,8 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 3 properties will be created: r, g and b. If not provided a new object will be created.
     * @return {object} An object with the red, green and blue values set in the r, g and b properties.
     */
-    HSLtoRGB: function (h, s, l, out) {
+    HSLtoRGB: function (h, s, l, out)
+    {
 
         if (!out)
         {
@@ -314,7 +413,8 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 3 properties will be created, h, s and v. If not provided a new object will be created.
     * @return {object} An object with the hue, saturation and value set in the h, s and v properties.
     */
-    RGBtoHSV: function (r, g, b, out) {
+    RGBtoHSV: function (r, g, b, out)
+    {
 
         if (!out)
         {
@@ -370,7 +470,8 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 3 properties will be created: r, g and b. If not provided a new object will be created.
     * @return {object} An object with the red, green and blue values set in the r, g and b properties.
     */
-    HSVtoRGB: function (h, s, v, out) {
+    HSVtoRGB: function (h, s, v, out)
+    {
 
         if (out === undefined) { out = Phaser.Color.createColor(0, 0, 0, 1, h, s, 0, v); }
 
@@ -436,7 +537,8 @@ Phaser.Color = {
     * @param {number} t
     * @return {number} The color component value.
     */
-    hueToColor: function (p, q, t) {
+    hueToColor: function (p, q, t)
+    {
 
         if (t < 0)
         {
@@ -486,7 +588,8 @@ Phaser.Color = {
     * @param {number} [v=0] - The value, in the range 0 - 1.
     * @return {object} The resulting object with r, g, b, a properties and h, s, l and v.
     */
-    createColor: function (r, g, b, a, h, s, l, v) {
+    createColor: function (r, g, b, a, h, s, l, v)
+    {
 
         var out = { r: r || 0, g: g || 0, b: b || 0, a: a || 1, h: h || 0, s: s || 0, l: l || 0, v: v || 0, color: 0, color32: 0, rgba: '' };
 
@@ -502,7 +605,8 @@ Phaser.Color = {
     * @param {object} out - The color object to update.
     * @returns {number} A native color value integer (format: 0xAARRGGBB).
     */
-    updateColor: function (out) {
+    updateColor: function (out)
+    {
 
         out.rgba = 'rgba(' + out.r.toFixed() + ',' + out.g.toFixed() + ',' + out.b.toFixed() + ',' + out.a.toString() + ')';
         out.color = Phaser.Color.getColor(out.r, out.g, out.b);
@@ -523,7 +627,8 @@ Phaser.Color = {
     * @param {number} b - The blue color component, in the range 0 - 255.
     * @returns {number} A native color value integer (format: 0xAARRGGBB).
     */
-    getColor32: function (a, r, g, b) {
+    getColor32: function (a, r, g, b)
+    {
 
         return a << 24 | r << 16 | g << 8 | b;
 
@@ -539,7 +644,8 @@ Phaser.Color = {
     * @param {number} b - The blue color component, in the range 0 - 255.
     * @returns {number} A native color value integer (format: 0xRRGGBB).
     */
-    getColor: function (r, g, b) {
+    getColor: function (r, g, b)
+    {
 
         return r << 16 | g << 8 | b;
 
@@ -558,7 +664,8 @@ Phaser.Color = {
     * @param {string} [prefix='#'] - The prefix used in the return string. If '#' it will return `#RRGGBB`, else `0xAARRGGBB`.
     * @return {string} A string containing the color values. If prefix was '#' it will be in the format `#RRGGBB` otherwise `0xAARRGGBB`.
     */
-    RGBtoString: function (r, g, b, a, prefix) {
+    RGBtoString: function (r, g, b, a, prefix)
+    {
 
         if (a === undefined) { a = 255; }
         if (prefix === undefined) { prefix = '#'; }
@@ -582,7 +689,8 @@ Phaser.Color = {
     * @param {string} hex - The hex string to convert. Can be in the short-hand format `#03f` or `#0033ff`.
     * @return {number} The rgb color value in the format 0xAARRGGBB.
     */
-    hexToRGB: function (hex) {
+    hexToRGB: function (hex)
+    {
 
         var rgb = Phaser.Color.hexToColor(hex);
 
@@ -606,14 +714,16 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 3 properties will be created or set: r, g and b. If not provided a new object will be created.
     * @return {object} An object with the red, green and blue values set in the r, g and b properties.
     */
-    hexToColor: function (hex, out) {
+    hexToColor: function (hex, out)
+    {
 
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        hex = hex.replace(/^(?:#|0x)?([a-f\d])([a-f\d])([a-f\d])$/i, function(m, r, g, b) {
+        hex = hex.replace(/^(?:#|0x)?([a-f\d])([a-f\d])([a-f\d])$/i, function (m, r, g, b)
+        {
             return r + r + g + g + b + b;
         });
 
-        var result = /^(?:#|0x)?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        var result = (/^(?:#|0x)?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i).exec(hex);
 
         if (result)
         {
@@ -648,14 +758,15 @@ Phaser.Color = {
     * @param {object} [out] - An object into which 4 properties will be created: r, g, b and a. If not provided a new object will be created.
     * @return {object} An object with the red, green, blue and alpha values set in the r, g, b and a properties.
     */
-    webToColor: function (web, out) {
+    webToColor: function (web, out)
+    {
 
         if (!out)
         {
             out = Phaser.Color.createColor();
         }
 
-        var result = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d+(?:\.\d+)?))?\s*\)$/.exec(web);
+        var result = (/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d+(?:\.\d+)?))?\s*\)$/).exec(web);
 
         if (result)
         {
@@ -683,7 +794,8 @@ Phaser.Color = {
     * @param {object} [out] - The object to use for the output. If not provided a new object will be created.
     * @return {object} The (`out`) object with the red, green, blue, and alpha values set as the r/g/b/a properties.
     */
-    valueToColor: function (value, out) {
+    valueToColor: function (value, out)
+    {
 
         //  The behavior is not consistent between hexToColor/webToColor on invalid input.
         //  This unifies both by returning a new object, but returning null may be better.
@@ -731,7 +843,8 @@ Phaser.Color = {
     * @param {number} color - The color channel to get the hex value for, must be a value between 0 and 255.
     * @returns {string} A string of length 2 characters, i.e. 255 = ff, 100 = 64.
     */
-    componentToHex: function (color) {
+    componentToHex: function (color)
+    {
 
         var hex = color.toString(16);
 
@@ -748,7 +861,8 @@ Phaser.Color = {
     * @param {number} [v=1] - The value, in the range 0 - 1.
     * @return {array} An array containing 360 elements corresponding to the HSV color wheel.
     */
-    HSVColorWheel: function (s, v) {
+    HSVColorWheel: function (s, v)
+    {
 
         if (s === undefined) { s = 1.0; }
         if (v === undefined) { v = 1.0; }
@@ -773,7 +887,8 @@ Phaser.Color = {
     * @param {number} [l=0.5] - The lightness, in the range 0 - 1.
     * @return {array} An array containing 360 elements corresponding to the HSL color wheel.
     */
-    HSLColorWheel: function (s, l) {
+    HSLColorWheel: function (s, l)
+    {
 
         if (s === undefined) { s = 0.5; }
         if (l === undefined) { l = 0.5; }
@@ -802,7 +917,8 @@ Phaser.Color = {
     * @param {number} [colorSpace=0] - The color space to interpolate in. 0 = RGB, 1 = HSV.
     * @returns {number} The interpolated color value.
     */
-    interpolateColor: function (color1, color2, steps, currentStep, alpha, colorSpace) {
+    interpolateColor: function (color1, color2, steps, currentStep, alpha, colorSpace)
+    {
 
         if (alpha === undefined) { alpha = 255; }
         if (colorSpace === undefined) { colorSpace = 0; }
@@ -836,7 +952,7 @@ Phaser.Color = {
             if (dh > 0.5)
             {
                 hsv1.h = hsv1.h + 1;
-                h =  (((hsv2.h - hsv1.h) * currentStep / steps) + hsv1.h) % 1;
+                h = (((hsv2.h - hsv1.h) * currentStep / steps) + hsv1.h) % 1;
             }
 
             if (dh <= 0.5)
@@ -870,7 +986,8 @@ Phaser.Color = {
     * @param {number} currentStep - The currentStep value. If the interpolation will take 100 steps, a currentStep value of 50 would be half-way between the two.
     * @returns {number} The interpolated color value.
     */
-    interpolateColorWithRGB: function (color, r, g, b, steps, currentStep) {
+    interpolateColorWithRGB: function (color, r, g, b, steps, currentStep)
+    {
 
         var src = Phaser.Color.getRGB(color);
         var or = (((r - src.red) * currentStep) / steps) + src.red;
@@ -895,7 +1012,8 @@ Phaser.Color = {
     * @param {number} currentStep - The currentStep value. If the interpolation will take 100 steps, a currentStep value of 50 would be half-way between the two.
     * @returns {number} The interpolated color value.
     */
-    interpolateRGB: function (r1, g1, b1, r2, g2, b2, steps, currentStep) {
+    interpolateRGB: function (r1, g1, b1, r2, g2, b2, steps, currentStep)
+    {
 
         var r = (((r2 - r1) * currentStep) / steps) + r1;
         var g = (((g2 - g1) * currentStep) / steps) + g1;
@@ -919,7 +1037,8 @@ Phaser.Color = {
     * @param {number} t - A value between 0 and 1.
     * @return {number} The interpolated color value.
     */
-    linear: function (color1, color2, t) {
+    linear: function (color1, color2, t)
+    {
 
         return this.interpolateColor(color1, color2, 1, t);
 
@@ -934,14 +1053,15 @@ Phaser.Color = {
     *
     * @method Phaser.Color.linearInterpolation
     * @param {number[]} colors - The input array of color values to interpolate between.
-    * @param {number} t - A value between 0 and 1.
+    * @param {number} t - The amount of interpolation, between 0 (start) and 1 (end).
     * @return {number} The interpolated color value.
     */
-    linearInterpolation: function (colors, t) {
+    linearInterpolation: function (colors, t)
+    {
 
         var k = Phaser.Math.linear(0, colors.length - 1, t);
-        var color1 = colors[ Math.floor(k) ];
-        var color2 = colors[ Math.ceil(k)] ;
+        var color1 = colors[Math.floor(k)];
+        var color2 = colors[Math.ceil(k)];
 
         return this.linear(color1, color2, k % 1);
 
@@ -959,7 +1079,8 @@ Phaser.Color = {
     * @param {number} [alpha=255] - The alpha value of the returning color (default 255 = fully opaque).
     * @returns {number} 32-bit color value with alpha.
     */
-    getRandomColor: function (min, max, alpha) {
+    getRandomColor: function (min, max, alpha)
+    {
 
         if (min === undefined) { min = 0; }
         if (max === undefined) { max = 255; }
@@ -989,7 +1110,8 @@ Phaser.Color = {
     * @param {number} color - Color in RGB (0xRRGGBB) or ARGB format (0xAARRGGBB).
     * @returns {object} An Object with properties: alpha, red, green, blue (also r, g, b and a). Alpha will only be present if a color value > 16777215 was given.
     */
-    getRGB: function (color) {
+    getRGB: function (color)
+    {
 
         if (color > 16777215)
         {
@@ -1029,7 +1151,8 @@ Phaser.Color = {
     * @param {number|Object} color - Color in RGB (0xRRGGBB), ARGB format (0xAARRGGBB) or an Object with r, g, b, a properties.
     * @returns {string} A string in the format: 'rgba(r,g,b,a)'
     */
-    getWebRGB: function (color) {
+    getWebRGB: function (color)
+    {
 
         if (typeof color === 'object')
         {
@@ -1051,7 +1174,8 @@ Phaser.Color = {
     * @param {number} color - In the format 0xAARRGGBB.
     * @returns {number} The Alpha component of the color, will be between 0 and 1 (0 being no Alpha (opaque), 1 full Alpha (transparent)).
     */
-    getAlpha: function (color) {
+    getAlpha: function (color)
+    {
         return color >>> 24;
     },
 
@@ -1063,7 +1187,8 @@ Phaser.Color = {
     * @param {number} color - In the format 0xAARRGGBB.
     * @returns {number} The Alpha component of the color, will be between 0 and 1 (0 being no Alpha (opaque), 1 full Alpha (transparent)).
     */
-    getAlphaFloat: function (color) {
+    getAlphaFloat: function (color)
+    {
         return (color >>> 24) / 255;
     },
 
@@ -1075,7 +1200,8 @@ Phaser.Color = {
     * @param {number} color In the format 0xAARRGGBB.
     * @returns {number} The Red component of the color, will be between 0 and 255 (0 being no color, 255 full Red).
     */
-    getRed: function (color) {
+    getRed: function (color)
+    {
         return color >> 16 & 0xFF;
     },
 
@@ -1087,7 +1213,8 @@ Phaser.Color = {
     * @param {number} color - In the format 0xAARRGGBB.
     * @returns {number} The Green component of the color, will be between 0 and 255 (0 being no color, 255 full Green).
     */
-    getGreen: function (color) {
+    getGreen: function (color)
+    {
         return color >> 8 & 0xFF;
     },
 
@@ -1099,7 +1226,8 @@ Phaser.Color = {
     * @param {number} color - In the format 0xAARRGGBB.
     * @returns {number} The Blue component of the color, will be between 0 and 255 (0 being no color, 255 full Blue).
     */
-    getBlue: function (color) {
+    getBlue: function (color)
+    {
         return color & 0xFF;
     },
 
@@ -1112,7 +1240,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendNormal: function (a) {
+    blendNormal: function (a)
+    {
         return a;
     },
 
@@ -1125,7 +1254,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendLighten: function (a, b) {
+    blendLighten: function (a, b)
+    {
         return (b > a) ? b : a;
     },
 
@@ -1138,7 +1268,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendDarken: function (a, b) {
+    blendDarken: function (a, b)
+    {
         return (b > a) ? a : b;
     },
 
@@ -1154,7 +1285,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendMultiply: function (a, b) {
+    blendMultiply: function (a, b)
+    {
         return (a * b) / 255;
     },
 
@@ -1167,7 +1299,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendAverage: function (a, b) {
+    blendAverage: function (a, b)
+    {
         return (a + b) / 2;
     },
 
@@ -1180,7 +1313,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendAdd: function (a, b) {
+    blendAdd: function (a, b)
+    {
         return Math.min(255, a + b);
     },
 
@@ -1193,7 +1327,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendSubtract: function (a, b) {
+    blendSubtract: function (a, b)
+    {
         return Math.max(0, a + b - 255);
     },
 
@@ -1208,7 +1343,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendDifference: function (a, b) {
+    blendDifference: function (a, b)
+    {
         return Math.abs(a - b);
     },
 
@@ -1221,7 +1357,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendNegation: function (a, b) {
+    blendNegation: function (a, b)
+    {
         return 255 - Math.abs(255 - a - b);
     },
 
@@ -1236,7 +1373,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendScreen: function (a, b) {
+    blendScreen: function (a, b)
+    {
         return 255 - (((255 - a) * (255 - b)) >> 8);
     },
 
@@ -1250,7 +1388,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendExclusion: function (a, b) {
+    blendExclusion: function (a, b)
+    {
         return a + b - 2 * a * b / 255;
     },
 
@@ -1265,7 +1404,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendOverlay: function (a, b) {
+    blendOverlay: function (a, b)
+    {
         return b < 128 ? (2 * a * b / 255) : (255 - 2 * (255 - a) * (255 - b) / 255);
     },
 
@@ -1288,7 +1428,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendSoftLight: function (a, b) {
+    blendSoftLight: function (a, b)
+    {
         return b < 128 ? (2 * ((a >> 1) + 64)) * (b / 255) : 255 - (2 * (255 - ((a >> 1) + 64)) * (255 - b) / 255);
     },
 
@@ -1312,7 +1453,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendHardLight: function (a, b) {
+    blendHardLight: function (a, b)
+    {
         return Phaser.Color.blendOverlay(b, a);
     },
 
@@ -1326,7 +1468,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendColorDodge: function (a, b) {
+    blendColorDodge: function (a, b)
+    {
         return b === 255 ? b : Math.min(255, ((a << 8) / (255 - b)));
     },
 
@@ -1340,7 +1483,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendColorBurn: function (a, b) {
+    blendColorBurn: function (a, b)
+    {
         return b === 0 ? b : Math.max(0, (255 - ((255 - a) << 8) / b));
     },
 
@@ -1353,7 +1497,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendLinearDodge: function (a, b) {
+    blendLinearDodge: function (a, b)
+    {
         return Phaser.Color.blendAdd(a, b);
     },
 
@@ -1366,7 +1511,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendLinearBurn: function (a, b) {
+    blendLinearBurn: function (a, b)
+    {
         return Phaser.Color.blendSubtract(a, b);
     },
 
@@ -1381,7 +1527,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendLinearLight: function (a, b) {
+    blendLinearLight: function (a, b)
+    {
         return b < 128 ? Phaser.Color.blendLinearBurn(a, 2 * b) : Phaser.Color.blendLinearDodge(a, (2 * (b - 128)));
     },
 
@@ -1397,7 +1544,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendVividLight: function (a, b) {
+    blendVividLight: function (a, b)
+    {
         return b < 128 ? Phaser.Color.blendColorBurn(a, 2 * b) : Phaser.Color.blendColorDodge(a, (2 * (b - 128)));
     },
 
@@ -1411,7 +1559,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendPinLight: function (a, b) {
+    blendPinLight: function (a, b)
+    {
         return b < 128 ? Phaser.Color.blendDarken(a, 2 * b) : Phaser.Color.blendLighten(a, (2 * (b - 128)));
     },
 
@@ -1427,7 +1576,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendHardMix: function (a, b) {
+    blendHardMix: function (a, b)
+    {
         return Phaser.Color.blendVividLight(a, b) < 128 ? 0 : 255;
     },
 
@@ -1440,7 +1590,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendReflect: function (a, b) {
+    blendReflect: function (a, b)
+    {
         return b === 255 ? b : Math.min(255, (a * a / (255 - b)));
     },
 
@@ -1453,7 +1604,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendGlow: function (a, b) {
+    blendGlow: function (a, b)
+    {
         return Phaser.Color.blendReflect(b, a);
     },
 
@@ -1466,7 +1618,8 @@ Phaser.Color = {
     * @param {integer} b - The backdrop color to blend, in the range 1 to 255.
     * @returns {integer} The blended color value, in the range 1 to 255.
     */
-    blendPhoenix: function (a, b) {
+    blendPhoenix: function (a, b)
+    {
         return Math.min(a, b) - Math.max(a, b) + 255;
     }
 

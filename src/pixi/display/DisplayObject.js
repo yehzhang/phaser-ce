@@ -15,7 +15,8 @@
 * @class PIXI.DisplayObject
 * @constructor
 */
-PIXI.DisplayObject = function () {
+PIXI.DisplayObject = function ()
+{
 
     /**
     * The coordinates, in pixels, of this DisplayObject, relative to its parent container.
@@ -74,12 +75,15 @@ PIXI.DisplayObject = function () {
 
     /**
     * The visibility of this DisplayObject. A value of `false` makes the object invisible.
-    * A value of `true` makes it visible. Please note that an object with a visible value of
-    * `false` is skipped during the render pass. Equally a DisplayObject with visible false will
-    * not render any of its children.
+    * A value of `true` makes it visible.
+    *
+    * An object with a visible value of `false` is skipped during the render pass.
+    * Equally a DisplayObject with visible `false` will not render any of its children.
     *
     * The value of this property does not reflect any visible values set further up the display list.
-    * To obtain that value please see the `worldVisible` property.
+    * To obtain that value please see the {@link #worldVisible} property.
+    *
+    * Objects that are not {@link #worldVisible} do not update their {@link #worldPosition}.
     *
     * @property {boolean} visible
     * @default
@@ -258,7 +262,8 @@ PIXI.DisplayObject.prototype = {
     *
     * @method PIXI.DisplayObject#destroy
     */
-    destroy: function () {
+    destroy: function ()
+    {
 
         if (this.children)
         {
@@ -305,7 +310,8 @@ PIXI.DisplayObject.prototype = {
     * @param {PIXI.DisplayObjectContainer} [parent] - Optional parent to calculate this DisplayObjects transform from.
     * @return {PIXI.DisplayObject} - A reference to this DisplayObject.
     */
-    updateTransform: function (parent) {
+    updateTransform: function (parent)
+    {
 
         if (!parent && !this.parent && !this.game)
         {
@@ -342,12 +348,12 @@ PIXI.DisplayObject.prototype = {
             }
 
             // get the matrix values of the displayobject based on its transform properties..
-            a  =  this._cr * this.scale.x;
-            b  =  this._sr * this.scale.x;
-            c  = -this._sr * this.scale.y;
-            d  =  this._cr * this.scale.y;
-            tx =  this.position.x;
-            ty =  this.position.y;
+            a = this._cr * this.scale.x;
+            b = this._sr * this.scale.x;
+            c = -this._sr * this.scale.y;
+            d = this._cr * this.scale.y;
+            tx = this.position.x;
+            ty = this.position.y;
 
             // check for pivot.. not often used so geared towards that fact!
             if (this.pivot.x || this.pivot.y)
@@ -357,27 +363,27 @@ PIXI.DisplayObject.prototype = {
             }
 
             // concat the parent matrix with the objects transform.
-            wt.a  = a  * pt.a + b  * pt.c;
-            wt.b  = a  * pt.b + b  * pt.d;
-            wt.c  = c  * pt.a + d  * pt.c;
-            wt.d  = c  * pt.b + d  * pt.d;
+            wt.a = a * pt.a + b * pt.c;
+            wt.b = a * pt.b + b * pt.d;
+            wt.c = c * pt.a + d * pt.c;
+            wt.d = c * pt.b + d * pt.d;
             wt.tx = tx * pt.a + ty * pt.c + pt.tx;
             wt.ty = tx * pt.b + ty * pt.d + pt.ty;
         }
         else
         {
             // lets do the fast version as we know there is no rotation..
-            a  = this.scale.x;
-            b  = 0;
-            c  = 0;
-            d  = this.scale.y;
+            a = this.scale.x;
+            b = 0;
+            c = 0;
+            d = this.scale.y;
             tx = this.position.x - this.pivot.x * a;
             ty = this.position.y - this.pivot.y * d;
 
-            wt.a  = a  * pt.a;
-            wt.b  = a  * pt.b;
-            wt.c  = d  * pt.c;
-            wt.d  = d  * pt.d;
+            wt.a = a * pt.a;
+            wt.b = a * pt.b;
+            wt.c = d * pt.c;
+            wt.d = d * pt.d;
             wt.tx = tx * pt.a + ty * pt.c + pt.tx;
             wt.ty = tx * pt.b + ty * pt.d + pt.ty;
         }
@@ -434,7 +440,8 @@ PIXI.DisplayObject.prototype = {
     *
     * @method PIXI.DisplayObject#preUpdate
     */
-    preUpdate: function () {
+    preUpdate: function ()
+    {
 
     },
 
@@ -451,7 +458,8 @@ PIXI.DisplayObject.prototype = {
     * @param {PIXI.CanvasRenderer|PIXI.WebGLRenderer} renderer - The renderer used to generate the texture.
     * @return {Phaser.RenderTexture} - A RenderTexture containing an image of this DisplayObject at the time it was invoked.
     */
-    generateTexture: function (resolution, scaleMode, renderer) {
+    generateTexture: function (resolution, scaleMode, renderer)
+    {
 
         var bounds = this.getLocalBounds();
 
@@ -472,7 +480,8 @@ PIXI.DisplayObject.prototype = {
     * @method PIXI.DisplayObject#updateCache
     * @return {PIXI.DisplayObject} - A reference to this DisplayObject.
     */
-    updateCache: function () {
+    updateCache: function ()
+    {
 
         this._generateCachedSprite();
 
@@ -487,7 +496,8 @@ PIXI.DisplayObject.prototype = {
     * @param {PIXI.Point} position - The global position to calculate from.
     * @return {PIXI.Point} - A point object representing the position of this DisplayObject based on the global position given.
     */
-    toGlobal: function (position) {
+    toGlobal: function (position)
+    {
 
         this.updateTransform();
 
@@ -503,7 +513,8 @@ PIXI.DisplayObject.prototype = {
     * @param {PIXI.DisplayObject} [from] - An optional DisplayObject to calculate the global position from.
     * @return {PIXI.Point} - A point object representing the position of this DisplayObject based on the global position given.
     */
-    toLocal: function (position, from) {
+    toLocal: function (position, from)
+    {
 
         if (from)
         {
@@ -523,7 +534,8 @@ PIXI.DisplayObject.prototype = {
     * @private
     * @param {Object} renderSession - The render session
     */
-    _renderCachedSprite: function (renderSession) {
+    _renderCachedSprite: function (renderSession)
+    {
 
         this._cachedSprite.worldAlpha = this.worldAlpha;
 
@@ -544,7 +556,8 @@ PIXI.DisplayObject.prototype = {
     * @method PIXI.DisplayObject#_generateCachedSprite
     * @private
     */
-    _generateCachedSprite: function () {
+    _generateCachedSprite: function ()
+    {
 
         this._cacheAsBitmap = false;
 
@@ -596,7 +609,8 @@ PIXI.DisplayObject.prototype = {
     * @method PIXI.DisplayObject#_destroyCachedSprite
     * @private
     */
-    _destroyCachedSprite: function () {
+    _destroyCachedSprite: function ()
+    {
 
         if (!this._cachedSprite)
         {
@@ -622,15 +636,17 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#x
     * @property {number} x - The horizontal position of the DisplayObject, in pixels, relative to its parent.
     */
-    'x': {
+    x: {
 
-        get: function () {
+        get: function ()
+        {
 
             return this.position.x;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             this.position.x = value;
 
@@ -644,15 +660,17 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#y
     * @property {number} y - The vertical position of the DisplayObject, in pixels, relative to its parent.
     */
-    'y': {
+    y: {
 
-        get: function () {
+        get: function ()
+        {
 
             return this.position.y;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             this.position.y = value;
 
@@ -665,9 +683,10 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#worldVisible
     * @property {boolean} worldVisible - Indicates if this DisplayObject is visible, based on it, and all of its parents, `visible` property values.
     */
-    'worldVisible': {
+    worldVisible: {
 
-        get: function () {
+        get: function ()
+        {
 
             if (!this.visible)
             {
@@ -712,15 +731,17 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#mask
     * @property {Phaser.Graphics} mask - The mask applied to this DisplayObject. Set to `null` to remove an existing mask.
     */
-    'mask': {
+    mask: {
 
-        get: function () {
+        get: function ()
+        {
 
             return this._mask;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             if (this._mask)
             {
@@ -751,15 +772,17 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#filters
     * @property {Array} filters - An Array of Phaser.Filter objects, or objects that extend them.
     */
-    'filters': {
+    filters: {
 
-        get: function () {
+        get: function ()
+        {
 
             return this._filters;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             if (Array.isArray(value))
             {
@@ -808,15 +831,17 @@ Object.defineProperties(PIXI.DisplayObject.prototype, {
     * @name PIXI.DisplayObject#cacheAsBitmap
     * @property {boolean} cacheAsBitmap - Cache this DisplayObject as a Bitmap. Set to `null` to remove an existing cached bitmap.
     */
-    'cacheAsBitmap': {
+    cacheAsBitmap: {
 
-        get: function () {
+        get: function ()
+        {
 
             return this._cacheAsBitmap;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             if (this._cacheAsBitmap === value)
             {

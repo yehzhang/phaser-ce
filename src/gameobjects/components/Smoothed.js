@@ -24,27 +24,29 @@ Phaser.Component.Smoothed.prototype = {
     */
     smoothed: {
 
-        get: function () {
+        get: function ()
+        {
 
             return !this.texture.baseTexture.scaleMode;
 
         },
 
-        set: function (value) {
+        set: function (value)
+        {
 
             if (value)
             {
                 if (this.texture)
                 {
                     this.texture.baseTexture.scaleMode = 0;
+                    this.texture.baseTexture.dirty();
                 }
             }
             else
+            if (this.texture)
             {
-                if (this.texture)
-                {
-                    this.texture.baseTexture.scaleMode = 1;
-                }
+                this.texture.baseTexture.scaleMode = 1;
+                this.texture.baseTexture.dirty();
             }
         }
 

@@ -5,13 +5,14 @@
 */
 
 /**
-* Phaser.Particles is the Particle Manager for the game. It is called during the game update loop and in turn updates any Emitters attached to it.
+* Phaser.Particles tracks any Emitters attached to it.
 *
 * @class Phaser.Particles
 * @constructor
 * @param {Phaser.Game} game - A reference to the currently running game.
 */
-Phaser.Particles = function (game) {
+Phaser.Particles = function (game)
+{
 
     /**
     * @property {Phaser.Game} game - A reference to the currently running Game.
@@ -39,7 +40,8 @@ Phaser.Particles.prototype = {
     * @param {Phaser.Emitter} emitter - The emitter to be added to the particle manager.
     * @return {Phaser.Emitter} The emitter that was added.
     */
-    add: function (emitter) {
+    add: function (emitter)
+    {
         this.emitters[emitter.id] = emitter;
         return emitter;
     },
@@ -49,28 +51,9 @@ Phaser.Particles.prototype = {
     * @method Phaser.Particles#remove
     * @param {Phaser.Emitter} emitter - The emitter to remove.
     */
-    remove: function (emitter) {
+    remove: function (emitter)
+    {
         delete this.emitters[emitter.id];
-    },
-
-    /**
-    * Updates all Emitters who have their exists value set to true.
-    *
-    * Phaser no longer uses this method; Emitters receive updates via {@link Phaser.Stage#update} instead.
-    *
-    * @method Phaser.Particles#update
-    * @protected
-    * @deprecated
-    */
-    update: function () {
-        for (var key in this.emitters)
-        {
-            if (this.emitters[key].exists)
-            {
-                this.emitters[key].update();
-            }
-        }
-
     }
 
 };
