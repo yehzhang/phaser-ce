@@ -3682,7 +3682,7 @@ declare module Phaser {
 
     addKey(keycode: number): Phaser.Key;
 
-    addKeys(keys: any): any;
+    addKeys<T extends {[key: string]: number}>(keys: T): {[U in keyof T]: Phaser.Key};
 
     addKeyCapture(keycode: any): void;
 
