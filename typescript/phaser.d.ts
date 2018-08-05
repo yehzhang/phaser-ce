@@ -2251,7 +2251,7 @@ declare module Phaser {
         scaleMode?: number;
         scaleV?: number
         seed?: number;
-        state?: any;
+        state?: Phaser.State;
         touch?: boolean;
         transparent?: boolean;
         trimH?: number;
@@ -2338,7 +2338,7 @@ declare module Phaser {
             height?: number | string,
             renderer?: number,
             parent?: any,
-            state?: any,
+            state?: Phaser.State,
             transparent?: boolean,
             antialias?: boolean,
             physicsConfig?: any);
