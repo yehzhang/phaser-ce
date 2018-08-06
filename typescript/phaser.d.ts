@@ -6363,6 +6363,9 @@ declare module Phaser {
 
     }
 
+    class ReadonlyPoint extends PIXI.ReadonlyPoint {
+    }
+
     class Point extends PIXI.Point {
     }
 

@@ -613,63 +613,104 @@ declare module PIXI {
 
     }
 
-    export class Point {
+    export class ReadonlyPoint {
+        readonly x: number;
 
+        readonly y: number;
+
+        readonly type: number;
+
+        angle(a: Phaser.ReadonlyPoint, asDegrees?: boolean): number;
+
+        angleSq(a: Phaser.ReadonlyPoint): number;
+
+        angleXY(x: number, y: number, asDegrees?: boolean): number;
+
+        atan(asDegrees?: boolean): number;
+
+        clone(output?: Phaser.Point): Phaser.Point;
+
+        copyTo<T>(dest: T): T;
+
+        cross(a: Phaser.ReadonlyPoint): number;
+
+        distance(dest: Phaser.ReadonlyPoint, round?: boolean): number;
+
+        dot(a: Phaser.ReadonlyPoint): number;
+
+        equals(a: Phaser.ReadonlyPoint): boolean;
+
+        equalsXY(x: number, y: number): boolean;
+
+        fuzzyEquals(a: Phaser.ReadonlyPoint, epsilon?: number): boolean;
+
+        fuzzyEqualsXY(x: number, y: number, epsilon?: number): boolean;
+
+        getMagnitude(): number;
+
+        getMagnitudeSq(): number;
+
+        isZero(): boolean;
+
+        toString(): string;
+    }
+
+    export class Point extends ReadonlyPoint {
         x: number;
+
         y: number;
-        type: number;
 
         constructor(x?: number, y?: number);
 
-        static add(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static add(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static subtract(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static subtract(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static multiply(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static multiply(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static divide(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static divide(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static equals(a: Phaser.Point, b: Phaser.Point): boolean;
+        static equals(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint): boolean;
 
-        static equalsXY(a: Phaser.Point, x: number, y: number): boolean;
+        static equalsXY(a: Phaser.ReadonlyPoint, x: number, y: number): boolean;
 
-        static fuzzyEquals(a: Phaser.Point, b: Phaser.Point, epsilon?: number): boolean;
+        static fuzzyEquals(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, epsilon?: number): boolean;
 
-        static fuzzyEqualsXY(a: Phaser.Point, x: number, y: number, epsilon?: number): boolean;
+        static fuzzyEqualsXY(a: Phaser.ReadonlyPoint, x: number, y: number, epsilon?: number): boolean;
 
-        static angle(a: Phaser.Point, b: Phaser.Point): number;
+        static angle(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint): number;
 
-        static angleSq(a: Phaser.Point, b: Phaser.Point): number;
+        static angleSq(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint): number;
 
-        static negative(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static negative(a: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
         static multiplyAdd(
-            a: Phaser.Point,
-            b: Phaser.Point,
+            a: Phaser.ReadonlyPoint,
+            b: Phaser.ReadonlyPoint,
             scale: number,
             out?: Phaser.Point): Phaser.Point;
 
         static interpolate(
-            a: Phaser.Point,
-            b: Phaser.Point,
+            a: Phaser.ReadonlyPoint,
+            b: Phaser.ReadonlyPoint,
             alpha: number,
             out?: Phaser.Point): Phaser.Point;
 
         static parse(obj: any, xProp?: string, yProp?: string): Phaser.Point;
 
-        static perp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static perp(a: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static rperp(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static rperp(a: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
         static distance(a: any, b: any, round?: boolean): number;
 
-        static project(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static project(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static projectUnit(a: Phaser.Point, b: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static projectUnit(a: Phaser.ReadonlyPoint, b: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static normalRightHand(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static normalRightHand(a: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
-        static normalize(a: Phaser.Point, out?: Phaser.Point): Phaser.Point;
+        static normalize(a: Phaser.ReadonlyPoint, out?: Phaser.Point): Phaser.Point;
 
         static rotate(
             a: Phaser.Point,
@@ -689,14 +730,6 @@ declare module PIXI {
 
         add(x: number, y: number): Phaser.Point;
 
-        angle(a: Phaser.Point, asDegrees?: boolean): number;
-
-        angleSq(a: Phaser.Point): number;
-
-        angleXY(x: number, y: number, asDegrees?: boolean): number;
-
-        atan(asDegrees?: boolean): number;
-
         ceil(): Phaser.Point;
 
         clamp(min: number, max: number): Phaser.Point;
@@ -707,39 +740,15 @@ declare module PIXI {
 
         clip(rect: any): Phaser.Point;
 
-        clone(output?: Phaser.Point): Phaser.Point;
-
-        copyFrom(source: Phaser.Point): Phaser.Point;
-
-        copyTo<T>(dest: T): T;
-
-        cross(a: Phaser.Point): number;
-
-        distance(dest: Phaser.Point, round?: boolean): number;
+        copyFrom(source: Phaser.ReadonlyPoint): Phaser.Point;
 
         divide(x: number, y: number): Phaser.Point;
-
-        dot(a: Phaser.Point): number;
-
-        equals(a: Phaser.Point): boolean;
-
-        equalsXY(x: number, y: number): boolean;
 
         expand(min: number): Phaser.Point;
 
         floor(): Phaser.Point;
 
-        fuzzyEquals(a: Phaser.Point, epsilon?: number): boolean;
-
-        fuzzyEqualsXY(x: number, y: number, epsilon?: number): boolean;
-
-        getMagnitude(): number;
-
-        getMagnitudeSq(): number;
-
         invert(): Phaser.Point;
-
-        isZero(): boolean;
 
         limit(max: number): Phaser.Point;
 
@@ -769,9 +778,6 @@ declare module PIXI {
         setToPolar(azimuth: number, radius?: number, asDegrees?: boolean): Phaser.Point;
 
         subtract(x: number, y: number): Phaser.Point;
-
-        toString(): string;
-
     }
 
     export class Rectangle {
@@ -807,7 +813,7 @@ declare module PIXI {
 
         static inflate(a: Phaser.Rectangle, dx: number, dy: number): Phaser.Rectangle;
 
-        static inflatePoint(a: Phaser.Rectangle, point: Phaser.Point): Phaser.Rectangle;
+        static inflatePoint(a: Phaser.Rectangle, point: Phaser.ReadonlyPoint): Phaser.Rectangle;
 
         static intersection(
             a: Phaser.Rectangle,
@@ -854,7 +860,7 @@ declare module PIXI {
 
         floorAll(): void;
 
-        getPoint(position: number, out: Phaser.Point): Phaser.Point;
+        getPoint(position: number, out?: Phaser.Point): Phaser.Point;
 
         inflate(dx: number, dy: number): Phaser.Rectangle;
 
@@ -871,7 +877,7 @@ declare module PIXI {
 
         offset(dx: number, dy: number): Phaser.Rectangle;
 
-        offsetPoint(point: Phaser.Point): Phaser.Rectangle;
+        offsetPoint(point: Phaser.ReadonlyPoint): Phaser.Rectangle;
 
         random(out?: Phaser.Point): Phaser.Point;
 
